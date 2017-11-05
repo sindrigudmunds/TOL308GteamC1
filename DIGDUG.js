@@ -156,6 +156,7 @@ function requestPreloads() {
     var requiredImages = {
         spriteSheet1   : "NES_Dig_Dug_General_Sprites.png",
         spriteSheet2  : "NES_Dig_Dug_Vegetables.png",
+        backgroundTexture : "DigDugBackgroundTexture.png",
 
     };
 
