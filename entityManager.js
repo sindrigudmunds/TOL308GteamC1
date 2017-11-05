@@ -27,6 +27,11 @@ var entityManager = {
 
     // "PRIVATE" DATA
 
+    _players   : [],
+    _pookas : [],
+    _flygars   : [],
+    _rocks : [],
+
     // "PRIVATE" METHODS
 
     _forEachOf: function(aCategory, fn) {
@@ -40,19 +45,53 @@ var entityManager = {
     // Some things must be deferred until after initial construction
     // i.e. thing which need `this` to be defined.
     deferredSetup : function () {
-       
+         this._categories = [this._players, this._pookas,
+                            this._flygars,this._rocks];
     },
 
     init: function() {
-      
+
+    },
+
+    generatePlayer : function(descr){
+      this._players.push(new Player(descr));
+    },
+
+    generatePooka : function(descr){
+      this._pookas.push(new Pooka(descr));
+    },
+
+    generateFlygar : function(descr){
+      this._flygars.push(new Flygar(descr));
     },
 
     update: function(du) {
-        
+      for (var c = 0; c < this._categories.length; ++c) {
+
+          var aCategory = this._categories[c];
+          var i = 0;
+
+          while (i < aCategory.length) {
+
+              var status = aCategory[i].update(du);
+              ++i;
+
+          }
+      }
     },
 
     render: function(ctx) {
 
+      for (var c = 0; c < this._categories.length; ++c) {
+
+          var aCategory = this._categories[c];
+          for (var i = 0; i < aCategory.length; ++i) {
+
+              aCategory[i].render(ctx);
+
+          }
+
+      }
     }
 }
 

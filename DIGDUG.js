@@ -15,16 +15,16 @@ var g_ctx = g_canvas.getContext("2d");
 // =====================
 
 
-/*
-function createInitialShips() {
 
-    entityManager.generateShip({
-        cx : 200,
-        cy : 200
+function createPlayer() {
+
+    entityManager.generatePlayer({
+      cx : 480,
+      cy : 480
     });
 
 }
-*/
+
 
 
 
@@ -156,6 +156,7 @@ function requestPreloads() {
     var requiredImages = {
         spriteSheet1   : "NES_Dig_Dug_General_Sprites.png",
         spriteSheet2  : "NES_Dig_Dug_Vegetables.png",
+        spriteSheet3 : "NES_Dig_Dug_Clear.png",
         backgroundTexture : "DigDugBackgroundTexture.png",
 
     };
@@ -167,12 +168,13 @@ var g_sprites = {};
 
 function preloadDone() {
 
-    g_sprites.spriteSheet1  = new Sprite(g_images.spriteSheet1);
-    g_sprites.spriteSheet2 = new Sprite(g_images.spriteSheet2);
+    //g_sprites.spriteSheet1  = new Sprite(g_images.spriteSheet1);
+    //g_sprites.spriteSheet2 = new Sprite(g_images.spriteSheet2);
+    g_sprites.player = new Sprite(16,6,16,16,g_images.spriteSheet3);
 
-
-    //entityManager.init();
+    entityManager.init();
     //createInitialShips();
+    createPlayer();
 
     main.init();
 }

@@ -40,7 +40,7 @@ Entity.prototype.setup = function (descr) {
     }
 
     // Get my (unique) spatial ID
-    this._spatialID = spatialManager.getNewSpatialID();
+    //this._spatialID = spatialManager.getNewSpatialID();
 
     // I am not dead yet!
     this._isDeadNow = false;
@@ -78,8 +78,9 @@ Entity.prototype.findHitEntity = function () {
 Entity.prototype.isColliding = function () {
     return this.findHitEntity();
 };
-
+/*
 Entity.prototype.wrapPosition = function () {
     this.cx = util.wrapRange(this.cx, 0, g_canvas.width);
     this.cy = util.wrapRange(this.cy, 0, g_canvas.height);
 };
+*/
