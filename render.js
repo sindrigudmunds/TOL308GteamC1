@@ -1,134 +1,72 @@
-// ========
-// MAINLOOP
-// ========
-/*
+// GENERIC RENDERING
 
-The mainloop is one big object with a fairly small public interface
-(e.g. init, iter, gameOver), and a bunch of private internal helper methods.
+var g_doClear = true;
+var g_doBox = false;
+var g_undoBox = false;
+var g_doFlipFlop = false;
+var g_doRender = true;
 
-The "private" members are identified as such purely by the naming convention
-of having them begin with a leading underscore. A more robust form of privacy,
-with genuine name-hiding *is* possible in JavaScript (via closures), but I
-haven't adopted it here.
+var g_frameCounter = 1;
 
-*/
+var TOGGLE_CLEAR = 'C'.charCodeAt(0);
+var TOGGLE_BOX = 'B'.charCodeAt(0);
+var TOGGLE_UNDO_BOX = 'U'.charCodeAt(0);
+var TOGGLE_FLIPFLOP = 'F'.charCodeAt(0);
+var TOGGLE_RENDER = 'R'.charCodeAt(0);
 
-"use strict";
-
-/* jshint browser: true, devel: true, globalstrict: true */
-
-/*
-0        1         2         3         4         5         6         7         8
-12345678901234567890123456789012345678901234567890123456789012345678901234567890
-*/
-
-
-var main = {
-
-    // "Frame Time" is a (potentially high-precision) frame-clock for animations
-    _frameTime_ms : null,
-    _frameTimeDelta_ms : null,
-
-};
-
-// Perform one iteration of the mainloop
-main.iter = function (frameTime) {
-
-    // Use the given frameTime to update all of our game-clocks
-    this._updateClocks(frameTime);
-
-    // Perform the iteration core to do all the "real" work
-    this._iterCore(this._frameTimeDelta_ms);
-
-    // Diagnostics, such as showing current timer values etc.
-    this._debugRender(g_ctx);
-
-    // Request the next iteration if needed
-    if (!this._isGameOver) this._requestNextIteration();
-};
-
-main._updateClocks = function (frameTime) {
-
-    // First-time initialisation
-    if (this._frameTime_ms === null) this._frameTime_ms = frameTime;
-
-    // Track frameTime and its delta
-    this._frameTimeDelta_ms = frameTime - this._frameTime_ms;
-    this._frameTime_ms = frameTime;
-};
-
-main._iterCore = function (dt) {
-
-    // Handle QUIT
-    if (requestedQuit()) {
-        this.gameOver();
-        return;
+function render(ctx) {
+    
+    // Process various option toggles
+    //
+    if (eatKey(TOGGLE_CLEAR)) g_doClear = !g_doClear;
+    if (eatKey(TOGGLE_BOX)) g_doBox = !g_doBox;
+    if (eatKey(TOGGLE_UNDO_BOX)) g_undoBox = !g_undoBox;
+    if (eatKey(TOGGLE_FLIPFLOP)) g_doFlipFlop = !g_doFlipFlop;
+    if (eatKey(TOGGLE_RENDER)) g_doRender = !g_doRender;
+    
+    // I've pulled the clear out of `renderSimulation()` and into
+    // here, so that it becomes part of our "diagnostic" wrappers
+    //
+    if (g_doClear) util.clearCanvas(ctx);
+    
+    // The main purpose of the box is to demonstrate that it is
+    // always deleted by the subsequent "undo" before you get to
+    // see it...
+    //
+    // i.e. double-buffering prevents flicker!
+    //
+    if (g_doBox) util.fillBox(ctx, 200, 200, 50, 50, "red");
+    
+    
+    // The core rendering of the actual game / simulation
+    //
+    if (g_doRender) renderSimulation(ctx);
+    
+    
+    // This flip-flip mechanism illustrates the pattern of alternation
+    // between frames, which provides a crude illustration of whether
+    // we are running "in sync" with the display refresh rate.
+    //
+    // e.g. in pathological cases, we might only see the "even" frames.
+    //
+    if (g_doFlipFlop) {
+        var boxX = 250,
+            boxY = g_isUpdateOdd ? 100 : 200;
+        
+        // Draw flip-flop box
+        util.fillBox(ctx, boxX, boxY, 50, 50, "green");
+        
+        // Display the current frame-counter in the box...
+        ctx.fillText(g_frameCounter % 1000, boxX + 10, boxY + 20);
+        // ..and its odd/even status too
+        var text = g_frameCounter % 2 ? "odd" : "even";
+        ctx.fillText(text, boxX + 10, boxY + 40);
     }
-
-    gatherInputs();
-    update(dt);
-    render(g_ctx);
-};
-
-main._isGameOver = false;
-
-main.gameOver = function () {
-    this._isGameOver = true;
-    console.log("gameOver: quitting...");
-};
-
-// Simple voluntary quit mechanism
-//
-var KEY_QUIT = 'Q'.charCodeAt(0);
-function requestedQuit() {
-    return keys[KEY_QUIT];
-}
-
-// Annoying shim for Firefox and Safari
-window.requestAnimationFrame =
-    window.requestAnimationFrame ||        // Chrome
-    window.mozRequestAnimationFrame ||     // Firefox
-    window.webkitRequestAnimationFrame;    // Safari
-
-// This needs to be a "global" function, for the "window" APIs to callback to
-function mainIterFrame(frameTime) {
-    main.iter(frameTime);
-}
-
-main._requestNextIteration = function () {
-    window.requestAnimationFrame(mainIterFrame);
-};
-
-// Mainloop-level debug-rendering
-
-var TOGGLE_TIMER_SHOW = 'T'.charCodeAt(0);
-
-main._doTimerShow = false;
-
-main._debugRender = function (ctx) {
-
-    if (eatKey(TOGGLE_TIMER_SHOW)) this._doTimerShow = !this._doTimerShow;
-
-    if (!this._doTimerShow) return;
-
-    var y = 350;
-    ctx.fillText('FT ' + this._frameTime_ms, 50, y+10);
-    ctx.fillText('FD ' + this._frameTimeDelta_ms, 50, y+20);
-    ctx.fillText('UU ' + g_prevUpdateDu, 50, y+30);
-    ctx.fillText('FrameSync ON', 50, y+40);
-};
-
-main.init = function () {
-
-    // Grabbing focus is good, but it sometimes screws up jsfiddle,
-    // so it's a risky option during "development"
+    
+    // Optional erasure of diagnostic "box",
+    // to illustrate flicker-proof double-buffering
     //
-    //window.focus(true);
-
-    // We'll be working on a black background here,
-    // so let's use a fillStyle which works against that...
-    //
-    g_ctx.fillStyle = "white";
-
-    this._requestNextIteration();
-};
+    if (g_undoBox) ctx.clearRect(200, 200, 50, 50);
+    
+    ++g_frameCounter;
+}

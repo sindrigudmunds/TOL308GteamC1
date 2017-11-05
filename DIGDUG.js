@@ -55,7 +55,7 @@ function gatherInputs(){
 
 function updateSimulation(du) {
 
-    processDiagnostics();
+    //processDiagnostics();
 
     entityManager.update(du);
 
@@ -141,7 +141,7 @@ function renderSimulation(ctx) {
 
     entityManager.render(ctx);
 
-    if (g_renderSpatialDebug) spatialManager.render(ctx);
+    //if (g_renderSpatialDebug) spatialManager.render(ctx);
 }
 
 
@@ -170,8 +170,8 @@ function preloadDone() {
     g_sprites.spriteSheet2 = new Sprite(g_images.spriteSheet2);
 
 
-    entityManager.init();
-    createInitialShips();
+    //entityManager.init();
+    //createInitialShips();
 
     main.init();
 }
