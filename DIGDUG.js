@@ -64,6 +64,59 @@ function updateSimulation(du) {
 }
 
 
+
+
+
+// GAME-SPECIFIC RENDERING
+
+function renderSimulation(ctx) {
+
+    entityManager.render(ctx);
+
+    //if (g_renderSpatialDebug) spatialManager.render(ctx);
+}
+
+
+// =============
+// PRELOAD STUFF
+// =============
+
+var g_images = {};
+
+function requestPreloads() {
+
+    var requiredImages = {
+        spriteSheet1   : "NES_Dig_Dug_General_Sprites.png",
+        spriteSheet2  : "NES_Dig_Dug_Vegetables.png",
+        spriteSheet3 : "NES_Dig_Dug_ClearX700Y220.png",
+        backgroundTexture : "DigDugBackgroundTextureX448Y1726.png",
+
+    };
+
+    imagesPreload(requiredImages, g_images, preloadDone);
+}
+
+var g_sprites = {};
+
+function preloadDone() {
+
+    //g_sprites.spriteSheet1  = new Sprite(g_images.spriteSheet1);
+    //g_sprites.spriteSheet2 = new Sprite(g_images.spriteSheet2);
+    g_sprites.player = new Sprite(32,6,32,38,g_images.spriteSheet3);
+
+    entityManager.init();
+    //createInitialShips();
+    createPlayer();
+
+    main.init();
+}
+
+// Kick it off
+requestPreloads();
+
+
+
+
 // Eiður: Comment-a út: veit ekki hvort við notum sambærileg diagnostics
 // GAME-SPECIFIC DIAGNOSTICS
 /*
@@ -133,51 +186,3 @@ function processDiagnostics() {
 // the diagnostic toggles (including screen-clearing).
 //
 // It then delegates the game-specific logic to `gameRender`
-
-
-// GAME-SPECIFIC RENDERING
-
-function renderSimulation(ctx) {
-
-    entityManager.render(ctx);
-
-    //if (g_renderSpatialDebug) spatialManager.render(ctx);
-}
-
-
-// =============
-// PRELOAD STUFF
-// =============
-
-var g_images = {};
-
-function requestPreloads() {
-
-    var requiredImages = {
-        spriteSheet1   : "NES_Dig_Dug_General_Sprites.png",
-        spriteSheet2  : "NES_Dig_Dug_Vegetables.png",
-        spriteSheet3 : "NES_Dig_Dug_Clear.png",
-        backgroundTexture : "DigDugBackgroundTexture.png",
-
-    };
-
-    imagesPreload(requiredImages, g_images, preloadDone);
-}
-
-var g_sprites = {};
-
-function preloadDone() {
-
-    //g_sprites.spriteSheet1  = new Sprite(g_images.spriteSheet1);
-    //g_sprites.spriteSheet2 = new Sprite(g_images.spriteSheet2);
-    g_sprites.player = new Sprite(16,6,16,16,g_images.spriteSheet3);
-
-    entityManager.init();
-    //createInitialShips();
-    createPlayer();
-
-    main.init();
-}
-
-// Kick it off
-requestPreloads();

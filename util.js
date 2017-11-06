@@ -79,7 +79,7 @@ wrappedDistSq: function(x1, y1, x2, y2, xWrap, yWrap) {
 
 clearCanvas: function (ctx) {
     var img = new Image();
-    img.src = 'https://notendur.hi.is/jdj4/digDugBackgroundTexture';
+    img.src = 'DigDugBackgroundTextureX448Y1726.png';
     var pattern = ctx.createPattern(img, 'repeat');
     var prevfillStyle = ctx.fillStyle;
     ctx.fillStyle = pattern;
