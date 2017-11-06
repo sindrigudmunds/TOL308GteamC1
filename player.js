@@ -15,10 +15,11 @@ Player.prototype = new Entity();
 //Player.prototype.cx = 480;
 //Player.prototype.cy = 480;
 
-Player.prototype.MIN_Y = 0;
-Player.prototype.MAX_Y = 960;
-Player.prototype.MIN_X = 0;
-Player.prototype.MAX_X = 960;
+Player.prototype.MIN_Y = 200;
+Player.prototype.MAX_Y = 1726;
+Player.prototype.MIN_X = 10; // ekki 0 til að sprite fari ekki út fyrir rammann
+Player.prototype.MAX_X = 438;// 448 - 10 (er 32 px á breidd)
+
 
 Player.prototype.UP = keyCode('W');
 Player.prototype.LEFT = keyCode('A');
@@ -31,16 +32,16 @@ Player.prototype.update = function (du) {
     var nextcx = this.cx;
 
     if (keys[this.UP]) {
-        nextcy -= 10*du;
+        nextcy -= 4*du;
     }
     if (keys[this.DOWN]) {
-        nextcy += 10*du;
+        nextcy += 4*du;
     }
     if (keys[this.LEFT]) {
-        nextcx -= 10*du;
+        nextcx -= 4*du;
     }
     if (keys[this.RIGHT]) {
-        nextcx += 10*du;
+        nextcx += 4*du;
     }
     if(nextcy <= this.MAX_Y && nextcy >= this.MIN_Y){
     	this.cy = nextcy;
