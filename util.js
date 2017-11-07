@@ -104,6 +104,34 @@ fillBox: function (ctx, x, y, w, h, style) {
     ctx.fillStyle = style;
     ctx.fillRect(x, y, w, h);
     ctx.fillStyle = oldStyle;
+},
+
+checkUpDown: function (nextcx) {
+  var upDownCoords = [16, 48, 80, 112, 144, 176, 208, 240, 272, 304, 336, 368, 400, 432];
+
+  for(var i=0; i < upDownCoords.length; i++){
+      var val = upDownCoords[i];
+      if(Math.abs(nextcx - val) < 2){
+        return val;
+      }
+  }
+  return false;
+},
+
+checkLeftRight: function (nextcy){
+  var leftRightCoords = [220, 252, 284, 316, 348, 380, 412, 444, 476, 508,
+    540, 572, 604, 636, 668, 700, 732, 764, 796, 828, 860,
+    892, 924, 956, 988, 1020, 1052, 1084, 1116, 1148, 1180,
+    1212, 1244, 1276, 1308, 1340, 1372, 1404, 1436, 1468,
+    1500, 1532, 1564, 1596, 1628, 1660, 1692, 1724 ];
+  for(var i=0; i < leftRightCoords.length; i++){
+    var val = leftRightCoords[i];
+    if(Math.abs(nextcy - val) < 2){
+      return val;
+    }
+  }
+  return false;
 }
+
 
 };

@@ -18,7 +18,7 @@ Player.prototype = new Entity();
 Player.prototype.MIN_Y = 200;
 Player.prototype.MAX_Y = 1726;
 Player.prototype.MIN_X = 10; // ekki 0 til að sprite fari ekki út fyrir rammann
-Player.prototype.MAX_X = 438;// 448 - 10 (er 32 px á breidd)
+Player.prototype.MAX_X = 438;// 448 - 10 (kall er 32 px á breidd)
 
 
 Player.prototype.UP = keyCode('W');
@@ -26,27 +26,80 @@ Player.prototype.LEFT = keyCode('A');
 Player.prototype.RIGHT = keyCode('D');
 Player.prototype.DOWN = keyCode('S');
 
+Player.prototype.lastDirLeftRight = 'Left';  // player byrjar að stefna til vinstri
+Player.prototype.lastDirUpDown = 'Down';  // player byrjar að stefna til vinstri
+
 
 Player.prototype.update = function (du) {
 		var nextcy = this.cy;
     var nextcx = this.cx;
 
     if (keys[this.UP]) {
-        nextcy -= 4*du;
+      this.lastDirUpDown = 'Up';
+      var canGo = util.checkUpDown(nextcx);
+      console.log("chkUpDwn return value: " + canGo);
+      if(canGo !== false){
+        nextcx = canGo; // locks player in place on x axis (i.e. in tunnel)
+        nextcy -= 3*du;
+      } else{
+        if(this.lastDirLeftRight === 'Left'){
+          nextcx -= 3*du;
+        } else if (this.lastDirLeftRight === 'Right') {
+          nextcx += 3*du;
+        }
+      }
     }
+
     if (keys[this.DOWN]) {
-        nextcy += 4*du;
+        this.lastDirUpDown = 'Down';
+        var canGo = util.checkUpDown(nextcx);
+        if(canGo !== false){
+          nextcx = canGo; // locks player in place on x axis (i.e. in tunnel)
+          nextcy += 3*du;
+        } else{
+          if(this.lastDirLeftRight === 'Left'){
+            nextcx -= 3*du;
+          } else if (this.lastDirLeftRight === 'Right') {
+            nextcx += 3*du;
+          }
+        }
     }
     if (keys[this.LEFT]) {
-        nextcx -= 4*du;
+        this.lastDirLeftRight = 'Left';
+        var canGo = util.checkLeftRight(nextcy);
+        if(canGo !== false){
+          nextcy = canGo; // locks player in place on y axis (i.e. in tunnel)
+          nextcx -= 3*du;
+        } else{
+          if(this.lastDirUpDown === 'Down'){
+            nextcy += 3*du;
+          } else if (this.lastDirUpDown === 'Up') {
+            nextcy -= 3*du;
+          }
+        }
     }
     if (keys[this.RIGHT]) {
-        nextcx += 4*du;
+        this.lastDirLeftRight = 'Right';
+        var canGo = util.checkLeftRight(nextcy);
+        if(canGo !== false){
+          nextcy = canGo; // locks player in place on y axis (i.e. in tunnel)
+          nextcx += 3*du;
+        } else{
+          if(this.lastDirUpDown === 'Down'){
+            nextcy += 3*du;
+          } else if (this.lastDirUpDown === 'Up') {
+            nextcy -= 3*du;
+          }
+        }
+
+
+        //nextcx += 3*du;
     }
+
+    // don't go further than borders
     if(nextcy <= this.MAX_Y && nextcy >= this.MIN_Y){
     	this.cy = nextcy;
     }
-
     if(nextcx <= this.MAX_X && nextcx >= this.MIN_X){
     	this.cx = nextcx;
     }
