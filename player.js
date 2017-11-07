@@ -28,7 +28,7 @@ Player.prototype.DOWN = keyCode('S');
 
 Player.prototype.lastDirLeftRight = 'Left';  // player byrjar að stefna til vinstri
 Player.prototype.lastDirUpDown = 'Down';  // player byrjar að stefna til vinstri
-
+Player.prototype.speed = 2;
 
 Player.prototype.update = function (du) {
 		var nextcy = this.cy;
@@ -40,12 +40,12 @@ Player.prototype.update = function (du) {
       console.log("chkUpDwn return value: " + canGo);
       if(canGo !== false){
         nextcx = canGo; // locks player in place on x axis (i.e. in tunnel)
-        nextcy -= 3*du;
+        nextcy -= this.speed*du;
       } else{
         if(this.lastDirLeftRight === 'Left'){
-          nextcx -= 3*du;
+          nextcx -= this.speed*du;
         } else if (this.lastDirLeftRight === 'Right') {
-          nextcx += 3*du;
+          nextcx += this.speed*du;
         }
       }
     }
@@ -55,12 +55,12 @@ Player.prototype.update = function (du) {
         var canGo = util.checkUpDown(nextcx);
         if(canGo !== false){
           nextcx = canGo; // locks player in place on x axis (i.e. in tunnel)
-          nextcy += 3*du;
+          nextcy += this.speed*du;
         } else{
           if(this.lastDirLeftRight === 'Left'){
-            nextcx -= 3*du;
+            nextcx -= this.speed*du;
           } else if (this.lastDirLeftRight === 'Right') {
-            nextcx += 3*du;
+            nextcx += this.speed*du;
           }
         }
     }
@@ -69,12 +69,12 @@ Player.prototype.update = function (du) {
         var canGo = util.checkLeftRight(nextcy);
         if(canGo !== false){
           nextcy = canGo; // locks player in place on y axis (i.e. in tunnel)
-          nextcx -= 3*du;
+          nextcx -= this.speed*du;
         } else{
           if(this.lastDirUpDown === 'Down'){
-            nextcy += 3*du;
+            nextcy += this.speed*du;
           } else if (this.lastDirUpDown === 'Up') {
-            nextcy -= 3*du;
+            nextcy -= this.speed*du;
           }
         }
     }
@@ -83,12 +83,12 @@ Player.prototype.update = function (du) {
         var canGo = util.checkLeftRight(nextcy);
         if(canGo !== false){
           nextcy = canGo; // locks player in place on y axis (i.e. in tunnel)
-          nextcx += 3*du;
+          nextcx += this.speed*du;
         } else{
           if(this.lastDirUpDown === 'Down'){
-            nextcy += 3*du;
+            nextcy += this.speed*du;
           } else if (this.lastDirUpDown === 'Up') {
-            nextcy -= 3*du;
+            nextcy -= this.speed*du;
           }
         }
 
