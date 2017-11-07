@@ -25,6 +25,11 @@ function createPlayer() {
 
 }
 
+function createPooka() {
+  entityManager.generatePooka({
+  });
+}
+
 
 
 
@@ -102,11 +107,20 @@ function preloadDone() {
 
     //g_sprites.spriteSheet1  = new Sprite(g_images.spriteSheet1);
     //g_sprites.spriteSheet2 = new Sprite(g_images.spriteSheet2);
+
     g_sprites.player = new Sprite(32,6,32,38,g_images.spriteSheet3);
+    g_sprites.pooka = new Sprite(20,107,30,27,g_images.spriteSheet3);
+    //g_sprites.pookalabb2 = new Sprite(58,102,28,28,g_images.spriteSheet3);
+    //sg_sprites.fygar = new Sprite(20,107,30,27,g_images.spriteSheet3);
 
     entityManager.init();
     //createInitialShips();
     createPlayer();
+
+    //Örugglega betri leið til að búa til marga pookas, mjög primitive
+    createPooka();
+    createPooka();
+    createPooka();
 
     main.init();
 }
