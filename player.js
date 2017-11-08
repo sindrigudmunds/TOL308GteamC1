@@ -27,7 +27,7 @@ Player.prototype.RIGHT = keyCode('D');
 Player.prototype.DOWN = keyCode('S');
 
 Player.prototype.lastDirLeftRight = 'Left';  // player byrjar að stefna til vinstri
-Player.prototype.lastDirUpDown = 'Down';  // player byrjar að stefna til vinstri
+Player.prototype.lastDirUpDown = 'Down';  
 Player.prototype.speed = 2;
 
 Player.prototype.update = function (du) {
