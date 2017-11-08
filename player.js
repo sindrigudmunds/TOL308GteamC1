@@ -48,7 +48,7 @@ Player.prototype.update = function (du) {
           nextcx += this.speed*du;
         }
       }
-    }
+    } else
 
     if (keys[this.DOWN]) {
         this.lastDirUpDown = 'Down';
@@ -63,7 +63,7 @@ Player.prototype.update = function (du) {
             nextcx += this.speed*du;
           }
         }
-    }
+    } else
     if (keys[this.LEFT]) {
         this.lastDirLeftRight = 'Left';
         var canGo = util.checkLeftRight(nextcy);
@@ -77,7 +77,7 @@ Player.prototype.update = function (du) {
             nextcy -= this.speed*du;
           }
         }
-    }
+    } else
     if (keys[this.RIGHT]) {
         this.lastDirLeftRight = 'Right';
         var canGo = util.checkLeftRight(nextcy);
