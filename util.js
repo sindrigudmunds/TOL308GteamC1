@@ -79,7 +79,7 @@ wrappedDistSq: function(x1, y1, x2, y2, xWrap, yWrap) {
 
 clearCanvas: function (ctx) {
     var img = new Image();
-    img.src = 'DigDugBackgroundTextureX448Y1726.png';
+    img.src = 'DigDugBackgroundTextureresized448.png';
     var pattern = ctx.createPattern(img, 'repeat');
     var prevfillStyle = ctx.fillStyle;
     ctx.fillStyle = pattern;
@@ -119,11 +119,7 @@ checkUpDown: function (nextcx) {
 },
 
 checkLeftRight: function (nextcy){
-  var leftRightCoords = [220, 252, 284, 316, 348, 380, 412, 444, 476, 508,
-    540, 572, 604, 636, 668, 700, 732, 764, 796, 828, 860,
-    892, 924, 956, 988, 1020, 1052, 1084, 1116, 1148, 1180,
-    1212, 1244, 1276, 1308, 1340, 1372, 1404, 1436, 1468,
-    1500, 1532, 1564, 1596, 1628, 1660, 1692, 1724 ];
+  var leftRightCoords = [32,64,96,128,160,192,224,256,288,320,352,384,416,448,490];
   for(var i=0; i < leftRightCoords.length; i++){
     var val = leftRightCoords[i];
     if(Math.abs(nextcy - val) < 2){
