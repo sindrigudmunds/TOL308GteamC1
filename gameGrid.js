@@ -34,14 +34,12 @@ Grid.prototype.Initialize = function(){
 }
 
 Grid.prototype.PlayerMoved = function(x, y, direction){
-
     // Finnna hvaða cellu við eigum að grafa
     var cell = FindCell(x, y);
 
     if(cell.IsFullyDug) return;
 
     cell.Dig(direction);
-
 }
 
 Grid.prototype.FindCell = function(x, y){
