@@ -30,6 +30,11 @@ function createPooka() {
   });
 }
 
+function createFygar() {
+  entityManager.generateFygar({
+
+  });
+}
 
 
 
@@ -110,9 +115,8 @@ function preloadDone() {
 
     g_sprites.player = new Sprite(32,6,32,38,g_images.spriteSheet3);
     g_sprites.pooka = new Sprite(20,107,30,27,g_images.spriteSheet3);
+    g_sprites.fygar = new Sprite(28,162,28,28,g_images.spriteSheet3);
     //g_sprites.pookalabb2 = new Sprite(58,102,28,28,g_images.spriteSheet3);
-    //sg_sprites.fygar = new Sprite(20,107,30,27,g_images.spriteSheet3);
-
     entityManager.init();
     //createInitialShips();
     createPlayer();
@@ -121,6 +125,8 @@ function preloadDone() {
     createPooka();
     createPooka();
     createPooka();
+    createFygar();
+    createFygar();
 
     var grid = new Grid(32, 32);
     grid.Initialize();
