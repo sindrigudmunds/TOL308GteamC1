@@ -122,6 +122,10 @@ function preloadDone() {
     createPooka();
     createPooka();
 
+    var grid = new Grid(32, 32);
+    grid.Initialize();
+    grid.print();
+
     main.init();
 }
 
