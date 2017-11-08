@@ -99,7 +99,7 @@ function requestPreloads() {
         spriteSheet1   : "NES_Dig_Dug_General_Sprites.png",
         spriteSheet2  : "NES_Dig_Dug_Vegetables.png",
         spriteSheet3 : "NES_Dig_Dug_ClearX700Y220.png",
-        backgroundTexture : "DigDugBackgroundTextureX448Y1726.png",
+        backgroundTexture : "DigDugBackgroundTextureresized448.png",
 
     };
 
@@ -128,7 +128,7 @@ function preloadDone() {
     createFygar();
     createFygar();
 
-    var grid = new Grid(32, 32);
+    var grid = new Grid(14, 16);
     grid.Initialize();
     grid.print();
 
