@@ -29,7 +29,7 @@ var entityManager = {
 
     _players   : [],
     _pookas : [],
-    _flygars   : [],
+    _fygars   : [],
     _rocks : [],
 
     // "PRIVATE" METHODS
@@ -46,7 +46,7 @@ var entityManager = {
     // i.e. thing which need `this` to be defined.
     deferredSetup : function () {
          this._categories = [this._players, this._pookas,
-                            this._flygars,this._rocks];
+                            this._fygars,this._rocks];
     },
 
     init: function() {
@@ -61,8 +61,8 @@ var entityManager = {
       this._pookas.push(new Pooka(descr));
     },
 
-    generateFlygar : function(descr){
-      this._flygars.push(new Flygar(descr));
+    generateFygar : function(descr){
+      this._fygars.push(new Fygar(descr));
     },
 
     update: function(du) {
