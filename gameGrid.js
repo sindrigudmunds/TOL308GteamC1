@@ -14,6 +14,10 @@ Cell.prototype.Dig = function(direction){
     }
 }
 
+Cell.prototype.Render = function(ctx){
+    
+}
+
 function Grid(xSize, ySize){
     // Fjöldi cella á x og y ás
     this.xSize = xSize;
@@ -44,6 +48,14 @@ Grid.prototype.PlayerMoved = function(x, y, direction){
 
 Grid.prototype.FindCell = function(x, y){
 
+}
+
+Grid.prototype.RenderGrid = function(ctx){
+    for(var x = 0; x < this.xSize; x++){
+        for(var y = 0; y < this.ySize; y++){
+            this.cells[x][y].Render(ctx);
+        }
+    }
 }
 
 // Prentar griddið
