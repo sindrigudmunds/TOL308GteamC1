@@ -99,6 +99,7 @@ function requestPreloads() {
         spriteSheet1   : "NES_Dig_Dug_General_Sprites.png",
         spriteSheet2  : "NES_Dig_Dug_Vegetables.png",
         spriteSheet3 : "NES_Dig_Dug_ClearX700Y220.png",
+        spriteSheet4 : "NES_Dig_Dug_ClearX700Y220Flipped.png",
         backgroundTexture : "DigDugBackgroundTextureresized448.png",
 
     };
@@ -113,7 +114,20 @@ function preloadDone() {
     //g_sprites.spriteSheet1  = new Sprite(g_images.spriteSheet1);
     //g_sprites.spriteSheet2 = new Sprite(g_images.spriteSheet2);
 
-    g_sprites.player = new Sprite(32,6,32,38,g_images.spriteSheet3);
+    //g_sprites.player = new Sprite(32,6,32,38,g_images.spriteSheet3);
+    // player right
+    g_sprites.playerWalkRight1 = new Sprite(32,6,32,38,g_images.spriteSheet3);
+    g_sprites.playerWalkRight2 = new Sprite(64,6,32,38,g_images.spriteSheet3);
+    // player left
+    g_sprites.playerWalkLeft1 = new Sprite(604,6,32,38,g_images.spriteSheet4);
+    g_sprites.playerWalkLeft2 = new Sprite(636,6,32,38,g_images.spriteSheet4);
+    // player up
+    g_sprites.playerWalkUp1 = new Sprite(32,44,32,38,g_images.spriteSheet3);
+    g_sprites.playerWalkUp2 = new Sprite(64,44,32,38,g_images.spriteSheet3);
+    // player down
+    g_sprites.playerWalkDown1 = new Sprite(604,44,32,38,g_images.spriteSheet4);
+    g_sprites.playerWalkDown2 = new Sprite(636,44,32,38,g_images.spriteSheet4);
+
     g_sprites.pooka = new Sprite(20,107,30,27,g_images.spriteSheet3);
     g_sprites.fygar = new Sprite(28,162,28,28,g_images.spriteSheet3);
     //g_sprites.pookalabb2 = new Sprite(58,102,28,28,g_images.spriteSheet3);

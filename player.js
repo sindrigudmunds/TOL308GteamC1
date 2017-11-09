@@ -37,7 +37,6 @@ Player.prototype.update = function (du) {
     if (keys[this.UP]) {
       this.lastDirUpDown = 'Up';
       var canGo = util.checkUpDown(nextcx);
-      console.log("chkUpDwn return value: " + canGo);
       if(canGo !== false){
         nextcx = canGo; // locks player in place on x axis (i.e. in tunnel)
         nextcy -= this.speed*du;
@@ -105,10 +104,90 @@ Player.prototype.update = function (du) {
     }
 
 
-
 };
+
+
+var g_playerAnimCounter = 0; // counter fyrir animation
+var lastCx = this.cx;
+var lastCy = this.cy;
 
 Player.prototype.render = function (ctx) {
+  var newCx = this.cx;
+  var newCy = this.cy;
 
-  g_sprites.player.drawCentredAt(ctx,this.cx,this.cy);
+  g_playerAnimCounter += 1;
+  // check for reset of animCounter
+  if(g_playerAnimCounter > 16) g_playerAnimCounter = 0;
+
+  // walk right anim cycle
+  if(lastCx < newCx){
+    this.rightAnim(ctx);
+  }
+  // walk left anim cycle
+  else if (lastCx > newCx) {
+    this.leftAnim(ctx);
+  }
+  // walk up anim cycle
+  else if (lastCy > newCy){
+    this.upAnim(ctx);
+  }
+  // walk down anim cycle
+  else if(lastCy < newCy){
+    this.downAnim(ctx);
+  } else {
+    this.lastAnim(ctx);
+  }
+
+
+  //walk left anim cycle
+
+  // stay still anim
+  //g_sprites.playerWalk1.drawCentredAt(ctx,this.cx,this.cy);
+  lastCx = newCx;
+  lastCy = newCy;
 };
+
+var lastAnimation = 1;
+
+Player.prototype.rightAnim = function (ctx){
+  lastAnimation = 1;
+  if(g_playerAnimCounter < 8){
+    g_sprites.playerWalkRight1.drawCentredAt(ctx,this.cx,this.cy);
+  } else { // if playerAnimCounter > 8
+    g_sprites.playerWalkRight2.drawCentredAt(ctx,this.cx,this.cy);
+  }
+}
+
+Player.prototype.leftAnim = function (ctx){
+  lastAnimation = 2;
+  if(g_playerAnimCounter < 8){
+    g_sprites.playerWalkLeft1.drawCentredAt(ctx,this.cx,this.cy);
+  } else { // if playerAnimCounter > 8
+    g_sprites.playerWalkLeft2.drawCentredAt(ctx,this.cx,this.cy);
+  }
+}
+
+Player.prototype.upAnim = function (ctx){
+  lastAnimation = 3;
+  if(g_playerAnimCounter < 8){
+    g_sprites.playerWalkUp1.drawCentredAt(ctx,this.cx,this.cy);
+  } else { // if playerAnimCounter > 8
+    g_sprites.playerWalkUp2.drawCentredAt(ctx,this.cx,this.cy);
+  }
+}
+
+Player.prototype.downAnim = function (ctx){
+  lastAnimation = 4;
+  if(g_playerAnimCounter < 8){
+    g_sprites.playerWalkDown1.drawCentredAt(ctx,this.cx,this.cy);
+  } else { // if playerAnimCounter > 8
+    g_sprites.playerWalkDown2.drawCentredAt(ctx,this.cx,this.cy);
+  }
+}
+
+Player.prototype.lastAnim = function(ctx){
+  if(lastAnimation === 1) g_sprites.playerWalkRight1.drawCentredAt(ctx,this.cx,this.cy);
+  if(lastAnimation === 2) g_sprites.playerWalkLeft1.drawCentredAt(ctx,this.cx,this.cy);
+  if(lastAnimation === 3) g_sprites.playerWalkUp1.drawCentredAt(ctx,this.cx,this.cy);
+  if(lastAnimation === 4) g_sprites.playerWalkDown1.drawCentredAt(ctx,this.cx,this.cy);
+}
