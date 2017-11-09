@@ -1,16 +1,14 @@
 function Pooka(descr){
   this.setup(descr);
   this.randomisePosition();
-  this.velX = 3;
+  this.vel = 3;
 };
 
 Pooka.prototype = new Entity();
 
 //Player.prototype.sprite = new Sprite(16,6,16,16,g_images.spriteSheet3);
 
-//Player.prototype.cx = 480;
-//Player.prototype.cy = 480;
-
+//Set default directions to left and Down
 
 Pooka.prototype.randomisePosition = function () {
     // Rock randomisation defaults (if nothing otherwise specified)
@@ -18,14 +16,18 @@ Pooka.prototype.randomisePosition = function () {
     this.cy = this.cy || Math.random() * g_canvas.height;
 };
 
+
+
 Pooka.prototype.update = function (du) {
 
-
   if (this.cx > g_canvas.width || this.cx < 0) {
-    this.velX = -this.velX;
+    this.vel = -this.vel;
+  }
+  if (this.cy > g_canvas.height || this.cy < 0) {
+    this.vel = -this.vel;
   }
 
-  this.cx += this.velX*du;
+  this.cx += this.vel;
 
 };
 
