@@ -92,11 +92,7 @@ Player.prototype.update = function (du) {
             nextcy -= this.speed*du;
           }
         }
-
-
-        //nextcx += 3*du;
     }
-
     // don't go further than borders
     if(nextcy <= this.MAX_Y && nextcy >= this.MIN_Y){
     	this.cy = nextcy;
@@ -104,14 +100,12 @@ Player.prototype.update = function (du) {
     if(nextcx <= this.MAX_X && nextcx >= this.MIN_X){
     	this.cx = nextcx;
     }
-
-
 };
 
 
 
-var lastCx = this.cx;
-var lastCy = this.cy;
+var g_playerLastCx = this.cx;
+var g_playerLastCy = this.cy;
 
 Player.prototype.render = function (ctx) {
   var newCx = this.cx;
@@ -122,26 +116,26 @@ Player.prototype.render = function (ctx) {
   if(this.animCounter > 16) this.animCounter = 0;
 
   // walk right anim cycle
-  if(lastCx < newCx){
+  if(g_playerLastCx < newCx){
     this.rightAnim(ctx);
   }
   // walk left anim cycle
-  else if (lastCx > newCx) {
+  else if (g_playerLastCx > newCx) {
     this.leftAnim(ctx);
   }
   // walk up anim cycle
-  else if (lastCy > newCy){
+  else if (g_playerLastCy > newCy){
     this.upAnim(ctx);
   }
   // walk down anim cycle
-  else if(lastCy < newCy){
+  else if(g_playerLastCy < newCy){
     this.downAnim(ctx);
   } else {
     this.lastAnim(ctx);
   }
 
-  lastCx = newCx;
-  lastCy = newCy;
+  g_playerLastCx = newCx;
+  g_playerLastCy = newCy;
 };
 
 
@@ -182,6 +176,7 @@ Player.prototype.downAnim = function (ctx){
   }
 }
 
+// For if player is standing still
 Player.prototype.lastAnim = function(ctx){
   if(this.lastAnimation === 1) g_sprites.playerWalkRight1.drawCentredAt(ctx,this.cx,this.cy);
   if(this.lastAnimation === 2) g_sprites.playerWalkLeft1.drawCentredAt(ctx,this.cx,this.cy);

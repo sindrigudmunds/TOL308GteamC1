@@ -128,8 +128,20 @@ function preloadDone() {
     g_sprites.playerWalkDown1 = new Sprite(604,44,32,38,g_images.spriteSheet4);
     g_sprites.playerWalkDown2 = new Sprite(636,44,32,38,g_images.spriteSheet4);
 
-    g_sprites.pooka = new Sprite(20,107,30,27,g_images.spriteSheet3);
-    g_sprites.fygar = new Sprite(28,162,28,28,g_images.spriteSheet3);
+    // Pooka right
+    g_sprites.pookaRight1 = new Sprite(20,107,30,27,g_images.spriteSheet3);
+    g_sprites.pookaRight2 = new Sprite(52,107,30,27,g_images.spriteSheet3);
+    // Pooka left
+    g_sprites.pookaLeft1 = new Sprite(616,107,30,27,g_images.spriteSheet4);
+    g_sprites.pookaLeft2 = new Sprite(648,107,30,27,g_images.spriteSheet4);
+
+    //  Fygar right
+    g_sprites.fygarRight1 = new Sprite(28,162,28,28,g_images.spriteSheet3);
+    g_sprites.fygarRight2 = new Sprite(60,162,28,28,g_images.spriteSheet3);
+    // Fygar left
+    g_sprites.fygarLeft1 = new Sprite(616,162,28,28,g_images.spriteSheet4);
+    g_sprites.fygarLeft2 = new Sprite(648,162,28,28,g_images.spriteSheet4);
+
     //g_sprites.pookalabb2 = new Sprite(58,102,28,28,g_images.spriteSheet3);
     entityManager.init();
     //createInitialShips();
