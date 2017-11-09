@@ -29,6 +29,8 @@ Player.prototype.DOWN = keyCode('S');
 Player.prototype.lastDirLeftRight = 'Left';  // player byrjar að stefna til vinstri
 Player.prototype.lastDirUpDown = 'Down';  // player byrjar að stefna niður
 Player.prototype.speed = 2;
+Player.prototype.lastAnimation = 1; // 1-4 eins og er - væri hægt að hafa 1-8
+Player.prototype.animCounter = 0;
 
 Player.prototype.update = function (du) {
 		var nextcy = this.cy;
@@ -107,7 +109,7 @@ Player.prototype.update = function (du) {
 };
 
 
-var g_playerAnimCounter = 0; // counter fyrir animation
+
 var lastCx = this.cx;
 var lastCy = this.cy;
 
@@ -115,9 +117,9 @@ Player.prototype.render = function (ctx) {
   var newCx = this.cx;
   var newCy = this.cy;
 
-  g_playerAnimCounter += 1;
+  this.animCounter += 1;
   // check for reset of animCounter
-  if(g_playerAnimCounter > 16) g_playerAnimCounter = 0;
+  if(this.animCounter > 16) this.animCounter = 0;
 
   // walk right anim cycle
   if(lastCx < newCx){
@@ -138,20 +140,15 @@ Player.prototype.render = function (ctx) {
     this.lastAnim(ctx);
   }
 
-
-  //walk left anim cycle
-
-  // stay still anim
-  //g_sprites.playerWalk1.drawCentredAt(ctx,this.cx,this.cy);
   lastCx = newCx;
   lastCy = newCy;
 };
 
-var lastAnimation = 1;
+
 
 Player.prototype.rightAnim = function (ctx){
-  lastAnimation = 1;
-  if(g_playerAnimCounter < 8){
+  this.lastAnimation = 1;
+  if(this.animCounter < 8){
     g_sprites.playerWalkRight1.drawCentredAt(ctx,this.cx,this.cy);
   } else { // if playerAnimCounter > 8
     g_sprites.playerWalkRight2.drawCentredAt(ctx,this.cx,this.cy);
@@ -159,8 +156,8 @@ Player.prototype.rightAnim = function (ctx){
 }
 
 Player.prototype.leftAnim = function (ctx){
-  lastAnimation = 2;
-  if(g_playerAnimCounter < 8){
+  this.lastAnimation = 2;
+  if(this.animCounter < 8){
     g_sprites.playerWalkLeft1.drawCentredAt(ctx,this.cx,this.cy);
   } else { // if playerAnimCounter > 8
     g_sprites.playerWalkLeft2.drawCentredAt(ctx,this.cx,this.cy);
@@ -168,8 +165,8 @@ Player.prototype.leftAnim = function (ctx){
 }
 
 Player.prototype.upAnim = function (ctx){
-  lastAnimation = 3;
-  if(g_playerAnimCounter < 8){
+  this.lastAnimation = 3;
+  if(this.animCounter < 8){
     g_sprites.playerWalkUp1.drawCentredAt(ctx,this.cx,this.cy);
   } else { // if playerAnimCounter > 8
     g_sprites.playerWalkUp2.drawCentredAt(ctx,this.cx,this.cy);
@@ -177,8 +174,8 @@ Player.prototype.upAnim = function (ctx){
 }
 
 Player.prototype.downAnim = function (ctx){
-  lastAnimation = 4;
-  if(g_playerAnimCounter < 8){
+  this.lastAnimation = 4;
+  if(this.animCounter < 8){
     g_sprites.playerWalkDown1.drawCentredAt(ctx,this.cx,this.cy);
   } else { // if playerAnimCounter > 8
     g_sprites.playerWalkDown2.drawCentredAt(ctx,this.cx,this.cy);
@@ -186,8 +183,8 @@ Player.prototype.downAnim = function (ctx){
 }
 
 Player.prototype.lastAnim = function(ctx){
-  if(lastAnimation === 1) g_sprites.playerWalkRight1.drawCentredAt(ctx,this.cx,this.cy);
-  if(lastAnimation === 2) g_sprites.playerWalkLeft1.drawCentredAt(ctx,this.cx,this.cy);
-  if(lastAnimation === 3) g_sprites.playerWalkUp1.drawCentredAt(ctx,this.cx,this.cy);
-  if(lastAnimation === 4) g_sprites.playerWalkDown1.drawCentredAt(ctx,this.cx,this.cy);
+  if(this.lastAnimation === 1) g_sprites.playerWalkRight1.drawCentredAt(ctx,this.cx,this.cy);
+  if(this.lastAnimation === 2) g_sprites.playerWalkLeft1.drawCentredAt(ctx,this.cx,this.cy);
+  if(this.lastAnimation === 3) g_sprites.playerWalkUp1.drawCentredAt(ctx,this.cx,this.cy);
+  if(this.lastAnimation === 4) g_sprites.playerWalkDown1.drawCentredAt(ctx,this.cx,this.cy);
 }
