@@ -31,6 +31,8 @@ Cell.prototype.Dig = function(direction){
 
 Cell.prototype.Render = function(ctx)
 {
+    if(this.y <= 1) return;
+
     if(this.AmmountDug['left'] === 0 &&
         this.AmmountDug['right'] === 0 &&
         this.AmmountDug['up'] === 0 &&
@@ -63,18 +65,21 @@ function Grid(xSize, ySize, cellSize){
     }
 }
 
-Grid.prototype.PlayerMoved = function(x, y, direction){
-    // Finnna hvaða cellu við eigum að grafa
-    var cell = this.FindCell(x, y, direction);
+Grid.prototype.PlayerMoved = function(x, y, direction){ 
+    xIndex = Math.floor(x / 32);
+    yIndex = Math.floor(y / 32);
+
+    //Viljum ekki grafa fyrir ofan yfirborðið
+    if(yIndex <= 1) return;
+
+    cell = this.cells[xIndex][yIndex];
 
     if(cell.IsFullyDug) return;
-    console.log(cell);
     cell.Dig(direction);
 }
 
 Grid.prototype.FindCell = function(x, y, direction){
-    xIndex = Math.floor(x / 32);
-    yIndex = Math.floor(y / 32);
+
     //if(direction === 'down') yIndex++;
     //if(direction === 'right') xIndex++;
     // Viljum vita í hvaða cellu playerinn er
