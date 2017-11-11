@@ -50,16 +50,16 @@ Player.prototype.update = function (du) {
     } else
     if (keys[this.UP]) {
       
-      this.lastDirUpDown = 'Up';
+      this.lastDirUpDown = 'up';
       var canGo = util.checkUpDown(nextcx);
       if(canGo !== false){
         nextcx = canGo; // locks player in place on x axis (i.e. in tunnel)
         nextcy -= this.speed*du;
         currentDirection = 'up';
       } else{
-        if(this.lastDirLeftRight === 'Left'){
+        if(this.lastDirLeftRight === 'left'){
           nextcx -= this.speed*du;
-        } else if (this.lastDirLeftRight === 'Right') {
+        } else if (this.lastDirLeftRight === 'right') {
           nextcx += this.speed*du;
         }
         currentDirection = this.lastDirLeftRight;
@@ -67,48 +67,48 @@ Player.prototype.update = function (du) {
     } else
 
     if (keys[this.DOWN]) {
-        this.lastDirUpDown = 'Down';
+        this.lastDirUpDown = 'down';
         var canGo = util.checkUpDown(nextcx);
         if(canGo !== false){
           nextcx = canGo; // locks player in place on x axis (i.e. in tunnel)
           nextcy += this.speed*du;
           currentDirection = 'down';
         } else{
-          if(this.lastDirLeftRight === 'Left'){
+          if(this.lastDirLeftRight === 'left'){
             nextcx -= this.speed*du;
-          } else if (this.lastDirLeftRight === 'Right') {
+          } else if (this.lastDirLeftRight === 'right') {
             nextcx += this.speed*du;
           }
           currentDirection = this.lastDirLeftRight;
         }
     } else
     if (keys[this.LEFT]) {
-        this.lastDirLeftRight = 'Left';
+        this.lastDirLeftRight = 'left';
         var canGo = util.checkLeftRight(nextcy);
         if(canGo !== false){
           nextcy = canGo; // locks player in place on y axis (i.e. in tunnel)
           nextcx -= this.speed*du;
           currentDirection = 'left';
         } else{
-          if(this.lastDirUpDown === 'Down'){
+          if(this.lastDirUpDown === 'down'){
             nextcy += this.speed*du;
-          } else if (this.lastDirUpDown === 'Up') {
+          } else if (this.lastDirUpDown === 'up') {
             nextcy -= this.speed*du;
           }
           currentDirection = this.lastDirUpDown;
         }
     } else
     if (keys[this.RIGHT]) {
-        this.lastDirLeftRight = 'Right';
+        this.lastDirLeftRight = 'right';
         var canGo = util.checkLeftRight(nextcy);
         if(canGo !== false){
           nextcy = canGo; // locks player in place on y axis (i.e. in tunnel)
           nextcx += this.speed*du;
           currentDirection = 'right';
         } else{
-          if(this.lastDirUpDown === 'Down'){
+          if(this.lastDirUpDown === 'down'){
             nextcy += this.speed*du;
-          } else if (this.lastDirUpDown === 'Up') {
+          } else if (this.lastDirUpDown === 'up') {
             nextcy -= this.speed*du;
           }
           currentDirection = this.lastDirLeftRight;
