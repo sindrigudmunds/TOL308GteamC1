@@ -25,18 +25,29 @@ Player.prototype.UP = keyCode('W');
 Player.prototype.LEFT = keyCode('A');
 Player.prototype.RIGHT = keyCode('D');
 Player.prototype.DOWN = keyCode('S');
+Player.prototype.SHOOT = keyCode('M');
 
 Player.prototype.lastDirLeftRight = 'Left';  // player byrjar að stefna til vinstri
 Player.prototype.lastDirUpDown = 'Down';  // player byrjar að stefna niður
 Player.prototype.speed = 2;
 Player.prototype.lastAnimation = 1; // 1-4 eins og er - væri hægt að hafa 1-8
 Player.prototype.animCounter = 0;
+Player.prototype.shooting = false;
+Player.prototype.shootCounter = 0;
 
 Player.prototype.update = function (du) {
 		var nextcy = this.cy;
     var nextcx = this.cx;
     var currentDirection = null;
 
+    if (keys[this.SHOOT]) {
+      this.shooting = true;
+      this.shootCounter = 0;
+      console.log("SHOOOT")
+      if(this.shootCounter > 15){
+        eatKey(keyCode('M'));
+      }
+    } else
     if (keys[this.UP]) {
       
       this.lastDirUpDown = 'Up';
@@ -132,6 +143,10 @@ Player.prototype.render = function (ctx) {
   if(this.animCounter > 16) this.animCounter = 0;
 
   // walk right anim cycle
+  if(this.shooting === true){
+    this.shootingAnim(ctx);
+    this.shooting = false;
+  } else
   if(g_playerLastCx < newCx){
     this.rightAnim(ctx);
   }
@@ -154,7 +169,39 @@ Player.prototype.render = function (ctx) {
   g_playerLastCy = newCy;
 };
 
+// g_sprites.plArrowRightPl.drawCentredAt(ctx,this.cx,this.cy);
 
+Player.prototype.shootingAnim = function (ctx){
+  if(this.shootCounter < 19){
+    if(this.animCounter < 3){
+      g_sprites.plArrowRight1.drawCentredAt(ctx,this.cx+50,this.cy + 20 );
+      g_sprites.plArrowRightPl.drawCentredAt(ctx,this.cx,this.cy);
+    }
+    if(this.animCounter < 6){
+      g_sprites.plArrowRight2.drawCentredAt(ctx,this.cx+50,this.cy + 20);
+      g_sprites.plArrowRightPl.drawCentredAt(ctx,this.cx,this.cy);
+    }
+    if(this.animCounter < 9){
+      g_sprites.plArrowRight3.drawCentredAt(ctx,this.cx+50,this.cy + 20);
+      g_sprites.plArrowRightPl.drawCentredAt(ctx,this.cx,this.cy);
+    }
+    if(this.animCounter < 12){
+       g_sprites.plArrowRight4.drawCentredAt(ctx,this.cx+50,this.cy + 20);
+       g_sprites.plArrowRightPl.drawCentredAt(ctx,this.cx,this.cy);
+    }
+    if(this.animCounter < 15){
+      g_sprites.plArrowRight5.drawCentredAt(ctx,this.cx+50,this.cy + 20);
+      g_sprites.plArrowRightPl.drawCentredAt(ctx,this.cx,this.cy);
+    }
+    if(this.animCounter < 18){
+      g_sprites.plArrowRight6.drawCentredAt(ctx,this.cx+50,this.cy + 20);
+      g_sprites.plArrowRightPl.drawCentredAt(ctx,this.cx,this.cy);
+    }
+    this.shooting = false;
+    this.shootCounter += 1;
+  }
+
+}
 
 Player.prototype.rightAnim = function (ctx){
   this.lastAnimation = 1;
