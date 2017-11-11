@@ -41,10 +41,10 @@ Player.prototype.update = function (du) {
 
     if (keys[this.SHOOT]) {
       this.shooting = true;
+      this.shootCounter = 0;
       console.log("SHOOOT")
       if(this.shootCounter > 15){
         eatKey(keyCode('M'));
-        this.shootCounter = 0;
       }
     } else
     if (keys[this.UP]) {
@@ -153,15 +153,34 @@ Player.prototype.render = function (ctx) {
   g_playerLastCy = newCy;
 };
 
+// g_sprites.plArrowRightPl.drawCentredAt(ctx,this.cx,this.cy);
 
 Player.prototype.shootingAnim = function (ctx){
-  if(this.shootCounter < 16){
-    if(this.animCounter < 2) g_sprites.plArrowRight1.drawCentredAt(ctx,this.cx+40,this.cy);
-    if(this.animCounter < 4) g_sprites.plArrowRight2.drawCentredAt(ctx,this.cx+40,this.cy);
-    if(this.animCounter < 6) g_sprites.plArrowRight3.drawCentredAt(ctx,this.cx+40,this.cy);
-    if(this.animCounter < 8) g_sprites.plArrowRight4.drawCentredAt(ctx,this.cx+40,this.cy);
-    if(this.animCounter < 10) g_sprites.plArrowRight5.drawCentredAt(ctx,this.cx+40,this.cy);
-    if(this.animCounter < 16) g_sprites.plArrowRight6.drawCentredAt(ctx,this.cx+40,this.cy);
+  if(this.shootCounter < 19){
+    if(this.animCounter < 3){
+      g_sprites.plArrowRight1.drawCentredAt(ctx,this.cx+50,this.cy + 20 );
+      g_sprites.plArrowRightPl.drawCentredAt(ctx,this.cx,this.cy);
+    }
+    if(this.animCounter < 6){
+      g_sprites.plArrowRight2.drawCentredAt(ctx,this.cx+50,this.cy + 20);
+      g_sprites.plArrowRightPl.drawCentredAt(ctx,this.cx,this.cy);
+    }
+    if(this.animCounter < 9){
+      g_sprites.plArrowRight3.drawCentredAt(ctx,this.cx+50,this.cy + 20);
+      g_sprites.plArrowRightPl.drawCentredAt(ctx,this.cx,this.cy);
+    }
+    if(this.animCounter < 12){
+       g_sprites.plArrowRight4.drawCentredAt(ctx,this.cx+50,this.cy + 20);
+       g_sprites.plArrowRightPl.drawCentredAt(ctx,this.cx,this.cy);
+    }
+    if(this.animCounter < 15){
+      g_sprites.plArrowRight5.drawCentredAt(ctx,this.cx+50,this.cy + 20);
+      g_sprites.plArrowRightPl.drawCentredAt(ctx,this.cx,this.cy);
+    }
+    if(this.animCounter < 18){
+      g_sprites.plArrowRight6.drawCentredAt(ctx,this.cx+50,this.cy + 20);
+      g_sprites.plArrowRightPl.drawCentredAt(ctx,this.cx,this.cy);
+    }
     this.shooting = false;
     this.shootCounter += 1;
   }

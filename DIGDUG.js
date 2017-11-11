@@ -142,12 +142,13 @@ function preloadDone() {
     g_sprites.fygarLeft2 = new Sprite(648,162,28,28,g_images.spriteSheet4);
 
     // player arrow right
-    g_sprites.plArrowRight1 = new Sprite(580, 44, 10, 28, g_images.spriteSheet3);
-    g_sprites.plArrowRight2 = new Sprite(600, 44, 20, 28, g_images.spriteSheet3);
-    g_sprites.plArrowRight3 = new Sprite(600, 44, 30, 28, g_images.spriteSheet3);
-    g_sprites.plArrowRight4 = new Sprite(600, 44, 40, 28, g_images.spriteSheet3);
-    g_sprites.plArrowRight5 = new Sprite(600, 44, 50, 28, g_images.spriteSheet3);
-    g_sprites.plArrowRight6 = new Sprite(642, 44, 60, 28, g_images.spriteSheet3);
+    g_sprites.plArrowRightPl = new Sprite(234,6,38,38, g_images.spriteSheet3);
+    g_sprites.plArrowRight1 = new Sprite(580, 44, 10, 38, g_images.spriteSheet3);
+    g_sprites.plArrowRight2 = new Sprite(580, 44, 20, 38, g_images.spriteSheet3);
+    g_sprites.plArrowRight3 = new Sprite(580, 44, 30, 38, g_images.spriteSheet3);
+    g_sprites.plArrowRight4 = new Sprite(580, 44, 40, 38, g_images.spriteSheet3);
+    g_sprites.plArrowRight5 = new Sprite(580, 44, 50, 38, g_images.spriteSheet3);
+    g_sprites.plArrowRight6 = new Sprite(580, 44, 70, 38, g_images.spriteSheet3);
 
 
 
