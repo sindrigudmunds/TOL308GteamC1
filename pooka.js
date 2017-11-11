@@ -14,9 +14,12 @@ Pooka.prototype.lastCy = this.cy;
 //Set default directions to left and Down
 
 Pooka.prototype.randomisePosition = function () {
-    // Rock randomisation defaults (if nothing otherwise specified)
+    // Starts on some y cell 
+    var leftRightCoords = [44,76,108,140,172,204,236,268,300,332,364,396,428,460,492];
+    var randomInt = Math.floor(Math.random() * leftRightCoords.length);
+
     this.cx = this.cx || Math.random() * g_canvas.width;
-    this.cy = this.cy || Math.random() * g_canvas.height;
+    this.cy =  6+ leftRightCoords[randomInt];//this.cy || Math.random() * g_canvas.height;
 };
 
 

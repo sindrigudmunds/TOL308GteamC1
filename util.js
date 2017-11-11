@@ -108,7 +108,6 @@ fillBox: function (ctx, x, y, w, h, style) {
 
 checkUpDown: function (nextcx) {
   var upDownCoords = [16, 48, 80, 112, 144, 176, 208, 240, 272, 304, 336, 368, 400, 432];
-
   for(var i=0; i < upDownCoords.length; i++){
       var val = upDownCoords[i];
       if(Math.abs(nextcx - val) < 2){
@@ -119,7 +118,8 @@ checkUpDown: function (nextcx) {
 },
 
 checkLeftRight: function (nextcy){
-  var leftRightCoords = [32,64,96,128,160,192,224,256,288,320,352,384,416,448,490];
+  var leftRightCoords = [44,76,108,140,172,204,236,268,300,332,364,396,428,460,492];
+
   for(var i=0; i < leftRightCoords.length; i++){
     var val = leftRightCoords[i];
     if(Math.abs(nextcy - val) < 2){

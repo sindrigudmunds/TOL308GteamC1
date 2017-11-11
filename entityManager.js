@@ -31,6 +31,7 @@ var entityManager = {
     _pookas : [],
     _fygars   : [],
     _rocks : [],
+    _grids: [],
 
     // "PRIVATE" METHODS
 
@@ -64,6 +65,7 @@ var entityManager = {
     generateFygar : function(descr){
       this._fygars.push(new Fygar(descr));
     },
+
 
     update: function(du) {
       for (var c = 0; c < this._categories.length; ++c) {

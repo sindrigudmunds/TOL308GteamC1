@@ -76,7 +76,7 @@ function updateSimulation(du) {
 
 
 
-
+var grid = new Grid(14, 16);
 // GAME-SPECIFIC RENDERING
 
 function renderSimulation(ctx) {
@@ -84,6 +84,7 @@ function renderSimulation(ctx) {
     entityManager.render(ctx);
 
     //if (g_renderSpatialDebug) spatialManager.render(ctx);
+    grid.RenderGrid(ctx);
 }
 
 
@@ -101,7 +102,7 @@ function requestPreloads() {
         spriteSheet3 : "NES_Dig_Dug_ClearX700Y220.png",
         spriteSheet4 : "NES_Dig_Dug_ClearX700Y220Flipped.png",
         backgroundTexture : "DigDugBackgroundTextureresized448.png",
-
+        protoTunnel: "protoTunnelX32Y32Transp.png",
     };
 
     imagesPreload(requiredImages, g_images, preloadDone);
@@ -150,7 +151,9 @@ function preloadDone() {
     g_sprites.plArrowRight5 = new Sprite(580, 44, 50, 38, g_images.spriteSheet3);
     g_sprites.plArrowRight6 = new Sprite(580, 44, 70, 38, g_images.spriteSheet3);
 
-
+    // Prototunnel
+    g_sprites.fullDugTunnel = new Sprite(0,0,31,31, g_images.protoTunnel);
+    //g_sprites.fullDugTunnel = new Sprite(578,158,32,32, g_images.spriteSheet3);
 
 
     //g_sprites.pookalabb2 = new Sprite(58,102,28,28,g_images.spriteSheet3);
@@ -165,7 +168,7 @@ function preloadDone() {
     createFygar();
     createFygar();
 
-    var grid = new Grid(14, 16);
+    //var grid = new Grid(14, 16);  // set fyrir ofan render: línu 82 fyrir ofan
     grid.Initialize();
     grid.print();
 

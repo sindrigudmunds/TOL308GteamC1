@@ -1,9 +1,11 @@
-function Cell(){
+function Cell(xPos, yPos){
     // Hvað er búið að grafa mikið úr cellunni
     this.AmmountDug = 0;
     // Var grafið upp eða til hliðar?
     this.DirectionDug = null;
     this.IsFullyDug = false;
+    this.xPos = xPos;
+    this.yPos = yPos;
 }
 
 Cell.prototype.Dig = function(direction){
@@ -14,8 +16,10 @@ Cell.prototype.Dig = function(direction){
     }
 }
 
+
 Cell.prototype.Render = function(ctx){
-    
+    g_sprites.fullDugTunnel.drawCentredAt(ctx, this.xPos, this.yPos);
+
 }
 
 function Grid(xSize, ySize){
@@ -26,15 +30,24 @@ function Grid(xSize, ySize){
     this.cells = [];
 }
 
-// Setur upp griddið í fyrsta sinn. 
+// Setur upp griddið í fyrsta sinn.
 Grid.prototype.Initialize = function(){
+    //var multiplierX = 1; // verður að byrja á 1 til að margfalda 32
+    //var multiplierY = 1; //  -- || --
+    var add = 32;
+    var xPos = 0
+    var yPos = 0
     for(var x = 0; x < this.xSize; x++){
-        var column = []
+        var column = [];
         for(var y = 0; y < this.ySize; y++){
-            column.push(new Cell());
+            column.push(new Cell(xPos + 16, yPos + 16));
+            yPos += add;
         }
+        xPos +=add;
+        yPos = 0;
         this.cells.push(column);
     }
+
 }
 
 Grid.prototype.PlayerMoved = function(x, y, direction){
