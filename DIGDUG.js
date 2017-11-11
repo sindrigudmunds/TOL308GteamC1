@@ -108,7 +108,6 @@ function requestPreloads() {
 }
 
 var g_sprites = {};
-
 function preloadDone() {
 
     //g_sprites.spriteSheet1  = new Sprite(g_images.spriteSheet1);
@@ -141,6 +140,17 @@ function preloadDone() {
     // Fygar left
     g_sprites.fygarLeft1 = new Sprite(616,162,28,28,g_images.spriteSheet4);
     g_sprites.fygarLeft2 = new Sprite(648,162,28,28,g_images.spriteSheet4);
+
+    // player arrow right
+    g_sprites.plArrowRight1 = new Sprite(580, 44, 10, 28, g_images.spriteSheet3);
+    g_sprites.plArrowRight2 = new Sprite(600, 44, 20, 28, g_images.spriteSheet3);
+    g_sprites.plArrowRight3 = new Sprite(600, 44, 30, 28, g_images.spriteSheet3);
+    g_sprites.plArrowRight4 = new Sprite(600, 44, 40, 28, g_images.spriteSheet3);
+    g_sprites.plArrowRight5 = new Sprite(600, 44, 50, 28, g_images.spriteSheet3);
+    g_sprites.plArrowRight6 = new Sprite(642, 44, 60, 28, g_images.spriteSheet3);
+
+
+
 
     //g_sprites.pookalabb2 = new Sprite(58,102,28,28,g_images.spriteSheet3);
     entityManager.init();
