@@ -35,19 +35,23 @@ Player.prototype.animCounter = 0;
 Player.prototype.update = function (du) {
 		var nextcy = this.cy;
     var nextcx = this.cx;
+    var currentDirection = null;
 
     if (keys[this.UP]) {
+      
       this.lastDirUpDown = 'Up';
       var canGo = util.checkUpDown(nextcx);
       if(canGo !== false){
         nextcx = canGo; // locks player in place on x axis (i.e. in tunnel)
         nextcy -= this.speed*du;
+        currentDirection = 'up';
       } else{
         if(this.lastDirLeftRight === 'Left'){
           nextcx -= this.speed*du;
         } else if (this.lastDirLeftRight === 'Right') {
           nextcx += this.speed*du;
         }
+        currentDirection = this.lastDirLeftRight;
       }
     } else
 
@@ -57,12 +61,14 @@ Player.prototype.update = function (du) {
         if(canGo !== false){
           nextcx = canGo; // locks player in place on x axis (i.e. in tunnel)
           nextcy += this.speed*du;
+          currentDirection = 'down';
         } else{
           if(this.lastDirLeftRight === 'Left'){
             nextcx -= this.speed*du;
           } else if (this.lastDirLeftRight === 'Right') {
             nextcx += this.speed*du;
           }
+          currentDirection = this.lastDirLeftRight;
         }
     } else
     if (keys[this.LEFT]) {
@@ -71,12 +77,14 @@ Player.prototype.update = function (du) {
         if(canGo !== false){
           nextcy = canGo; // locks player in place on y axis (i.e. in tunnel)
           nextcx -= this.speed*du;
+          currentDirection = 'left';
         } else{
           if(this.lastDirUpDown === 'Down'){
             nextcy += this.speed*du;
           } else if (this.lastDirUpDown === 'Up') {
             nextcy -= this.speed*du;
           }
+          currentDirection = this.lastDirUpDown;
         }
     } else
     if (keys[this.RIGHT]) {
@@ -85,13 +93,18 @@ Player.prototype.update = function (du) {
         if(canGo !== false){
           nextcy = canGo; // locks player in place on y axis (i.e. in tunnel)
           nextcx += this.speed*du;
+          currentDirection = 'right';
         } else{
           if(this.lastDirUpDown === 'Down'){
             nextcy += this.speed*du;
           } else if (this.lastDirUpDown === 'Up') {
             nextcy -= this.speed*du;
           }
+          currentDirection = this.lastDirLeftRight;
         }
+    }
+    if(this.cy !== nextcy || this.cx !== nextcx){
+      grid.PlayerMoved(this.cx, this.cy, currentDirection);
     }
     // don't go further than borders
     if(nextcy <= this.MAX_Y && nextcy >= this.MIN_Y){
@@ -100,6 +113,9 @@ Player.prototype.update = function (du) {
     if(nextcx <= this.MAX_X && nextcx >= this.MIN_X){
     	this.cx = nextcx;
     }
+
+
+
 };
 
 

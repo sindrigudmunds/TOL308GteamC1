@@ -1,37 +1,63 @@
-function Cell(){
+function Cell(x, y, size){
     // Hvað er búið að grafa mikið úr cellunni
-    this.AmmountDug = 0;
-    // Var grafið upp eða til hliðar?
-    this.DirectionDug = null;
+    // út hvorri átt.
+    this.AmmountDug = {'left': 0,
+                       'right': 0,
+                       'up': 0,
+                       'down': 0};
+
     this.IsFullyDug = false;
+    this.x = x;
+    this.y = y;
+    this.size = size;
+
+    this.currentDigDirection = null;
 }
 
 Cell.prototype.Dig = function(direction){
     if(this.IsFullyDug) return;
-    this.AmmountDug++
-    if(this.AmmountDug === 10){
+
+    this.currentDigDirection = direction;
+    this.AmmountDug[direction]++
+
+    if(this.AmmountDug['left'] === 3 ||
+       this.AmmountDug['right'] === 3 ||
+       this.AmmountDug['up'] === 3 ||
+       this.AmmountDug['down'] === 3){
+        // Búið að grafa í gegnum alla celluna
         this.IsFullyDug = true;
     }
 }
 
-Cell.prototype.Render = function(ctx){
-    
+Cell.prototype.Render = function(ctx)
+{
+    if(this.AmmountDug['left'] === 0 &&
+        this.AmmountDug['right'] === 0 &&
+        this.AmmountDug['up'] === 0 &&
+        this.AmmountDug['down'] === 0) return;
+
+    switch(this.currentDigDirection){
+        case 'left':
+        case 'right':
+        case 'up':
+        case 'down':
+    }
+
+    util.fillBox(ctx, this.x*this.size, this.y*this.size, 30, 30, "Black")
 }
 
-function Grid(xSize, ySize){
+function Grid(xSize, ySize, cellSize){
     // Fjöldi cella á x og y ás
     this.xSize = xSize;
     this.ySize = ySize;
     // Setjum upp tómt 2d fylki
     this.cells = [];
-}
+    this.cellSize = cellSize;
 
-// Setur upp griddið í fyrsta sinn. 
-Grid.prototype.Initialize = function(){
     for(var x = 0; x < this.xSize; x++){
         var column = []
         for(var y = 0; y < this.ySize; y++){
-            column.push(new Cell());
+            column.push(new Cell(x, y, this.cellSize));
         }
         this.cells.push(column);
     }
@@ -39,15 +65,22 @@ Grid.prototype.Initialize = function(){
 
 Grid.prototype.PlayerMoved = function(x, y, direction){
     // Finnna hvaða cellu við eigum að grafa
-    var cell = FindCell(x, y);
+    var cell = this.FindCell(x, y, direction);
 
     if(cell.IsFullyDug) return;
-
+    console.log(cell);
     cell.Dig(direction);
 }
 
-Grid.prototype.FindCell = function(x, y){
-
+Grid.prototype.FindCell = function(x, y, direction){
+    xIndex = Math.floor(x / 32);
+    yIndex = Math.floor(y / 32);
+    //if(direction === 'down') yIndex++;
+    //if(direction === 'right') xIndex++;
+    // Viljum vita í hvaða cellu playerinn er
+    //console.log('x ' + xIndex);
+    //console.log('y ' + yIndex);
+    return this.cells[xIndex][yIndex];
 }
 
 Grid.prototype.RenderGrid = function(ctx){

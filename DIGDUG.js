@@ -7,14 +7,11 @@
 var g_canvas = document.getElementById("myCanvas");
 var g_ctx = g_canvas.getContext("2d");
 
-
-
+var grid = new Grid(14, 16, 32);
 
 // =====================
 // CREATE Player
 // =====================
-
-
 
 function createPlayer() {
 
@@ -35,8 +32,6 @@ function createFygar() {
 
   });
 }
-
-
 
 // =====================
 // GATHER INPUTS
@@ -153,11 +148,7 @@ function preloadDone() {
     createPooka();
     createFygar();
     createFygar();
-
-    var grid = new Grid(14, 16);
-    grid.Initialize();
     grid.print();
-
     main.init();
 }
 

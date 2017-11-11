@@ -26,7 +26,6 @@ with suitable 'data' and 'methods'.
 var entityManager = {
 
     // "PRIVATE" DATA
-
     _players   : [],
     _pookas : [],
     _fygars   : [],
@@ -39,7 +38,6 @@ var entityManager = {
             fn.call(aCategory[i]);
         }
     },
-
     // PUBLIC METHODS
 
     // Some things must be deferred until after initial construction
@@ -52,6 +50,7 @@ var entityManager = {
     init: function() {
 
     },
+
 
     generatePlayer : function(descr){
       this._players.push(new Player(descr));
@@ -75,13 +74,13 @@ var entityManager = {
 
               var status = aCategory[i].update(du);
               ++i;
-
           }
       }
     },
 
     render: function(ctx) {
-
+      grid.RenderGrid(ctx);
+      
       for (var c = 0; c < this._categories.length; ++c) {
 
           var aCategory = this._categories[c];
