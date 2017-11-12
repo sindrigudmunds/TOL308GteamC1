@@ -30,8 +30,8 @@ Cell.prototype.Render = function(ctx){
     //if(this.yPos <= 64) return;  // Eiður; til minnis: ég er að nýtast við pixla stærð héra - jón notaði cellu númer (þ.e. 1)
     g_sprites.fullDugTunnel.drawCentredAt(ctx, this.xPos, this.yPos);
 
-    var playerPosX = entityManager._players[0].cx;
-    var playerPosY = entityManager._players[0].cy;
+
+
 
     var cellXRight = false;
     var cellXLeft = false;
@@ -42,10 +42,19 @@ Cell.prototype.Render = function(ctx){
     if(playerPosX < this.xPos + 32 ) cellYUp = true;
     if(playerPosX > this.xPos)       cellYDown = true;
 
+    if(cellXRight === true && cellXLeft === true){
+      if(cellYUp === true && cellYDown === true){
+        console.log("CellLeftRight: " + this.cellX + " -- CellUpDown: " + this.cellY);
 
-  if(cellXRight === true && cellXLeft === true && cellYUp === true && cellYDown === true  ){
-    console.log("CellX: " + this.cellX +  " -- CellY: " + this.cellY);
-  }
+        console.log("cell X pos: " + this.xPos);
+        console.log("cell Y pos: " + this.yPos);
+      }
+    }
+      if(cellYUp === true && cellYDown === true){
+        console.log("WDDDDDD");
+      }
+
+
 
     /*
     if((playerPosX < this.xPos + 32 && playerPosX > this.xPos)
@@ -66,6 +75,13 @@ Cell.prototype.Render = function(ctx){
 
 }
 
+var playerPosX;
+var playerPosY;
+Cell.prototype.update = function(){
+  playerPosX = entityManager._players[0].cx;
+  playerPosY = entityManager._players[0].cy;
+  //console.log("PlPosX: " + playerPosX + " -- PlPosY: " + playerPosX);
+}
 
 
 function Grid(xSize, ySize){
@@ -113,6 +129,7 @@ Grid.prototype.RenderGrid = function(ctx){
     for(var x = 0; x < this.xSize; x++){
         for(var y = 0; y < this.ySize; y++){
             this.cells[x][y].Render(ctx);
+            this.cells[x][y].update();
         }
     }
 }

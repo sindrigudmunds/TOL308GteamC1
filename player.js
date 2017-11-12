@@ -126,6 +126,8 @@ Player.prototype.render = function (ctx) {
   var newCx = this.cx;
   var newCy = this.cy;
 
+  //console.log("playerX: " + newCx + " -- PlayerY: " + newCy);
+
   this.animCounter += 1;
   // check for reset of animCounter
   if(this.animCounter > 16) this.animCounter = 0;
