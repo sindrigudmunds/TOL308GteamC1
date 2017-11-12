@@ -1,11 +1,19 @@
-function Cell(xPos, yPos){
+
+
+function Cell(xPos, yPos, cellX, cellY){
     // Hvað er búið að grafa mikið úr cellunni
-    this.AmmountDug = 0;
+    this.AmmountDug = {'left': 0,
+                       'right': 0,
+                       'up': 0,
+                       'down': 0};
+
     // Var grafið upp eða til hliðar?
     this.DirectionDug = null;
     this.IsFullyDug = false;
     this.xPos = xPos;
     this.yPos = yPos;
+    this.cellX = cellX; // cell nr x
+    this.cellY = cellY; // cell nr Y
 }
 
 Cell.prototype.Dig = function(direction){
@@ -18,9 +26,47 @@ Cell.prototype.Dig = function(direction){
 
 
 Cell.prototype.Render = function(ctx){
+    // ef fyrstu tvær hæðir sleppa að render-a
+    //if(this.yPos <= 64) return;  // Eiður; til minnis: ég er að nýtast við pixla stærð héra - jón notaði cellu númer (þ.e. 1)
     g_sprites.fullDugTunnel.drawCentredAt(ctx, this.xPos, this.yPos);
 
+    var playerPosX = entityManager._players[0].cx;
+    var playerPosY = entityManager._players[0].cy;
+
+    var cellXRight = false;
+    var cellXLeft = false;
+    var cellYUp = false;
+    var cellYDown = false;
+    if(playerPosY < this.yPos + 32 ) cellXRight = true;
+    if(playerPosY > this.yPos)       cellXLeft = true;
+    if(playerPosX < this.xPos + 32 ) cellYUp = true;
+    if(playerPosX > this.xPos)       cellYDown = true;
+
+
+  if(cellXRight === true && cellXLeft === true && cellYUp === true && cellYDown === true  ){
+    console.log("CellX: " + this.cellX +  " -- CellY: " + this.cellY);
+  }
+
+    /*
+    if((playerPosX < this.xPos + 32 && playerPosX > this.xPos)
+      && (playerPosY < this.yPos + 32 && playerPosY > this.yPos) )
+    { // if player is within the cell
+      //console.log("posX: " + playerPosX + " -- posY: " + playerPosY);
+      console.log("CellX: " + this.cellX +  " -- CellY: " + this.cellY);
+    }
+    */
+
+    /*
+    if(this.AmmountDug['left'] === 0 &&
+        this.AmmountDug['right'] === 0 &&
+        this.AmmountDug['up'] === 0 &&
+        this.AmmountDug['down'] === 0) return;
+    */
+
+
 }
+
+
 
 function Grid(xSize, ySize){
     // Fjöldi cella á x og y ás
@@ -35,16 +81,16 @@ Grid.prototype.Initialize = function(){
     //var multiplierX = 1; // verður að byrja á 1 til að margfalda 32
     //var multiplierY = 1; //  -- || --
     var add = 32;
-    var xPos = 0
-    var yPos = 0
+    var xPos = 0;
+    var yPos = 0;
     for(var x = 0; x < this.xSize; x++){
         var column = [];
         for(var y = 0; y < this.ySize; y++){
-            column.push(new Cell(xPos + 16, yPos + 16));
+            column.push(new Cell(xPos + 16, yPos + 16, x, y));
             yPos += add;
         }
         xPos +=add;
-        yPos = 0;
+        yPos = 0; // byrjar á nýjum column
         this.cells.push(column);
     }
 

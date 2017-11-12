@@ -36,8 +36,12 @@ Player.prototype.shooting = false;
 Player.prototype.shootCounter = 0;
 
 Player.prototype.update = function (du) {
-		var nextcy = this.cy;
+  //  console.log("PLAYERY: " + entityManager._players[0].cy;)
+    var nextcy = this.cy;
     var nextcx = this.cx;
+
+
+    //console.log("plX: " + entityManager._players[0].cx + " -- plY: " + entityManager._players[0].cy);
 
     if (keys[this.SHOOT]) {
       this.shooting = true;

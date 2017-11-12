@@ -19,8 +19,8 @@ var g_ctx = g_canvas.getContext("2d");
 function createPlayer() {
 
     entityManager.generatePlayer({
-      cx : 220,
-      cy : 440
+      cx : 208,
+      cy : 202,
     });
 
 }
