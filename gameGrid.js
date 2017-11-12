@@ -49,7 +49,7 @@ Cell.prototype.Render = function(ctx)
                          this.AmmountDug['right']*6, 28, "Black");
             break;
         case 'up':
-            util.fillBox(ctx, this.x*this.size, 
+            util.fillBox(ctx, this.x*this.size,
                          (this.y+1)*this.size - this.AmmountDug['up']*6,
                          28, this.AmmountDug['up']*6, "Black");
             break;
@@ -77,7 +77,7 @@ function Grid(xSize, ySize, cellSize){
     }
 }
 
-Grid.prototype.PlayerMoved = function(x, y, direction){ 
+Grid.prototype.PlayerMoved = function(x, y, direction){
     xIndex = Math.floor(x / 32);
     yIndex = Math.floor(y / 32);
 
