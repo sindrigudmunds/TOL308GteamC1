@@ -56,15 +56,6 @@ Cell.prototype.Render = function(ctx)
       this.AmmountDug['down'] === 0) return;
 
 // ------------------------------------------------------------------------
-<<<<<<< HEAD
-  util.fillBox(ctx, ((this.x+1)*this.size) - this.AmmountDug['left']*6, this.y*this.size, this.AmmountDug['left']*6, 28, "Black");
-
-  util.fillBox(ctx, this.x*this.size, this.y*this.size, this.AmmountDug['right']*6, 28, "Black");
-
-  util.fillBox(ctx, this.x*this.size, (this.y+1)*this.size - this.AmmountDug['up']*6,28, this.AmmountDug['up']*6, "Black");
-
-  util.fillBox(ctx, this.x*this.size, this.y*this.size, 28, this.AmmountDug['down']*6, "Black");
-=======
   util.fillBox(ctx, ((this.x+1)*this.size) - this.AmmountDug['left']*4,
                     this.y*this.size, this.AmmountDug['left']*4, 28, "Black");
 
@@ -76,7 +67,6 @@ Cell.prototype.Render = function(ctx)
 
   util.fillBox(ctx, this.x*this.size, this.y*this.size,
                 28, this.AmmountDug['down']*4, "Black");
->>>>>>> 8c98b396d4f362334f274d9dcadc900eb5a0c5a6
 // ----------------------------------------------------------------------
   /*
     switch(this.currentDigDirection){
@@ -124,10 +114,10 @@ Grid.prototype.PlayerMoved = function(x, y, direction){
 
     //-- prufa að bæta við 10 px í þá átt sem player er að fara, til að fá
     //-- staðsetningu odd spjótsins hans, sem á að keyra niður veggina
-    if(direction === 'right') xIndex = Math.floor((x+5) / 32);
-    if(direction === 'left') xIndex = Math.floor((x-5) / 32);
-    if(direction === 'up') yIndex = Math.floor((y-5) / 32);
-    if(direction === 'down') yIndex = Math.floor((y+5) / 32);
+    if(direction === 'right') xIndex = Math.floor(x / 32);
+    if(direction === 'left') xIndex = Math.floor(x / 32);
+    if(direction === 'up') yIndex = Math.floor(y / 32);
+    if(direction === 'down') yIndex = Math.floor(y / 32);
     // console.log("xIndex: " + xIndex + " -- yIndex: " + yIndex + " -- Dir: " + direction
 
 
@@ -150,7 +140,7 @@ Grid.prototype.PlayerMoved = function(x, y, direction){
 Grid.prototype.FindCell = function(x, y, direction){
 
 
-   
+
     //if(direction === 'down') yIndex++;
     //if(direction === 'right') xIndex++;
     // Viljum vita í hvaða cellu playerinn er
