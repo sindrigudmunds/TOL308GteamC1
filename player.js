@@ -111,9 +111,11 @@ Player.prototype.update = function (du) {
           } else if (this.lastDirUpDown === 'up') {
             nextcy -= this.speed*du;
           }
-          currentDirection = this.lastDirLeftRight;
+          // var lastDirLeftRight -- grunar að það sé rangt - breyti í lastDirUpDown
+          currentDirection = this.lastDirUpDown;
         }
     }
+    // notað í grid til að staðsetja hvaða cellu player er í
     if(this.cy !== nextcy || this.cx !== nextcx){
       grid.PlayerMoved(this.cx, this.cy, currentDirection);
     }

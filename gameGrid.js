@@ -80,6 +80,16 @@ function Grid(xSize, ySize, cellSize){
 Grid.prototype.PlayerMoved = function(x, y, direction){
     xIndex = Math.floor(x / 32);
     yIndex = Math.floor(y / 32);
+    /*
+    //-- prufa að bæta við 10 px í þá átt sem player er að fara, til að fá
+    //-- staðsetningu odd spjótsins hans, sem á að keyra niður veggina
+    //-- :: prufa að commenta út til að sjá hvernig það keyrir
+    if(direction === 'right') xIndex = Math.floor((x+10) / 32);
+    if(direction === 'left') xIndex = Math.floor((x-10) / 32);
+    if(direction === 'up') yIndex = Math.floor((y-10) / 32);
+    if(direction === 'down') yIndex = Math.floor((y+10) / 32);
+    // console.log("xIndex: " + xIndex + " -- yIndex: " + yIndex + " -- Dir: " + direction
+    */
 
     //Viljum ekki grafa fyrir ofan yfirborðið
     if(yIndex <= 1) return;
