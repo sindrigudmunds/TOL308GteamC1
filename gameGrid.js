@@ -92,6 +92,8 @@ Grid.prototype.PlayerMoved = function(x, y, direction){
 
 Grid.prototype.FindCell = function(x, y, direction){
 
+
+   
     //if(direction === 'down') yIndex++;
     //if(direction === 'right') xIndex++;
     // Viljum vita í hvaða cellu playerinn er
@@ -106,6 +108,9 @@ Grid.prototype.RenderGrid = function(ctx){
             this.cells[x][y].Render(ctx);
         }
     }
+
+    var path = findPath(this.cells, [2, 4], [4, 6]);
+    console.log(path);
 }
 
 // Prentar griddið

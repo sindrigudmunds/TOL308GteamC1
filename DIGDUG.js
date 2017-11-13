@@ -7,7 +7,7 @@
 var g_canvas = document.getElementById("myCanvas");
 var g_ctx = g_canvas.getContext("2d");
 
-var grid = new Grid(14, 16, 32);
+var grid = new Grid(16, 16, 32);
 
 // =====================
 // CREATE Player
