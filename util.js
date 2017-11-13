@@ -124,7 +124,9 @@ checkUpDown: function (nextcx) {
 },
 
 checkLeftRight: function (nextcy){
-  var leftRightCoords = [32,64,96,128,160,192,224,256,288,320,352,384,416,448,490];
+  //var leftRightCoords = [32,64,96,128,160,192,224,256,288,320,352,384,416,448,490];
+  var leftRightCoords = [42,74,106,138,170,202,234,266,298,330,362,394,426,458,490];
+
   for(var i=0; i < leftRightCoords.length; i++){
     var val = leftRightCoords[i];
     if(Math.abs(nextcy - val) < 2){

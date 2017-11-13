@@ -15,10 +15,10 @@ Player.prototype = new Entity();
 //Player.prototype.cx = 480;
 //Player.prototype.cy = 480;
 
-Player.prototype.MIN_Y = 30;
-Player.prototype.MAX_Y = 512;
-Player.prototype.MIN_X = 10; // ekki 0 til að sprite fari ekki út fyrir rammann
-Player.prototype.MAX_X = 438;// 448 - 10 (kall er 32 px á breidd)
+Player.prototype.MIN_Y = 42;
+Player.prototype.MAX_Y = 492;
+Player.prototype.MIN_X = 14; // ekki 0 til að sprite fari ekki út fyrir rammann
+Player.prototype.MAX_X = 434;// 448 - 10 (kall er 32 px á breidd)
 
 
 Player.prototype.UP = keyCode('W');
@@ -49,7 +49,7 @@ Player.prototype.update = function (du) {
       }
     } else
     if (keys[this.UP]) {
-      
+
       this.lastDirUpDown = 'up';
       var canGo = util.checkUpDown(nextcx);
       if(canGo !== false){
@@ -111,9 +111,11 @@ Player.prototype.update = function (du) {
           } else if (this.lastDirUpDown === 'up') {
             nextcy -= this.speed*du;
           }
-          currentDirection = this.lastDirLeftRight;
+          // var lastDirLeftRight -- grunar að það sé rangt - breyti í lastDirUpDown
+          currentDirection = this.lastDirUpDown;
         }
     }
+    // notað í grid til að staðsetja hvaða cellu player er í
     if(this.cy !== nextcy || this.cx !== nextcx){
       grid.PlayerMoved(this.cx, this.cy, currentDirection);
     }

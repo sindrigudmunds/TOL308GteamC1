@@ -16,8 +16,8 @@ var grid = new Grid(16, 16, 32);
 function createPlayer() {
 
     entityManager.generatePlayer({
-      cx : 220,
-      cy : 440
+      cx : 208,
+      cy : 202,
     });
 
 }
