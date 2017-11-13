@@ -48,15 +48,27 @@ if(this.AmmountDug['down'] === 6) this.dugDownFully = true;
 
 Cell.prototype.Render = function(ctx)
 {
-    if(this.y <= 1) return;
+  if(this.y <= 1) return;
 
-    if(this.AmmountDug['left'] === 0 &&
-        this.AmmountDug['right'] === 0 &&
-        this.AmmountDug['up'] === 0 &&
-        this.AmmountDug['down'] === 0) return;
+  if(this.AmmountDug['left'] === 0 &&
+      this.AmmountDug['right'] === 0 &&
+      this.AmmountDug['up'] === 0 &&
+      this.AmmountDug['down'] === 0) return;
 
+// ------------------------------------------------------------------------
+  util.fillBox(ctx, ((this.x+1)*this.size) - this.AmmountDug['left']*6,
+                    this.y*this.size, this.AmmountDug['left']*6, 28, "Black");
 
+  util.fillBox(ctx, this.x*this.size, this.y*this.size,
+                      this.AmmountDug['right']*6, 28, "Black");
 
+  util.fillBox(ctx, this.x*this.size, (this.y+1)*this.size -
+                this.AmmountDug['up']*6,28, this.AmmountDug['up']*6, "Black");
+
+  util.fillBox(ctx, this.x*this.size, this.y*this.size,
+                28, this.AmmountDug['down']*6, "Black");
+// ----------------------------------------------------------------------
+  /*
     switch(this.currentDigDirection){
         case 'left':
             util.fillBox(ctx, ((this.x+1)*this.size) - this.AmmountDug['left']*6,
@@ -76,6 +88,7 @@ Cell.prototype.Render = function(ctx)
                          28, this.AmmountDug['down']*6, "Black");
             break;
     }
+    */
 }
 
 function Grid(xSize, ySize, cellSize){
