@@ -65,13 +65,12 @@ var entityManager = {
     },
 
     update: function(du) {
+        
       for (var c = 0; c < this._categories.length; ++c) {
-
           var aCategory = this._categories[c];
           var i = 0;
 
           while (i < aCategory.length) {
-
               var status = aCategory[i].update(du);
               ++i;
           }

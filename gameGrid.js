@@ -19,10 +19,10 @@ Cell.prototype.Dig = function(direction){
 
     this.currentDigDirection = direction;
     this.AmmountDug[direction]++
-    if(this.AmmountDug['left'] === 10 ||
-       this.AmmountDug['right'] === 10 ||
-       this.AmmountDug['up'] === 10 ||
-       this.AmmountDug['down'] === 10){
+    if(this.AmmountDug['left'] === 6 ||
+       this.AmmountDug['right'] === 6 ||
+       this.AmmountDug['up'] === 6 ||
+       this.AmmountDug['down'] === 6){
         // Búið að grafa í gegnum alla celluna
         this.IsFullyDug = true;
     }
@@ -41,21 +41,21 @@ Cell.prototype.Render = function(ctx)
 
     switch(this.currentDigDirection){
         case 'left':
-            util.fillBox(ctx, ((this.x+1)*this.size) - this.AmmountDug['left']*3,
-                         this.y*this.size, this.AmmountDug['left']*3, 30, "Black");
+            util.fillBox(ctx, ((this.x+1)*this.size) - this.AmmountDug['left']*6,
+                         this.y*this.size, this.AmmountDug['left']*6, 28, "Black");
             break;
         case 'right':
             util.fillBox(ctx, this.x*this.size, this.y*this.size,
-                         this.AmmountDug['right']*3, 30, "Black");
+                         this.AmmountDug['right']*6, 28, "Black");
             break;
         case 'up':
             util.fillBox(ctx, this.x*this.size, 
-                         (this.y+1)*this.size - this.AmmountDug['up']*3,
-                         30, this.AmmountDug['up']*3, "Black");
+                         (this.y+1)*this.size - this.AmmountDug['up']*6,
+                         28, this.AmmountDug['up']*6, "Black");
             break;
         case 'down':
             util.fillBox(ctx, this.x*this.size, this.y*this.size,
-                         30, this.AmmountDug['down']*3, "Black");
+                         28, this.AmmountDug['down']*6, "Black");
             break;
     }
 }

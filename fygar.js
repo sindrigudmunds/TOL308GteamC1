@@ -14,6 +14,13 @@ Fygar.prototype.lastCy = this.cy;
 //Player.prototype.cx = 480;
 //Player.prototype.cy = 480;
 
+ 
+Fygar.prototype.getDirectionToPlayer = function(){
+  
+  var next = grid.GetNextEnemyPosition();
+  var direction
+
+};
 
 Fygar.prototype.randomisePosition = function () {
     // Rock randomisation defaults (if nothing otherwise specified)
