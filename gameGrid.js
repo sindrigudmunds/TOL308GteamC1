@@ -14,6 +14,9 @@ function Cell(x, y, size){
     this.dugRightFully = false;
     this.dugUpFully = false;
     this.dugDownFully = false;
+
+    this.fullyDug = {'horizontal': false,
+                     'vertical': false}
  // ---------------------------------
 
     this.x = x;
@@ -22,18 +25,27 @@ function Cell(x, y, size){
 
     this.currentDigDirection = null;
 }
-
+Cell.prototype.IsDug = function(direction){
+    return true;
+    if(direction === 'vertical'){
+        return this.dugDownFully || this.dugUpFully;
+    } else {
+        return this.dugLeftFully || this.dugRightFully
+    }
+}
 Cell.prototype.Dig = function(direction){
     this.currentDigDirection = direction;
     this.AmmountDug[direction]++
-//---------------------------------------------
-if(this.AmmountDug['left'] === 8) this.dugLeftFully = true;
-if(this.AmmountDug['right'] === 8) this.dugRightFully = true;
-if(this.AmmountDug['up'] === 8) this.dugUpFully = true;
-if(this.AmmountDug['down'] === 8) this.dugDownFully = true;
-  // Búið að grafa í gegnum alla celluna
-  //  this.IsFullyDug = true;
-// ----------------------------------------
+    if(this.AmmountDug[direction] > 8) this.AmmountDug[direction] = 8;
+    //console.log("Digging ", direction)
+    //---------------------------------------------
+    if(this.AmmountDug['left'] === 8) this.dugLeftFully = true;
+    if(this.AmmountDug['right'] === 8) this.dugRightFully = true;
+    if(this.AmmountDug['up'] === 8) this.dugUpFully = true;
+    if(this.AmmountDug['down'] === 8) this.dugDownFully = true;
+    // Búið að grafa í gegnum alla celluna
+    //  this.IsFullyDug = true;
+    // ----------------------------------------
 
     /*
     if(this.AmmountDug['left'] === 6 ||
@@ -98,6 +110,7 @@ function Grid(xSize, ySize, cellSize){
     // Setjum upp tómt 2d fylki
     this.cells = [];
     this.cellSize = cellSize;
+    this.playerPosition = [13, 13];
 
     for(var x = 0; x < this.xSize; x++){
         var column = []
@@ -111,13 +124,15 @@ function Grid(xSize, ySize, cellSize){
 Grid.prototype.PlayerMoved = function(x, y, direction){
     xIndex = Math.floor(x / 32);
     yIndex = Math.floor(y / 32);
+    //console.log(this);
+    this.playerPosition = [xIndex, yIndex];
 
     //-- prufa að bæta við 10 px í þá átt sem player er að fara, til að fá
     //-- staðsetningu odd spjótsins hans, sem á að keyra niður veggina
-    if(direction === 'right') xIndex = Math.floor((x+10) / 32);
-    if(direction === 'left') xIndex = Math.floor((x-10) / 32);
-    if(direction === 'up') yIndex = Math.floor((y-10) / 32);
-    if(direction === 'down') yIndex = Math.floor((y+10) / 32);
+    if(direction === 'right') xIndex = Math.floor(x / 32);
+    if(direction === 'left') xIndex = Math.floor(x / 32);
+    if(direction === 'up') yIndex = Math.floor(y / 32);
+    if(direction === 'down') yIndex = Math.floor(y / 32);
     // console.log("xIndex: " + xIndex + " -- yIndex: " + yIndex + " -- Dir: " + direction
 
 
@@ -128,10 +143,10 @@ Grid.prototype.PlayerMoved = function(x, y, direction){
 
     //--------------------------------------------------------
     //if(cell.IsFullyDug) return;
-    if(direction === 'right') if(cell.dugRightFully) return;
-    if(direction === 'left') if(cell.dugLeftFully) return;
-    if(direction === 'up') if(cell.dugUpFully) return;
-    if(direction === 'down') if(cell.dugDownFully) return;
+    //if(direction === 'right') if(cell.dugRightFully) return;
+    //if(direction === 'left') if(cell.dugLeftFully) return;
+    //if(direction === 'up') if(cell.dugUpFully) return;
+    //if(direction === 'down') if(cell.dugDownFully) return;
     // --------------------------------------------------------
     cell.Dig(direction);
 
@@ -155,9 +170,10 @@ Grid.prototype.RenderGrid = function(ctx){
             this.cells[x][y].Render(ctx);
         }
     }
+}
 
-    var path = findPath(this.cells, [2, 4], [4, 6]);
-    console.log(path);
+Grid.prototype.GetPlayerCoords = function(){
+    return this.playerPosition;
 }
 
 // Prentar griddið

@@ -154,10 +154,10 @@ function preloadDone() {
     createPlayer();
 
     //Örugglega betri leið til að búa til marga pookas, mjög primitive
-    createPooka();
-    createPooka();
-    createPooka();
-    createFygar();
+    //createPooka();
+    //createPooka();
+    //createPooka();
+    //createFygar();
     createFygar();
     grid.print();
     main.init();

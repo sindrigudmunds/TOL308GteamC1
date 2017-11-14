@@ -2,7 +2,7 @@
 // The code was edited to fit our project.
 
 
-// grid is a 2d array of integers (eg grid[10][15] = 0)
+// grid is a 2d array
 // pathStart and pathEnd are arrays like [5,10]
 function findPath(grid, pathStart, pathEnd)
 {
@@ -12,12 +12,7 @@ function findPath(grid, pathStart, pathEnd)
 	var	pow = Math.pow;
 	var	sqrt = Math.sqrt;
 
-	// the grid data are integers:
-	// anything higher than this number is considered blocked
-	// this is handy is you use numbered sprites, more than one
-	// of which is walkable road, grass, mud, etc
-	var maxWalkableTileNum = 0;
-
+	if(!grid) return;
 	// keep track of the grid dimensions
 	// Note that this A-star implementation expects the grid array to be square: 
 	// it must have equal height and width. If your game grid is rectangular, 
@@ -37,11 +32,11 @@ function findPath(grid, pathStart, pathEnd)
         var	N = y - 1,
         S = y + 1,
         E = x + 1,
-        W = x - 1,
-        myN = N > -1 && canWalkHere(x, N),
-        myS = S < gridHeight && canWalkHere(x, S),
-        myE = E < gridWidth && canWalkHere(E, y),
-        myW = W > -1 && canWalkHere(W, y),
+		W = x - 1,
+        myN = N > -1 && canWalkHere(x, N, 'vertical'),
+        myS = S < gridHeight && canWalkHere(x, S, 'vertical'),
+        myE = E < gridWidth && canWalkHere(E, y, 'horizontal'),
+        myW = W > -1 && canWalkHere(W, y, 'horizontal'),
         result = [];
         if(myN)
         result.push({x:x, y:N});
@@ -55,38 +50,19 @@ function findPath(grid, pathStart, pathEnd)
         return result;
     }
     // returns boolean value (grid cell is available and open)
-    function canWalkHere(x, y)
+    function canWalkHere(x, y, direction)
     {
         return ((grid[x] != null) &&
             (grid[x][y] != null) &&
-            (grid[x][y] <= maxWalkableTileNum));
-    };
+            (grid[x][y].IsDug(direction)));
+	}
+	
 	// which heuristic should we use?
 	// default: no diagonals (Manhattan)
 	var distanceFunction = ManhattanDistance;
 	var findNeighbours = function(){}; // empty
 
-
-    // distanceFunction functions
-	// these return how far away a point is to another
-
-	
-	/*
-	// alternate heuristics, depending on your game:
-	// diagonals allowed but no sqeezing through cracks:
-	var distanceFunction = DiagonalDistance;
-	var findNeighbours = DiagonalNeighbours;
-	// diagonals and squeezing through cracks allowed:
-	var distanceFunction = DiagonalDistance;
-	var findNeighbours = DiagonalNeighboursFree;
-	// euclidean but no squeezing through cracks:
-	var distanceFunction = EuclideanDistance;
-	var findNeighbours = DiagonalNeighbours;
-	// euclidean and squeezing through cracks allowed:
-	var distanceFunction = EuclideanDistance;
-	var findNeighbours = DiagonalNeighboursFree;
-    */
-      // Node function, returns a new object with Node properties
+    // Node function, returns a new object with Node properties
 	// Used in the calculatePath function to store route costs, etc.
 	function Node(Parent, Point)
 	{
@@ -109,32 +85,7 @@ function findPath(grid, pathStart, pathEnd)
 		return newNode;
 	}
 
-    
-    function Neighbours(x, y)
-	{
-		var	N = y - 1,
-		S = y + 1,
-		E = x + 1,
-		W = x - 1,
-		myN = N > -1 && canWalkHere(x, N),
-		myS = S < gridHeight && canWalkHere(x, S),
-		myE = E < gridWidth && canWalkHere(E, y),
-		myW = W > -1 && canWalkHere(W, y),
-		result = [];
-		if(myN)
-		result.push({x:x, y:N});
-		if(myE)
-		result.push({x:E, y:y});
-		if(myS)
-		result.push({x:x, y:S});
-		if(myW)
-		result.push({x:W, y:y});
-		findNeighbours(myN, myS, myE, myW, N, S, E, W, result);
-		return result;
-    }
-
-
-    	// Path function, executes AStar algorithm operations
+	// Path function, executes AStar algorithm operations
 	function calculatePath()
 	{
 		// create Nodes from the Start and End x,y coordinates
