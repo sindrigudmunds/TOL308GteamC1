@@ -75,6 +75,11 @@ var entityManager = {
               ++i;
           }
       }
+
+      var collision = collisionManager.checkCollisions(this._players[0], this._fygars);
+      if(collision){
+        console.log(collision);
+      }
     },
 
     render: function(ctx) {
