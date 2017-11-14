@@ -14,6 +14,8 @@ function Cell(x, y, size){
     this.dugRightFully = false;
     this.dugUpFully = false;
     this.dugDownFully = false;
+    // holds all directions dug on particular cell, for enemies
+    this.dirDugArray = [];
  // ---------------------------------
 
     this.x = x;
@@ -27,23 +29,25 @@ Cell.prototype.Dig = function(direction){
     this.currentDigDirection = direction;
     this.AmmountDug[direction]++
 //---------------------------------------------
-if(this.AmmountDug['left'] === 8) this.dugLeftFully = true;
-if(this.AmmountDug['right'] === 8) this.dugRightFully = true;
-if(this.AmmountDug['up'] === 8) this.dugUpFully = true;
-if(this.AmmountDug['down'] === 8) this.dugDownFully = true;
-  // Búið að grafa í gegnum alla celluna
-  //  this.IsFullyDug = true;
+// Búið að grafa í gegnum alla celluna í allar áttir
+if(this.AmmountDug['left'] === 8){
+  this.dugLeftFully = true;
+  this.dirDugArray.push('left');
+}
+if(this.AmmountDug['right'] === 8){
+  this.dugRightFully = true;
+  this.dirDugArray.push('right');
+}
+if(this.AmmountDug['up'] === 8){
+  this.dugUpFully = true;
+  this.dirDugArray.push('up');
+}
+if(this.AmmountDug['down'] === 8){
+  this.dugDownFully = true;
+  this.dirDugArray.push('down');
+}
 // ----------------------------------------
 
-    /*
-    if(this.AmmountDug['left'] === 6 ||
-       this.AmmountDug['right'] === 6 ||
-       this.AmmountDug['up'] === 6 ||
-       this.AmmountDug['down'] === 6){
-        // Búið að grafa í gegnum alla celluna
-        this.IsFullyDug = true;
-    }
-    */
 }
 
 Cell.prototype.Render = function(ctx)
@@ -137,7 +141,7 @@ Grid.prototype.PlayerMoved = function(x, y, direction){
 
 }
 
-Grid.prototype.FindCell = function(x, y, direction){
+Grid.prototype.FindCell = function(x, y){
 
 
 
@@ -146,7 +150,7 @@ Grid.prototype.FindCell = function(x, y, direction){
     // Viljum vita í hvaða cellu playerinn er
     //console.log('x ' + xIndex);
     //console.log('y ' + yIndex);
-    return this.cells[xIndex][yIndex];
+    return this.cells[xIndex][yIndex]; // return-ar cellu object
 }
 
 Grid.prototype.RenderGrid = function(ctx){
@@ -157,8 +161,10 @@ Grid.prototype.RenderGrid = function(ctx){
     }
 
     var path = findPath(this.cells, [2, 4], [4, 6]);
-    console.log(path);
+    //console.log(path);
 }
+
+
 
 // Prentar griddið
 Grid.prototype.print = function(){
