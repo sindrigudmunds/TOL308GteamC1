@@ -65,7 +65,7 @@ var entityManager = {
     },
 
     update: function(du) {
-        
+
       for (var c = 0; c < this._categories.length; ++c) {
           var aCategory = this._categories[c];
           var i = 0;
@@ -76,6 +76,7 @@ var entityManager = {
           }
       }
 
+      
       var enemies = this._fygars.concat(this._pookas);
       var collisionObject = collisionManager.checkCollisions(this._players[0], enemies);
       if(collisionObject){
@@ -85,7 +86,7 @@ var entityManager = {
 
     render: function(ctx) {
       grid.RenderGrid(ctx);
-      
+
       for (var c = 0; c < this._categories.length; ++c) {
 
           var aCategory = this._categories[c];
