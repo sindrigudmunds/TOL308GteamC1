@@ -188,14 +188,14 @@ function Grid(xSize, ySize, cellSize){
               if(x !== 15){ // viljum ekki skoða x+1 :: sem er stærra en borðið
                 if(level[y][x+1] === 1) newCell.AmmountDug['right'] = 8;
               }
-              if(y !== 0){
+              if(y !== 0){ // viljum ekki skoða x-1: minna en borðið
                 if(level[y][x-1] === 1) newCell.AmmountDug['left'] = 8;
               }
-              if(y !== 15){
+              if(y !== 15){ // -- || --
                 if(level[y+1][x] === 1) newCell.AmmountDug['up'] = 8;
 
               }
-              if(y !== 0){
+              if(y !== 0){ // -- || -- 
                 if(level[y-1][x] === 1) newCell.AmmountDug['down'] = 8;
               }
             }
