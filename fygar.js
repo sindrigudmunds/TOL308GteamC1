@@ -98,7 +98,6 @@ Fygar.prototype.update = function (du) {
      this.isMoving = false;
      this.direction = this.GetNextDirection();
      this.isMoving = true;
-     console.log("New cell!")
   }
    // spruning að hafa * du
 
