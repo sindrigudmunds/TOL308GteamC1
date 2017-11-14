@@ -155,7 +155,7 @@ Grid.prototype.PlayerMoved = function(x, y, direction){
 Grid.prototype.FindCell = function(x, y, direction){
 
 
-   
+
     //if(direction === 'down') yIndex++;
     //if(direction === 'right') xIndex++;
     // Viljum vita í hvaða cellu playerinn er
