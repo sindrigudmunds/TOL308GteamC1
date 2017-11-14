@@ -76,9 +76,10 @@ var entityManager = {
           }
       }
 
-      var collision = collisionManager.checkCollisions(this._players[0], this._fygars);
-      if(collision){
-        console.log(collision);
+      var enemies = this._fygars.concat(this._pookas);
+      var collisionObject = collisionManager.checkCollisions(this._players[0], enemies);
+      if(collisionObject){
+        console.log(collisionObject);
       }
     },
 
