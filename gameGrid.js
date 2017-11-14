@@ -25,6 +25,7 @@ function Cell(x, y, size){
 
     this.currentDigDirection = null;
 }
+
 Cell.prototype.IsDug = function(direction){
     return true;
     if(direction === 'vertical'){
@@ -33,6 +34,7 @@ Cell.prototype.IsDug = function(direction){
         return this.dugLeftFully || this.dugRightFully
     }
 }
+
 Cell.prototype.Dig = function(direction){
     this.currentDigDirection = direction;
     this.AmmountDug[direction]++
@@ -103,6 +105,72 @@ Cell.prototype.Render = function(ctx)
     */
 }
 
+var level2 = [
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // fyrstu tvær línur skipta ekki máli
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // -------- || -----------
+  [0,0,1,1,1,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,1,1,1,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,1,1,1,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,1,1,1,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,1,1,1,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,1,1,1,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,1,1,1,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,1,1,1,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,1,1,1,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,1,1,1,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,1,1,1,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,1,1,1,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,1,1,1,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,1,1,1,0,0,0,0,0,0,1,1,1,1,1],
+];
+
+var level3 = [
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // fyrstu tvær línur skipta ekki máli
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // -------- || -----------
+  [0,0,0,0,1,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,0,0,1,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,0,0,1,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,1,1,1,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,1,0,0,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,1,1,1,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,0,0,1,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,1,1,1,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,1,1,1,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,0,0,1,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,1,1,1,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,1,1,1,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,1,1,1,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,1,1,1,0,0,0,0,0,0,1,1,1,1,1],
+];
+
+var level = [
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // fyrstu tvær línur skipta ekki máli
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // -------- || -----------
+  [1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1],
+  [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,1,1,1,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,0,0,1,0,0,0,0,0,0,1,0,1,0,1],
+  [0,0,1,1,1,0,0,0,0,0,0,1,0,0,0,1],
+  [0,0,1,0,1,0,0,0,0,0,0,1,1,1,1,1],
+  [0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,1],
+  [0,0,1,0,1,0,0,0,0,0,0,1,0,0,0,1],
+  [0,0,1,0,1,0,0,0,0,0,0,1,0,0,0,1],
+  [0,0,1,0,1,0,0,0,0,0,0,1,0,0,0,1],
+  [0,0,1,1,1,0,0,0,0,0,0,1,1,1,1,1],
+];
+
+
+Cell.prototype.makeFullyDugInDir = function(x, y, direction){
+   var cellObj = grid.FindCell(x,y);
+   if(direction === 'left' ) cellObj.AmmountDug['left'] = 8;
+   if(direction === 'right') cellObj.AmmountDug['right'] = 8
+   if(direction === 'up') cellObj.AmmountDug['up'] = 8
+   if(direction === 'down') cellObj.AmmountDug['down'] = 8
+}
+
 function Grid(xSize, ySize, cellSize){
     // Fjöldi cella á x og y ás
     this.xSize = xSize;
@@ -115,7 +183,23 @@ function Grid(xSize, ySize, cellSize){
     for(var x = 0; x < this.xSize; x++){
         var column = []
         for(var y = 0; y < this.ySize; y++){
-            column.push(new Cell(x, y, this.cellSize));
+            var newCell = new Cell(x, y, this.cellSize);
+            if(level[y][x] === 1){  // þægilegara að hugsa sem y x miðað við level grid
+              if(x !== 15){ // viljum ekki skoða x+1 :: sem er stærra en borðið
+                if(level[y][x+1] === 1) newCell.AmmountDug['right'] = 8;
+              }
+              if(y !== 0){
+                if(level[y][x-1] === 1) newCell.AmmountDug['left'] = 8;
+              }
+              if(y !== 15){
+                if(level[y+1][x] === 1) newCell.AmmountDug['up'] = 8;
+
+              }
+              if(y !== 0){
+                if(level[y-1][x] === 1) newCell.AmmountDug['down'] = 8;
+              }
+            }
+            column.push(newCell);
         }
         this.cells.push(column);
     }
