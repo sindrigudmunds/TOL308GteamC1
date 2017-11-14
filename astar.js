@@ -1,4 +1,4 @@
-// This code is originally from http://buildnewgames.com/astar/ 
+// This code is originally from http://buildnewgames.com/astar/
 // The code was edited to fit our project.
 
 
@@ -14,8 +14,8 @@ function findPath(grid, pathStart, pathEnd)
 
 	if(!grid) return;
 	// keep track of the grid dimensions
-	// Note that this A-star implementation expects the grid array to be square: 
-	// it must have equal height and width. If your game grid is rectangular, 
+	// Note that this A-star implementation expects the grid array to be square:
+	// it must have equal height and width. If your game grid is rectangular,
 	// just fill the array with dummy values to pad the empty space.
 	var gridWidth = grid[0].length;
 	var gridHeight = grid.length;
@@ -26,17 +26,17 @@ function findPath(grid, pathStart, pathEnd)
     {	// linear movement - no diagonals - just cardinal directions (NSEW)
         return abs(Point.x - Goal.x) + abs(Point.y - Goal.y);
     }
-    
+
     function Neighbours(x, y)
     {
         var	N = y - 1,
         S = y + 1,
         E = x + 1,
-		W = x - 1,
-        myN = N > -1 && canWalkHere(x, N, 'vertical'),
-        myS = S < gridHeight && canWalkHere(x, S, 'vertical'),
-        myE = E < gridWidth && canWalkHere(E, y, 'horizontal'),
-        myW = W > -1 && canWalkHere(W, y, 'horizontal'),
+				W = x - 1,
+        myN = N > -1 && canWalkHere(x, N, 'd'),
+        myS = S < gridHeight && canWalkHere(x, S, 'u'),
+        myE = E < gridWidth && canWalkHere(E, y, 'l'),
+        myW = W > -1 && canWalkHere(W, y, 'r'),
         result = [];
         if(myN)
         result.push({x:x, y:N});
@@ -46,7 +46,7 @@ function findPath(grid, pathStart, pathEnd)
         result.push({x:x, y:S});
         if(myW)
         result.push({x:W, y:y});
-        findNeighbours(myN, myS, myE, myW, N, S, E, W, result);
+        //findNeighbours(myN, myS, myE, myW, N, S, E, W, result);
         return result;
     }
     // returns boolean value (grid cell is available and open)
@@ -56,7 +56,7 @@ function findPath(grid, pathStart, pathEnd)
             (grid[x][y] != null) &&
             (grid[x][y].IsDug(direction)));
 	}
-	
+
 	// which heuristic should we use?
 	// default: no diagonals (Manhattan)
 	var distanceFunction = ManhattanDistance;

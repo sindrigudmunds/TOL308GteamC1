@@ -15,8 +15,8 @@ function Cell(x, y, size){
     this.dugUpFully = false;
     this.dugDownFully = false;
 
-    this.fullyDug = {'horizontal': false,
-                     'vertical': false}
+    //this.fullyDug = {'horizontal': false,
+    //                 'vertical': false}
  // ---------------------------------
 
     this.x = x;
@@ -27,12 +27,26 @@ function Cell(x, y, size){
 }
 
 Cell.prototype.IsDug = function(direction){
+  // kóði fyrir neðan er tilrun til að láta enemy fara eingöngu í gegnum göng
+  // en hann framkallar bögg - þessvegan bara alltaf true
+  // -- þ.e. að allar cellur eru álitnar opnar - svipað og þegar kallarnir
+  // eru draugar í original Dig Dug
     return true;
+    /*
+    if(direction === 'd') return this.dugDownFully;
+    if(direction === 'u') return this.dugUpFully;
+    if(direction === 'l') return this.dugLeftFully;
+    if(direction === 'r') return this.dugRightFully;
+    */
+    //return false;
+
+    /*
     if(direction === 'vertical'){
         return this.dugDownFully || this.dugUpFully;
     } else {
         return this.dugLeftFully || this.dugRightFully
     }
+    */
 }
 
 Cell.prototype.Dig = function(direction){
@@ -169,7 +183,7 @@ var level = [
   [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
