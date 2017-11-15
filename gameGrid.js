@@ -14,6 +14,7 @@ function Cell(x, y, size){
     this.dugRightFully = false;
     this.dugUpFully = false;
     this.dugDownFully = false;
+    this.pointsGivem = false;
 
     //this.fullyDug = {'horizontal': false,
     //                 'vertical': false}
@@ -52,14 +53,27 @@ Cell.prototype.IsDug = function(direction){
 Cell.prototype.Dig = function(direction){
     this.currentDigDirection = direction;
     this.AmmountDug[direction]++
-    scoreManager.addToScore(1);
+    if(!this.pointsGiven) scoreManager.addToScore(1);
+
     if(this.AmmountDug[direction] > 8) this.AmmountDug[direction] = 8;
     //console.log("Digging ", direction)
     //---------------------------------------------
-    if(this.AmmountDug['left'] === 8) this.dugLeftFully = true;
-    if(this.AmmountDug['right'] === 8) this.dugRightFully = true;
-    if(this.AmmountDug['up'] === 8) this.dugUpFully = true;
-    if(this.AmmountDug['down'] === 8) this.dugDownFully = true;
+    if(this.AmmountDug['left'] === 8) {
+        this.dugLeftFully = true;
+        this.pointsGiven = true;
+    }
+    if(this.AmmountDug['right'] === 8){
+        this.dugRightFully = true;
+        this.pointsGiven = true;
+    }
+    if(this.AmmountDug['up'] === 8){
+         this.dugUpFully = true;
+         this.pointsGiven = true;
+    }
+    if(this.AmmountDug['down'] === 8){
+         this.dugDownFully = true;
+         this.pointsGiven = true;
+    }
 
 
 
@@ -223,17 +237,29 @@ function Grid(xSize, ySize, cellSize){
             var newCell = new Cell(x, y, this.cellSize);
             if(level[y][x] === 1){  // þægilegara að hugsa sem y x miðað við level grid
               if(x !== 15){ // viljum ekki skoða x+1 :: sem er stærra en borðið
-                if(level[y][x+1] === 1) newCell.AmmountDug['right'] = 8;
+                if(level[y][x+1] === 1){
+                    newCell.AmmountDug['right'] = 8;
+                    newCell.pointsGivem = true;
+                } 
               }
               if(y !== 0){ // viljum ekki skoða x-1: minna en borðið
-                if(level[y][x-1] === 1) newCell.AmmountDug['left'] = 8;
+                if(level[y][x-1] === 1){
+                     newCell.AmmountDug['left'] = 8;
+                     newCell.pointsGiven = true;
+                }
               }
               if(y !== 15){ // -- || --
-                if(level[y+1][x] === 1) newCell.AmmountDug['up'] = 8;
+                if(level[y+1][x] === 1) {
+                    newCell.AmmountDug['up'] = 8;
+                    newCell.pintsGiven = true;
+                }
 
               }
               if(y !== 0){ // -- || --
-                if(level[y-1][x] === 1) newCell.AmmountDug['down'] = 8;
+                if(level[y-1][x] === 1) {
+                    newCell.AmmountDug['down'] = 8;
+                    this.pointsGiven = true;
+                }
               }
             }
             column.push(newCell);
