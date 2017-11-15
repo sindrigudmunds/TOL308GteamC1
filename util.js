@@ -112,7 +112,7 @@ fillBox: function (ctx, x, y, w, h, style) {
 },
 
 checkUpDown: function (nextcx) {
-  var upDownCoords = [16, 48, 80, 112, 144, 176, 208, 240, 272, 304, 336, 368, 400, 432];
+  var upDownCoords = [16, 48, 80, 112, 144, 176, 208, 240, 272, 304, 336, 368, 400, 432, 464, 496];
 
   for(var i=0; i < upDownCoords.length; i++){
       var val = upDownCoords[i];

@@ -229,7 +229,7 @@ function Grid(xSize, ySize, cellSize){
     // Setjum upp tómt 2d fylki
     this.cells = [];
     this.cellSize = cellSize;
-    this.playerPosition = [13, 13];
+    this.playerPosition = [7, 5];
 
     for(var x = 0; x < this.xSize; x++){
         var column = []
