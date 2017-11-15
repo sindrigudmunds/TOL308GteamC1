@@ -190,8 +190,8 @@ function preloadDone() {
     //createPooka();
     //createPooka();
     createFygar({cx: 64, cy: 64});
-    createFygar({cx: 256, cy: 256});
-    createFygar({cx: 128, cy: 64});
+    createFygar({cx: 486, cy: 356});
+    createFygar({cx: 128, cy: 486});
     createPooka2({cx: 228, cy: 364});
     createPooka2({cx: 328, cy: 364});
     grid.print();
