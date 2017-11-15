@@ -95,12 +95,15 @@ function requestPreloads() {
         spriteSheet2  : "NES_Dig_Dug_Vegetables.png",
         spriteSheet3 : "NES_Dig_Dug_ClearX700Y220.png",
         spriteSheet4 : "NES_Dig_Dug_ClearX700Y220Flipped.png",
+        spriteSheet5 : "NES_Dig_Dug_ClearX700Y220VertFlipped.png",
         backgroundTexture : "DigDugBackgroundTextureresized448.png",
 
     };
 
     imagesPreload(requiredImages, g_images, preloadDone);
 }
+
+var playerShootingArr = [];
 
 var g_sprites = {};
 function preloadDone() {
@@ -119,7 +122,7 @@ function preloadDone() {
     g_sprites.playerWalkUp1 = new Sprite(32,44,32,38,g_images.spriteSheet3);
     g_sprites.playerWalkUp2 = new Sprite(64,44,32,38,g_images.spriteSheet3);
     // player down
-    g_sprites.playerWalkDown1 = new Sprite(604,44,32,38,g_images.spriteSheet4);
+    g_sprites.playerWalkDown1 = new Sprite(604,44,32,40,g_images.spriteSheet4);
     g_sprites.playerWalkDown2 = new Sprite(636,44,32,38,g_images.spriteSheet4);
 
     // Pooka right
@@ -136,18 +139,40 @@ function preloadDone() {
     g_sprites.fygarLeft1 = new Sprite(616,162,28,28,g_images.spriteSheet4);
     g_sprites.fygarLeft2 = new Sprite(648,162,28,28,g_images.spriteSheet4);
 
+
     // player arrow right
-    g_sprites.plArrowRightPl = new Sprite(234,6,38,38, g_images.spriteSheet3);
-    g_sprites.plArrowRight1 = new Sprite(580, 44, 10, 38, g_images.spriteSheet3);
-    g_sprites.plArrowRight2 = new Sprite(580, 44, 20, 38, g_images.spriteSheet3);
-    g_sprites.plArrowRight3 = new Sprite(580, 44, 30, 38, g_images.spriteSheet3);
-    g_sprites.plArrowRight4 = new Sprite(580, 44, 40, 38, g_images.spriteSheet3);
-    g_sprites.plArrowRight5 = new Sprite(580, 44, 50, 38, g_images.spriteSheet3);
-    g_sprites.plArrowRight6 = new Sprite(580, 44, 70, 38, g_images.spriteSheet3);
+    g_sprites.plArrowRightPl = new Sprite(234,6,38,38, g_images.spriteSheet3); // The player
+     // the arrow
+    playerShootingArr.push(g_sprites.plArrowRight1 = new Sprite(580, 44, 10, 38, g_images.spriteSheet3));
+    playerShootingArr.push(g_sprites.plArrowRight2 = new Sprite(580, 44, 20, 38, g_images.spriteSheet3));
+    playerShootingArr.push(g_sprites.plArrowRight3 = new Sprite(580, 44, 30, 38, g_images.spriteSheet3));
+    playerShootingArr.push(g_sprites.plArrowRight4 = new Sprite(580, 44, 40, 38, g_images.spriteSheet3));
+    playerShootingArr.push(g_sprites.plArrowRight5 = new Sprite(580, 44, 50, 38, g_images.spriteSheet3));
+    playerShootingArr.push(g_sprites.plArrowRight6 = new Sprite(580, 44, 70, 38, g_images.spriteSheet3));
 
+    g_sprites.plArrowUpPl = new Sprite(234,45,38,38, g_images.spriteSheet3); // The player
+    playerShootingArr.push(g_sprites.plArrowUp1 = new Sprite(8, 68, 18, 80,  g_images.spriteSheet3)); // The Arrow
+    playerShootingArr.push(g_sprites.plArrowUp2 = new Sprite(8, 56, 18, 80,  g_images.spriteSheet3));
+    playerShootingArr.push(g_sprites.plArrowUp3 = new Sprite(8, 44, 18, 80,  g_images.spriteSheet3));
+    playerShootingArr.push(g_sprites.plArrowUp4 = new Sprite(8, 32, 18, 80,  g_images.spriteSheet3));
+    playerShootingArr.push(g_sprites.plArrowUp5 = new Sprite(8, 20, 18, 80,  g_images.spriteSheet3));
+    playerShootingArr.push(g_sprites.plArrowUp6 = new Sprite(8, 12, 18, 80,  g_images.spriteSheet3));
 
+    g_sprites.plArrowLeftPl = new Sprite(428,18,38,28, g_images.spriteSheet4); // The player
+    playerShootingArr.push(g_sprites.plArrowLeft1 = new Sprite(88, 46, 84, 14,  g_images.spriteSheet4)); // The Arrow
+    playerShootingArr.push(g_sprites.plArrowLeft2 = new Sprite(88, 46, 84, 14,  g_images.spriteSheet4));
+    playerShootingArr.push(g_sprites.plArrowLeft3 = new Sprite(88, 46, 84, 14,  g_images.spriteSheet4));
+    playerShootingArr.push(g_sprites.plArrowLeft4 = new Sprite(76, 46, 84, 14,  g_images.spriteSheet4));
+    playerShootingArr.push(g_sprites.plArrowLeft5 = new Sprite(64, 46, 84, 14,  g_images.spriteSheet4));
+    playerShootingArr.push(g_sprites.plArrowLeft6 = new Sprite(52, 46, 84, 14,  g_images.spriteSheet4));
 
-
+    g_sprites.plArrowDownPl = new Sprite(432,56,28,34, g_images.spriteSheet4); // The player
+    playerShootingArr.push(g_sprites.plArrowDown1 = new Sprite(678, 142, 14, 11,  g_images.spriteSheet5)); // The Arrow
+    playerShootingArr.push(g_sprites.plArrowDown2 = new Sprite(678, 142, 14, 24,  g_images.spriteSheet5));
+    playerShootingArr.push(g_sprites.plArrowDown3 = new Sprite(678, 142, 14, 35,  g_images.spriteSheet5));
+    playerShootingArr.push(g_sprites.plArrowDown4 = new Sprite(678, 142, 14, 47,  g_images.spriteSheet5));
+    playerShootingArr.push(g_sprites.plArrowDown5 = new Sprite(678, 142, 14, 59,  g_images.spriteSheet5));
+    playerShootingArr.push(g_sprites.plArrowDown6 = new Sprite(678, 142, 14, 80,  g_images.spriteSheet5));
     //g_sprites.pookalabb2 = new Sprite(58,102,28,28,g_images.spriteSheet3);
     entityManager.init();
     //createInitialShips();
@@ -158,7 +183,7 @@ function preloadDone() {
     //createPooka();
     //createPooka();
     //createFygar();
-    createFygar();
+  //  createFygar();
     grid.print();
     main.init();
 }

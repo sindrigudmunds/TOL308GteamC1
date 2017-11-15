@@ -34,11 +34,12 @@ Player.prototype.lastAnimation = 1; // 1-4 eins og er - væri hægt að hafa 1-8
 Player.prototype.animCounter = 0;
 Player.prototype.shooting = false;
 Player.prototype.shootCounter = 0;
+Player.prototype.currentDirection = null;
 
 Player.prototype.update = function (du) {
 		var nextcy = this.cy;
     var nextcx = this.cx;
-    var currentDirection = null;
+  //  var this.currentDirection = null;
 
     if (keys[this.SHOOT]) {
       this.shooting = true;
@@ -55,14 +56,14 @@ Player.prototype.update = function (du) {
       if(canGo !== false){
         nextcx = canGo; // locks player in place on x axis (i.e. in tunnel)
         nextcy -= this.speed*du;
-        currentDirection = 'up';
+        this.currentDirection = 'up';
       } else{
         if(this.lastDirLeftRight === 'left'){
           nextcx -= this.speed*du;
         } else if (this.lastDirLeftRight === 'right') {
           nextcx += this.speed*du;
         }
-        currentDirection = this.lastDirLeftRight;
+        this.currentDirection = this.lastDirLeftRight;
       }
     } else
 
@@ -72,14 +73,14 @@ Player.prototype.update = function (du) {
         if(canGo !== false){
           nextcx = canGo; // locks player in place on x axis (i.e. in tunnel)
           nextcy += this.speed*du;
-          currentDirection = 'down';
+          this.currentDirection = 'down';
         } else{
           if(this.lastDirLeftRight === 'left'){
             nextcx -= this.speed*du;
           } else if (this.lastDirLeftRight === 'right') {
             nextcx += this.speed*du;
           }
-          currentDirection = this.lastDirLeftRight;
+          this.currentDirection = this.lastDirLeftRight;
         }
     } else
     if (keys[this.LEFT]) {
@@ -88,14 +89,14 @@ Player.prototype.update = function (du) {
         if(canGo !== false){
           nextcy = canGo; // locks player in place on y axis (i.e. in tunnel)
           nextcx -= this.speed*du;
-          currentDirection = 'left';
+          this.currentDirection = 'left';
         } else{
           if(this.lastDirUpDown === 'down'){
             nextcy += this.speed*du;
           } else if (this.lastDirUpDown === 'up') {
             nextcy -= this.speed*du;
           }
-          currentDirection = this.lastDirUpDown;
+          this.currentDirection = this.lastDirUpDown;
         }
     } else
     if (keys[this.RIGHT]) {
@@ -104,7 +105,7 @@ Player.prototype.update = function (du) {
         if(canGo !== false){
           nextcy = canGo; // locks player in place on y axis (i.e. in tunnel)
           nextcx += this.speed*du;
-          currentDirection = 'right';
+          this.currentDirection = 'right';
         } else{
           if(this.lastDirUpDown === 'down'){
             nextcy += this.speed*du;
@@ -112,12 +113,12 @@ Player.prototype.update = function (du) {
             nextcy -= this.speed*du;
           }
           // var lastDirLeftRight -- grunar að það sé rangt - breyti í lastDirUpDown
-          currentDirection = this.lastDirUpDown;
+          this.currentDirection = this.lastDirUpDown;
         }
     }
     // notað í grid til að staðsetja hvaða cellu player er í
     if(this.cy !== nextcy || this.cx !== nextcx){
-      grid.PlayerMoved(this.cx, this.cy, currentDirection);
+      grid.PlayerMoved(this.cx, this.cy, this.currentDirection);
     }
     // don't go further than borders
     if(nextcy <= this.MAX_Y && nextcy >= this.MIN_Y){
@@ -137,16 +138,16 @@ var g_playerLastCx = this.cx;
 var g_playerLastCy = this.cy;
 
 Player.prototype.render = function (ctx) {
+
   var newCx = this.cx;
   var newCy = this.cy;
-
   this.animCounter += 1;
   // check for reset of animCounter
   if(this.animCounter > 16) this.animCounter = 0;
 
   // walk right anim cycle
   if(this.shooting === true){
-    this.shootingAnim(ctx);
+    this.shootingAnim2(ctx);
     this.shooting = false;
   } else
   if(g_playerLastCx < newCx){
@@ -173,10 +174,44 @@ Player.prototype.render = function (ctx) {
 
 // g_sprites.plArrowRightPl.drawCentredAt(ctx,this.cx,this.cy);
 
-Player.prototype.shootingAnim = function (ctx){
+Player.prototype.shootingAnim2 = function (ctx){
+  var delta = 0;
+  var frame;
+  while(delta < 600){
+    if(delta < 100) frame = 0;
+    if(delta < 200) frame = 1;
+    if(delta < 300) frame = 2;
+    if(delta < 400) frame = 3;
+    if(delta < 500) frame = 4;
+    if(delta < 600) frame = 5;
+    if(this.currentDirection === 'right' ){
+      playerShootingArr[frame].drawCentredAt(ctx,this.cx+52,this.cy + 18 );
+      g_sprites.plArrowRightPl.drawCentredAt(ctx,this.cx,this.cy);
+    }
+    if(this.currentDirection === 'up' ){
+      playerShootingArr[frame +6].drawCentredAt(ctx,this.cx,this.cy - 44 );
+      g_sprites.plArrowUpPl.drawCentredAt(ctx,this.cx,this.cy);
+    }
+    if(this.currentDirection === 'left'){
+      playerShootingArr[frame +12].drawCentredAt(ctx,this.cx - 46,this.cy + 6 );
+      g_sprites.plArrowLeftPl.drawCentredAt(ctx,this.cx,this.cy +6);
+    }
+    if(this.currentDirection === 'down'){
+      playerShootingArr[frame +18].drawCentredAt(ctx,this.cx,this.cy + 62 );
+      g_sprites.plArrowDownPl.drawCentredAt(ctx,this.cx,this.cy + 6);
+    }
+
+    delta +=1;
+  }
+}
+
+
+
+Player.prototype.shootingAnim = function (ctx, direction){
+  console.log(playerShootingArr[0]);
   if(this.shootCounter < 19){
     if(this.animCounter < 3){
-      g_sprites.plArrowRight1.drawCentredAt(ctx,this.cx+50,this.cy + 20 );
+      playerShootingArr[0].drawCentredAt(ctx,this.cx+50,this.cy + 20 );
       g_sprites.plArrowRightPl.drawCentredAt(ctx,this.cx,this.cy);
     }
     if(this.animCounter < 6){
@@ -202,8 +237,8 @@ Player.prototype.shootingAnim = function (ctx){
     this.shooting = false;
     this.shootCounter += 1;
   }
-
 }
+
 
 Player.prototype.rightAnim = function (ctx){
   this.lastAnimation = 1;
