@@ -60,9 +60,9 @@ Cell.prototype.Dig = function(direction){
     if(this.AmmountDug['right'] === 8) this.dugRightFully = true;
     if(this.AmmountDug['up'] === 8) this.dugUpFully = true;
     if(this.AmmountDug['down'] === 8) this.dugDownFully = true;
-    
-    
-    
+
+
+
     // Búið að grafa í gegnum alla celluna
     //  this.IsFullyDug = true;
     // ----------------------------------------
@@ -183,18 +183,18 @@ var level4 = [
 var level = [
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // fyrstu tvær línur skipta ekki máli
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // -------- || -----------
-  [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+  [1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0],
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0],
+  [0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0],
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 ];
@@ -261,7 +261,7 @@ Grid.prototype.PlayerMoved = function(x, y, direction){
     if(yIndex <= 1) return;
 
     cell = this.cells[xIndex][yIndex];
-    
+
     //--------------------------------------------------------
     //if(cell.IsFullyDug) return;
     //if(direction === 'right') if(cell.dugRightFully) return;
@@ -291,6 +291,7 @@ Grid.prototype.RenderGrid = function(ctx){
             this.cells[x][y].Render(ctx);
         }
     }
+    g_sprites.blom.drawCentredAt(ctx,470, 51);
 }
 
 Grid.prototype.GetPlayerCoords = function(){

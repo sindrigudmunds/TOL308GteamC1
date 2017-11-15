@@ -101,6 +101,7 @@ function requestPreloads() {
         spriteSheet4 : "NES_Dig_Dug_ClearX700Y220Flipped.png",
         spriteSheet5 : "NES_Dig_Dug_ClearX700Y220VertFlipped.png",
         backgroundTexture : "DigDugBackgroundTextureresized448.png",
+        blom : "Blom.png",
 
     };
 
@@ -116,6 +117,9 @@ function preloadDone() {
     //g_sprites.spriteSheet2 = new Sprite(g_images.spriteSheet2);
 
     //g_sprites.player = new Sprite(32,6,32,38,g_images.spriteSheet3);
+
+    // blóm
+    g_sprites.blom = new Sprite(0,0,32,32, g_images.blom);
     // player right
     g_sprites.playerWalkRight1 = new Sprite(32,6,32,38,g_images.spriteSheet3);
     g_sprites.playerWalkRight2 = new Sprite(64,6,32,38,g_images.spriteSheet3);
