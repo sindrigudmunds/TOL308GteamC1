@@ -1,28 +1,28 @@
-function Fygar(descr){
+function Pooka2(descr){
   this.setup(descr);
   this.vel = 0.5;
 
 };
 
-Fygar.prototype = new Entity();
+Pooka2.prototype = new Entity();
 
-Fygar.prototype.type = 'fygar';
+Pooka2.prototype.type = 'pooka';
 //Player.prototype.sprite = new Sprite(16,6,16,16,g_images.spriteSheet3);
-Fygar.prototype.animCounter = 0;
-Fygar.prototype.lastCx = this.cx;
-Fygar.prototype.lastCy = this.cy;
-Fygar.prototype.gridX = Math.floor(this.cx / 32);
-Fygar.prototype.gridY = Math.floor(this.cy / 32);
+Pooka2.prototype.animCounter = 0;
+Pooka2.prototype.lastCx = this.cx;
+Pooka2.prototype.lastCy = this.cy;
+Pooka2.prototype.gridX = Math.floor(this.cx / 32);
+Pooka2.prototype.gridY = Math.floor(this.cy / 32);
 // Smá offset til að hann passi betur inn í göngin.
 // Annars stendur hann alltaf smá uppúr.
-Fygar.prototype.yOffset = 12;
+Pooka2.prototype.yOffset = 12;
 //Player.prototype.cx = 480;
 //Player.prototype.cy = 480;
-Fygar.prototype.direction = 'right';
-Fygar.prototype.pathToPlayer = [];
-Fygar.prototype.isMoving = true;
+Pooka2.prototype.direction = 'right';
+Pooka2.prototype.pathToPlayer = [];
+Pooka2.prototype.isMoving = true;
 
-Fygar.prototype.GetNextDirection = function(){
+Pooka2.prototype.GetNextDirection = function(){
 
   var currPosition = [Math.floor(this.cx/32), Math.floor(this.cy/32)];
   var path = findPath(grid.cells, currPosition, grid.playerPosition);
@@ -52,11 +52,11 @@ Fygar.prototype.GetNextDirection = function(){
   }
 };
 
-Fygar.prototype.randomisePosition = function () {
+Pooka2.prototype.randomisePosition = function () {
     // Rock randomisation defaults (if nothing otherwise specified)
 };
 
-Fygar.prototype.update = function (du) {
+Pooka2.prototype.update = function (du) {
   var oldGridX = this.gridX;
   var oldGridY = this.gridY;
 
@@ -89,7 +89,7 @@ Fygar.prototype.update = function (du) {
   }
 
 
-  // Check if fygar has entered a new cell
+  // Check if Pooka2 has entered a new cell
   // then it will need to ask where to go next.
   var i = 0;
   if(this.gridX !== oldGridX || this.gridY !== oldGridY){
@@ -102,7 +102,7 @@ Fygar.prototype.update = function (du) {
 
 };
 
-Fygar.prototype.render = function (ctx) {
+Pooka2.prototype.render = function (ctx) {
   var newCx = this.cx;
   var newCy = this.cy;
   this.animCounter += 1;
@@ -125,37 +125,37 @@ Fygar.prototype.render = function (ctx) {
   this.lastCx = newCx;
   this.lastCy = newCy;
 
-  //g_sprites.fygar.drawAt(ctx,this.cx,this.cy);
+  //g_sprites.pooka.drawCentredAt(ctx,this.cx,this.cy);
 };
 
-Fygar.prototype.rightAnim = function (ctx){
+Pooka2.prototype.rightAnim = function (ctx){
   if(this.animCounter < 8){
-    g_sprites.fygarRight1.drawAt(ctx,this.cx,this.cy);
+    g_sprites.pookaRight1.drawAt(ctx,this.cx,this.cy);
   } else { // if playerAnimCounter > 8
-    g_sprites.fygarRight2.drawAt(ctx,this.cx,this.cy);
+    g_sprites.pookaRight2.drawAt(ctx,this.cx,this.cy);
   }
 }
 
-Fygar.prototype.leftAnim = function (ctx){
+Pooka2.prototype.leftAnim = function (ctx){
   if(this.animCounter < 8){
-    g_sprites.fygarLeft1.drawAt(ctx,this.cx,this.cy);
+    g_sprites.pookaLeft1.drawAt(ctx,this.cx,this.cy);
   } else { // if playerAnimCounter > 8
-    g_sprites.fygarLeft2.drawAt(ctx,this.cx,this.cy);
+    g_sprites.pookaLeft2.drawAt(ctx,this.cx,this.cy);
   }
 }
 
-Fygar.prototype.upAnim = function (ctx){
+Pooka2.prototype.upAnim = function (ctx){
   if(this.animCounter < 8){
-    g_sprites.fygarLeft1.drawAt(ctx,this.cx,this.cy);
+    g_sprites.pookaLeft1.drawAt(ctx,this.cx,this.cy);
   } else { // if playerAnimCounter > 8
-    g_sprites.fygarLeft2.drawAt(ctx,this.cx,this.cy);
+    g_sprites.pookaLeft2.drawAt(ctx,this.cx,this.cy);
   }
 }
 
-Fygar.prototype.downAnim = function (ctx){
+Pooka2.prototype.downAnim = function (ctx){
   if(this.animCounter < 8){
-    g_sprites.fygarLeft1.drawAt(ctx,this.cx,this.cy);
+    g_sprites.pookaLeft1.drawAt(ctx,this.cx,this.cy);
   } else { // if playerAnimCounter > 8
-    g_sprites.fygarLeft2.drawAt(ctx,this.cx,this.cy);
+    g_sprites.pookaLeft2.drawAt(ctx,this.cx,this.cy);
   }
 }

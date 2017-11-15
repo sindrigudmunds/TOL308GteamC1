@@ -60,6 +60,10 @@ var entityManager = {
       this._pookas.push(new Pooka(descr));
     },
 
+    generatePooka2 : function(descr){
+      this._pookas.push(new Pooka2(descr));
+    },
+
     generateFygar : function(descr){
       this._fygars.push(new Fygar(descr));
     },
@@ -77,9 +81,6 @@ var entityManager = {
               }
           }
       }
-
-
-
       var player = this._players[0];
       var enemies = this._fygars.concat(this._pookas);
       if(player.shooting){
