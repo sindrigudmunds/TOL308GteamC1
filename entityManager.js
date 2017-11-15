@@ -71,14 +71,28 @@ var entityManager = {
           var i = 0;
 
           while (i < aCategory.length) {
-              var status = aCategory[i].update(du);
-              ++i;
+              if(!aCategory[i].isDeadNow){
+                var status = aCategory[i].update(du);
+                ++i;
+              }
           }
       }
 
-      
+
+
+      var player = this._players[0];
       var enemies = this._fygars.concat(this._pookas);
-      var collisionObject = collisionManager.checkCollisions(this._players[0], enemies);
+      if(player.shooting){
+          // Player is shooting,  lets check if enemies collide with the gun
+          var enemy = collisionManager.checkGunCollision(player.gunCoords, enemies);
+          if(enemy){
+              // We hit an enemy, kill it.
+              enemy.kill();
+              console.log("enemy killed!");
+          }
+      }
+      
+      var collisionObject = collisionManager.checkCollisions(player, enemies);
       if(collisionObject){
         if(collisionObject.type === 'pooka' || collisionObject.type === 'fygar'){
             // Kill player
@@ -89,7 +103,6 @@ var entityManager = {
                 // Restart level?
             }
         }
-        
       }
     },
 
@@ -101,11 +114,10 @@ var entityManager = {
 
           var aCategory = this._categories[c];
           for (var i = 0; i < aCategory.length; ++i) {
-
-              aCategory[i].render(ctx);
-
+              if(!aCategory[i].isDeadNow){
+                aCategory[i].render(ctx);  
+              }
           }
-
       }
     }
 }

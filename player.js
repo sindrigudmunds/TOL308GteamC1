@@ -35,6 +35,7 @@ Player.prototype.animCounter = 0;
 Player.prototype.shooting = false;
 Player.prototype.shootCounter = 0;
 Player.prototype.currentDirection = null;
+Player.prototype.gunCoords = {};
 
 Player.prototype.update = function (du) {
 		var nextcy = this.cy;
@@ -127,18 +128,12 @@ Player.prototype.update = function (du) {
     if(nextcx <= this.MAX_X && nextcx >= this.MIN_X){
     	this.cx = nextcx;
     }
-
-
-
 };
-
-
 
 var g_playerLastCx = this.cx;
 var g_playerLastCy = this.cy;
 
 Player.prototype.render = function (ctx) {
-
   var newCx = this.cx;
   var newCy = this.cy;
   this.animCounter += 1;
@@ -149,6 +144,7 @@ Player.prototype.render = function (ctx) {
   if(this.shooting === true){
     this.shootingAnim2(ctx);
     this.shooting = false;
+
   } else
   if(g_playerLastCx < newCx){
     this.rightAnim(ctx);
@@ -185,22 +181,26 @@ Player.prototype.shootingAnim2 = function (ctx){
     if(delta < 500) frame = 4;
     if(delta < 600) frame = 5;
     if(this.currentDirection === 'right' ){
+      this.gunCoords = {x: this.cx+25, y: this.cy - 6, height: 32, width: 67};
       playerShootingArr[frame].drawCentredAt(ctx,this.cx+52,this.cy + 18 );
       g_sprites.plArrowRightPl.drawCentredAt(ctx,this.cx,this.cy);
     }
     if(this.currentDirection === 'up' ){
+      this.gunCoords = {x: this.cx - 18, y: this.cy - 80, height: 67, width: 32};
       playerShootingArr[frame +6].drawCentredAt(ctx,this.cx,this.cy - 44 );
       g_sprites.plArrowUpPl.drawCentredAt(ctx,this.cx,this.cy);
     }
     if(this.currentDirection === 'left'){
+      this.gunCoords = {x: this.cx-80, y: this.cy-6, height: 32, width: 67};
       playerShootingArr[frame +12].drawCentredAt(ctx,this.cx - 46,this.cy + 6 );
       g_sprites.plArrowLeftPl.drawCentredAt(ctx,this.cx,this.cy +6);
     }
     if(this.currentDirection === 'down'){
+      this.gunCoords = {x: this.cx - 12, y: this.cy+25, height: 67, width: 32};
       playerShootingArr[frame +18].drawCentredAt(ctx,this.cx,this.cy + 62 );
       g_sprites.plArrowDownPl.drawCentredAt(ctx,this.cx,this.cy + 6);
     }
-
+    util.fillBox(ctx, this.gunCoords.x, this.gunCoords.y, this.gunCoords.width, this.gunCoords.height, 'black')
     delta +=1;
   }
 }
@@ -211,10 +211,12 @@ Player.prototype.shootingAnim = function (ctx, direction){
   console.log(playerShootingArr[0]);
   if(this.shootCounter < 19){
     if(this.animCounter < 3){
+      
       playerShootingArr[0].drawCentredAt(ctx,this.cx+50,this.cy + 20 );
       g_sprites.plArrowRightPl.drawCentredAt(ctx,this.cx,this.cy);
     }
     if(this.animCounter < 6){
+      
       g_sprites.plArrowRight2.drawCentredAt(ctx,this.cx+50,this.cy + 20);
       g_sprites.plArrowRightPl.drawCentredAt(ctx,this.cx,this.cy);
     }
