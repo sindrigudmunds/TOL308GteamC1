@@ -60,6 +60,10 @@ var entityManager = {
       this._pookas.push(new Pooka(descr));
     },
 
+    generatePooka2 : function(descr){
+      this._pookas.push(new Pooka2(descr));
+    },
+
     generateFygar : function(descr){
       this._fygars.push(new Fygar(descr));
     },
@@ -76,7 +80,7 @@ var entityManager = {
           }
       }
 
-      
+
       var enemies = this._fygars.concat(this._pookas);
       var collisionObject = collisionManager.checkCollisions(this._players[0], enemies);
       if(collisionObject){
@@ -89,7 +93,7 @@ var entityManager = {
                 // Restart level?
             }
         }
-        
+
       }
     },
 

@@ -29,6 +29,10 @@ function createPooka() {
   });
 }
 
+function createPooka2(descr) {
+  entityManager.generatePooka2(descr);
+}
+
 function createFygar(descr) {
   entityManager.generateFygar(descr);
 }
@@ -184,6 +188,8 @@ function preloadDone() {
     createFygar({cx: 64, cy: 64});
     createFygar({cx: 256, cy: 256});
     createFygar({cx: 128, cy: 64});
+    createPooka2({cx: 228, cy: 164});
+    createPooka2({cx: 328, cy: 364});
     grid.print();
     main.init();
 }
