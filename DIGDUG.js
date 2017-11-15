@@ -6,6 +6,8 @@
 
 var g_canvas = document.getElementById("myCanvas");
 var g_ctx = g_canvas.getContext("2d");
+g_ctx.font="bold 22px Courier ";
+
 
 var grid = new Grid(16, 16, 32);
 
@@ -27,10 +29,8 @@ function createPooka() {
   });
 }
 
-function createFygar() {
-  entityManager.generateFygar({
-
-  });
+function createFygar(descr) {
+  entityManager.generateFygar(descr);
 }
 
 // =====================
@@ -156,9 +156,9 @@ function preloadDone() {
     //Örugglega betri leið til að búa til marga pookas, mjög primitive
     //createPooka();
     //createPooka();
-    //createPooka();
-    //createFygar();
-    createFygar();
+    createFygar({cx: 64, cy: 64});
+    createFygar({cx: 256, cy: 256});
+    createFygar({cx: 128, cy: 64});
     grid.print();
     main.init();
 }

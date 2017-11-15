@@ -36,6 +36,7 @@ Cell.prototype.IsDug = function(direction){
 Cell.prototype.Dig = function(direction){
     this.currentDigDirection = direction;
     this.AmmountDug[direction]++
+    scoreManager.addToScore(1);
     if(this.AmmountDug[direction] > 8) this.AmmountDug[direction] = 8;
     //console.log("Digging ", direction)
     //---------------------------------------------
@@ -43,6 +44,9 @@ Cell.prototype.Dig = function(direction){
     if(this.AmmountDug['right'] === 8) this.dugRightFully = true;
     if(this.AmmountDug['up'] === 8) this.dugUpFully = true;
     if(this.AmmountDug['down'] === 8) this.dugDownFully = true;
+    
+    
+    
     // Búið að grafa í gegnum alla celluna
     //  this.IsFullyDug = true;
     // ----------------------------------------
@@ -140,7 +144,7 @@ Grid.prototype.PlayerMoved = function(x, y, direction){
     if(yIndex <= 1) return;
 
     cell = this.cells[xIndex][yIndex];
-
+    
     //--------------------------------------------------------
     //if(cell.IsFullyDug) return;
     //if(direction === 'right') if(cell.dugRightFully) return;
