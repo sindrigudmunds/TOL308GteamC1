@@ -21,9 +21,9 @@ Fygar.prototype.yOffset = 12;
 Fygar.prototype.direction = 'right';
 Fygar.prototype.pathToPlayer = [];
 Fygar.prototype.isMoving = true;
- 
+
 Fygar.prototype.GetNextDirection = function(){
-  
+
   var currPosition = [Math.floor(this.cx/32), Math.floor(this.cy/32)];
   var path = findPath(grid.cells, currPosition, grid.playerPosition);
   //var path = [[1, 2],[1, 3],[1, 4],[1, 5],]
@@ -33,20 +33,20 @@ Fygar.prototype.GetNextDirection = function(){
   if(!nextCoords){
     console.log('enemy has nowhere to go!');
     return;
-  } 
+  }
 
   var nextX = nextCoords[0];
   var nextY = nextCoords[1];
 
   if(nextX > this.gridX){
     return 'right';
-  } 
+  }
   else if(nextX < this.gridX){
     return 'left';
   }
   if(nextY > this.gridY){
     return 'down';
-  } 
+  }
   else if(nextY < this.gridY){
     return 'up';
   }
@@ -72,7 +72,7 @@ Fygar.prototype.update = function (du) {
 
   if(this.isMoving){
 
-  
+
     switch(this.direction){
       case 'left': this.cx -= this.vel * du;
         break;
