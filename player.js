@@ -200,7 +200,7 @@ Player.prototype.shootingAnim2 = function (ctx){
       playerShootingArr[frame +18].drawCentredAt(ctx,this.cx,this.cy + 62 );
       g_sprites.plArrowDownPl.drawCentredAt(ctx,this.cx,this.cy + 6);
     }
-    util.fillBox(ctx, this.gunCoords.x, this.gunCoords.y, this.gunCoords.width, this.gunCoords.height, 'black')
+    //util.fillBox(ctx, this.gunCoords.x, this.gunCoords.y, this.gunCoords.width, this.gunCoords.height, 'black')
     delta +=1;
   }
 }
