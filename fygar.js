@@ -1,12 +1,12 @@
 function Fygar(descr){
   this.setup(descr);
-  this.randomisePosition();
   this.vel = 0.5;
 
 };
 
 Fygar.prototype = new Entity();
 
+Fygar.prototype.type = 'fygar';
 //Player.prototype.sprite = new Sprite(16,6,16,16,g_images.spriteSheet3);
 Fygar.prototype.animCounter = 0;
 Fygar.prototype.lastCx = this.cx;
@@ -73,8 +73,6 @@ Fygar.prototype.GetNextDirection = function(){
 
 Fygar.prototype.randomisePosition = function () {
     // Rock randomisation defaults (if nothing otherwise specified)
-    this.cx = 64;
-    this.cy = 64;
 };
 
 Fygar.prototype.update = function (du) {

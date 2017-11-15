@@ -10,6 +10,8 @@ Pooka.prototype = new Entity();
 Pooka.prototype.animCounter = 0;
 Pooka.prototype.lastCx = this.cx;
 Pooka.prototype.lastCy = this.cy;
+Pooka.prototype.type = 'pooka';
+
 
 //Set default directions to left and Down
 
