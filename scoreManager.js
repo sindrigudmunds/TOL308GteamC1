@@ -13,9 +13,15 @@ var scoreManager = {
         var oldFillStyle = ctx.fillStyle;
         ctx.fillStyle = 'red';
         g_ctx.fillText('HIGH SCORE', 180, 20);
+        g_ctx.fillText('CURRENT', 15, 20);
         ctx.fillStyle = 'white';
         g_ctx.fillText(this.highScore, 220, 45);
         g_ctx.fillText(this.currentScore, 50, 45);
+
+        for(var i = 0; i < this.livesRemaining; i++){
+            g_sprites.playerWalkRight1.drawCentredAt(ctx, 350 + (i*35), 20);
+        }
+
         ctx.fillStyle = oldFillStyle;
     },
 

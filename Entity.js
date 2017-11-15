@@ -41,7 +41,8 @@ Entity.prototype.setup = function (descr) {
 
     // Get my (unique) spatial ID
     //this._spatialID = spatialManager.getNewSpatialID();
-
+    this.originalX = descr.cx;
+    this.originalY = descr.cy;
     // I am not dead yet!
     this._isDeadNow = false;
 };
@@ -50,6 +51,10 @@ Entity.prototype.setPos = function (cx, cy) {
     this.cx = cx;
     this.cy = cy;
 };
+
+Entity.prototype.reset = function(){
+    this.setPos(this.originalX, this.originalY);
+}
 
 Entity.prototype.getPos = function () {
     return {posX : this.cx, posY : this.cy};

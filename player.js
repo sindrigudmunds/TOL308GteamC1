@@ -18,7 +18,7 @@ Player.prototype = new Entity();
 Player.prototype.MIN_Y = 42;
 Player.prototype.MAX_Y = 492;
 Player.prototype.MIN_X = 14; // ekki 0 til að sprite fari ekki út fyrir rammann
-Player.prototype.MAX_X = 434;// 448 - 10 (kall er 32 px á breidd)
+Player.prototype.MAX_X = 502;// 448 - 10 (kall er 32 px á breidd)
 
 
 Player.prototype.UP = keyCode('W');

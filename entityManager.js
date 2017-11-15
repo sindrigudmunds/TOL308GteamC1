@@ -96,12 +96,19 @@ var entityManager = {
       var collisionObject = collisionManager.checkCollisions(player, enemies);
       if(collisionObject){
         if(collisionObject.type === 'pooka' || collisionObject.type === 'fygar'){
+            
+            for(var i = 0; i < enemies.length; i++){
+                enemies[i].reset();
+            }
+            player.reset();
             // Kill player
             scoreManager.livesRemaining--;
+            console.log(scoreManager.livesRemaining);
+
             if(scoreManager.livesRemaining === 0){
                 // Game over
                 scoreManager.reset();
-                // Restart level?
+                grid = new Grid(16, 16, 32);
             }
         }
       }

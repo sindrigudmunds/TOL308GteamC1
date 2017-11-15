@@ -14,7 +14,6 @@ var collisionManager = {
             gun.x + gun.width > enemy.cx &&
             gun.y < enemy.cy + 32 &&
             gun.height + gun.y > enemy.cy) {
-            console.log("búmm");
              return true;
          }
          console.log(gun);
