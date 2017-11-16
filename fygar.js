@@ -60,6 +60,10 @@ Fygar.prototype.update = function (du) {
   var oldGridX = this.gridX;
   var oldGridY = this.gridY;
 
+  if (this._isDeadNow) {
+    return;
+  }
+
 
   //console.log(this.pathToPlayer);
 

@@ -68,6 +68,21 @@ var entityManager = {
       this._fygars.push(new Fygar(descr));
     },
 
+    allDead : function(enemies){
+        var allDead = true;
+        for (var i = 0; i < enemies.length; i++) {
+          if (!enemies[i]._isDeadNow) allDead = false;
+        }
+        return allDead;
+    },
+
+    clearCorpses : function(){
+      this._fygars = [];
+      this._pookas = [];
+      this._players = [];
+
+    },
+
     update: function(du) {
 
       for (var c = 0; c < this._categories.length; ++c) {
@@ -85,18 +100,35 @@ var entityManager = {
       var enemies = this._fygars.concat(this._pookas);
       if(player.shooting){
           // Player is shooting,  lets check if enemies collide with the gun
-          var enemy = collisionManager.checkGunCollision(player.gunCoords, enemies);
-          if(enemy){
+          var enemy = collisionManager.checkGunCollisions(player.gunCoords, enemies);
+          if(enemy !== false){
+            enemy.kill();
+            console.log("enemy killed");
               // We hit an enemy, kill it.
-              enemy.kill();
-              console.log("enemy killed!");
+              //enemy.kill(); //kill ekki skilgreint?
+
           }
       }
-      
+
+      if(this.allDead(enemies)){
+        console.log("allirdauðir");
+
+        this.clearCorpses();
+        console.log(levels.currentLevel);
+        levels.nextLevel();
+        console.log(levels.currentLevel);
+
+        grid = new Grid(16, 16, 32, levels.currentLevelArray());
+        player.reset();
+        initLevel();
+
+      }
+
+
       var collisionObject = collisionManager.checkCollisions(player, enemies);
       if(collisionObject){
         if(collisionObject.type === 'pooka' || collisionObject.type === 'fygar'){
-            
+
             for(var i = 0; i < enemies.length; i++){
                 enemies[i].reset();
             }
@@ -108,7 +140,9 @@ var entityManager = {
             if(scoreManager.livesRemaining === 0){
                 // Game over
                 scoreManager.reset();
-                grid = new Grid(16, 16, 32);
+
+                //Todo - Game over screen, "menu" fyrir restart
+                grid = new Grid(16, 16, 32, currentLevel);
             }
         }
       }
@@ -123,7 +157,7 @@ var entityManager = {
           var aCategory = this._categories[c];
           for (var i = 0; i < aCategory.length; ++i) {
               if(!aCategory[i].isDeadNow){
-                aCategory[i].render(ctx);  
+                aCategory[i].render(ctx);
               }
           }
       }

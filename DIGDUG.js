@@ -8,8 +8,11 @@ var g_canvas = document.getElementById("myCanvas");
 var g_ctx = g_canvas.getContext("2d");
 g_ctx.font="bold 22px Courier ";
 
+var levels = new Levels();
+var currentLevel = levels.currentLevelArray();
 
-var grid = new Grid(16, 16, 32);
+var grid = new Grid(16, 16, 32, currentLevel);
+
 
 // =====================
 // CREATE Player
@@ -18,8 +21,8 @@ var grid = new Grid(16, 16, 32);
 function createPlayer() {
 
     entityManager.generatePlayer({
-      cx : 208,
-      cy : 202,
+      cx : 240,
+      cy : 266,
     });
 
 }
@@ -35,6 +38,22 @@ function createPooka2(descr) {
 
 function createFygar(descr) {
   entityManager.generateFygar(descr);
+}
+
+function initLevel(){
+
+  var fygars = levels.getFygarLocation();
+  var pookas = levels.getPookaLocation();
+
+	for(var i=0; i<fygars.length; i++){
+		entityManager.generateFygar({cx:fygars[i][0], cy: fygars[i][1]});
+	}
+
+	for(var i=0; i<pookas.length; i++){
+		entityManager.generatePooka2({cx:pookas[i][0], cy: pookas[i][1]});
+	}
+
+  createPlayer();
 }
 
 // =====================
@@ -184,16 +203,19 @@ function preloadDone() {
     //g_sprites.pookalabb2 = new Sprite(58,102,28,28,g_images.spriteSheet3);
     entityManager.init();
     //createInitialShips();
-    createPlayer();
+    //createPlayer();
 
     //Örugglega betri leið til að búa til marga pookas, mjög primitive
     //createPooka();
     //createPooka();
+    /*
     createFygar({cx: 64, cy: 64});
     createFygar({cx: 486, cy: 356});
     createFygar({cx: 128, cy: 486});
     createPooka2({cx: 228, cy: 364});
     createPooka2({cx: 328, cy: 364});
+    */
+    initLevel();
     grid.print();
     main.init();
 }

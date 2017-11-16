@@ -222,7 +222,7 @@ Cell.prototype.makeFullyDugInDir = function(x, y, direction){
    if(direction === 'down') cellObj.AmmountDug['down'] = 8
 }
 
-function Grid(xSize, ySize, cellSize){
+function Grid(xSize, ySize, cellSize, level){
     // Fjöldi cella á x og y ás
     this.xSize = xSize;
     this.ySize = ySize;
@@ -235,28 +235,28 @@ function Grid(xSize, ySize, cellSize){
         var column = []
         for(var y = 0; y < this.ySize; y++){
             var newCell = new Cell(x, y, this.cellSize);
-            if(level[y][x] === 1){  // þægilegara að hugsa sem y x miðað við level grid
+            if(level[y][x] !== 0){  // þægilegara að hugsa sem y x miðað við level grid
               if(x !== 15){ // viljum ekki skoða x+1 :: sem er stærra en borðið
-                if(level[y][x+1] === 1){
+                if(level[y][x+1] !== 0){
                     newCell.AmmountDug['right'] = 8;
                     newCell.pointsGivem = true;
-                } 
+                }
               }
               if(y !== 0){ // viljum ekki skoða x-1: minna en borðið
-                if(level[y][x-1] === 1){
+                if(level[y][x-1] !== 0){
                      newCell.AmmountDug['left'] = 8;
                      newCell.pointsGiven = true;
                 }
               }
               if(y !== 15){ // -- || --
-                if(level[y+1][x] === 1) {
+                if(level[y+1][x] !== 0) {
                     newCell.AmmountDug['up'] = 8;
                     newCell.pintsGiven = true;
                 }
 
               }
               if(y !== 0){ // -- || --
-                if(level[y-1][x] === 1) {
+                if(level[y-1][x] !== 0) {
                     newCell.AmmountDug['down'] = 8;
                     this.pointsGiven = true;
                 }
