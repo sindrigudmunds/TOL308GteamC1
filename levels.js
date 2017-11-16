@@ -85,12 +85,17 @@ Levels.prototype.currentLevelArray = function(){
 //this is called when a level is completed, all pookas and fygars are killed
 Levels.prototype.nextLevel = function(){
   var maxLevel =  this.levelsArray.length;
-  if (this.currentLevel === maxLevel){
+  if (this.currentLevel + 1 === maxLevel){
     //wingame aðferð
   }
   else {
     this.currentLevel += 1;
   }
+}
+
+Levels.prototype.resetLevel = function(){
+
+  this.currentLevel = 0;
 }
 
 //returns list [x,y,z] where x = number of fygars in current level,

@@ -68,6 +68,20 @@ var entityManager = {
       this._fygars.push(new Fygar(descr));
     },
 
+    allDead : function(enemies){
+        var allDead = true;
+        for (var i = 0; i < enemies.length; i++) {
+          if (!enemies[i]._isDeadNow) allDead = false;
+        }
+        return allDead;
+    },
+
+    clearCorpses : function(){
+      this._fygars = [];
+      this._pookas = [];
+
+    },
+
     update: function(du) {
 
       for (var c = 0; c < this._categories.length; ++c) {
@@ -94,6 +108,17 @@ var entityManager = {
 
           }
       }
+
+      if(this.allDead(enemies)){
+
+        this.clearCorpses();
+
+        levels.nextLevel();
+        initLevel();
+        grid = new Grid(16, 16, 32, currentLevel);
+
+      }
+
 
       var collisionObject = collisionManager.checkCollisions(player, enemies);
       if(collisionObject){
