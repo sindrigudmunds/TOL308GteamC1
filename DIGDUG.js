@@ -41,15 +41,16 @@ function createFygar(descr) {
 }
 
 function initLevel(){
+
   var fygars = levels.getFygarLocation();
   var pookas = levels.getPookaLocation();
 
 	for(var i=0; i<fygars.length; i++){
-		createFygar({cx:fygars[i][0], cy: fygars[i][1]});
+		entityManager.generateFygar({cx:fygars[i][0], cy: fygars[i][1]});
 	}
 
 	for(var i=0; i<pookas.length; i++){
-		createPooka2({cx:pookas[i][0], cy: pookas[i][1]});
+		entityManager.generatePooka2({cx:pookas[i][0], cy: pookas[i][1]});
 	}
 
   createPlayer();

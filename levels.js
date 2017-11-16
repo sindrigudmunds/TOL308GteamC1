@@ -86,7 +86,7 @@ Levels.prototype.currentLevelArray = function(){
 Levels.prototype.nextLevel = function(){
   var maxLevel =  this.levelsArray.length;
   if (this.currentLevel + 1 === maxLevel){
-    //wingame aðferð
+    this.resetLevel();
   }
   else {
     this.currentLevel += 1;

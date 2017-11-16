@@ -79,6 +79,7 @@ var entityManager = {
     clearCorpses : function(){
       this._fygars = [];
       this._pookas = [];
+      this._players = [];
 
     },
 
@@ -110,12 +111,16 @@ var entityManager = {
       }
 
       if(this.allDead(enemies)){
+        console.log("allirdauðir");
 
         this.clearCorpses();
-
+        console.log(levels.currentLevel);
         levels.nextLevel();
+        console.log(levels.currentLevel);
+
+        grid = new Grid(16, 16, 32, levels.currentLevelArray());
+        player.reset();
         initLevel();
-        grid = new Grid(16, 16, 32, currentLevel);
 
       }
 
