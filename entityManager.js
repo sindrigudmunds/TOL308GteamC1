@@ -92,11 +92,11 @@ var entityManager = {
               console.log("enemy killed!");
           }
       }
-      
+
       var collisionObject = collisionManager.checkCollisions(player, enemies);
       if(collisionObject){
         if(collisionObject.type === 'pooka' || collisionObject.type === 'fygar'){
-            
+
             for(var i = 0; i < enemies.length; i++){
                 enemies[i].reset();
             }
@@ -108,7 +108,7 @@ var entityManager = {
             if(scoreManager.livesRemaining === 0){
                 // Game over
                 scoreManager.reset();
-                grid = new Grid(16, 16, 32);
+                grid = new Grid(16, 16, 32, currentLevel);
             }
         }
       }
@@ -123,7 +123,7 @@ var entityManager = {
           var aCategory = this._categories[c];
           for (var i = 0; i < aCategory.length; ++i) {
               if(!aCategory[i].isDeadNow){
-                aCategory[i].render(ctx);  
+                aCategory[i].render(ctx);
               }
           }
       }

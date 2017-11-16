@@ -78,6 +78,10 @@ Levels.prototype.levelsArray = [
 
 Levels.prototype.currentLevel = 0;
 
+Levels.prototype.currentLevelArray = function(){
+  return this.levelsArray[this.currentLevel];
+}
+/*
 //this is called when a level is completed, all pookas and fygars are killed
 Levels.prototype.nextLevel = function(){
   var maxLevel =  this.levelsArray.length;
@@ -158,4 +162,4 @@ Levels.prototype.getRockLocation = function(){
       }
     }
     return rockLocations;
-};
+};*/

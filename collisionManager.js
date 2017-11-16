@@ -5,7 +5,7 @@ var collisionManager = {
             y1 < y2 + size && y1 + size > y2) {
                 return true;
          }
-         
+
         return false;
     },
 

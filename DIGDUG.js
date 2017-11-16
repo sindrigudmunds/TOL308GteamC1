@@ -8,8 +8,11 @@ var g_canvas = document.getElementById("myCanvas");
 var g_ctx = g_canvas.getContext("2d");
 g_ctx.font="bold 22px Courier ";
 
+var levels = new Levels();
+var currentLevel = levels.currentLevelArray();
 
-var grid = new Grid(16, 16, 32);
+var grid = new Grid(16, 16, 32, currentLevel);
+
 
 // =====================
 // CREATE Player
@@ -189,6 +192,7 @@ function preloadDone() {
     //Örugglega betri leið til að búa til marga pookas, mjög primitive
     //createPooka();
     //createPooka();
+
     createFygar({cx: 64, cy: 64});
     createFygar({cx: 486, cy: 356});
     createFygar({cx: 128, cy: 486});
