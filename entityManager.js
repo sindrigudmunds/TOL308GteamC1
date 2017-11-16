@@ -108,6 +108,8 @@ var entityManager = {
             if(scoreManager.livesRemaining === 0){
                 // Game over
                 scoreManager.reset();
+
+                //Todo - Game over screen, "menu" fyrir restart
                 grid = new Grid(16, 16, 32, currentLevel);
             }
         }

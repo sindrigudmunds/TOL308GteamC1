@@ -12,7 +12,7 @@ function Levels(descr){
 2 - player location
 3 - fygar location
 4 - pooka location
-5 - rock location
+0 - rock location
 ====================*/
 //ath engin aðferð notar player location því hún er alltaf sú sama.
 
@@ -23,15 +23,15 @@ Levels.prototype.levelsArray = [
   [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],
   [0,0,4,0,0,0,0,1,0,0,1,1,4,1,0,0],
-  [0,0,1,0,0,5,0,1,0,0,0,0,0,0,0,0],
+  [0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0],
   [0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0],
   [0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0],
   [0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,1,2,1,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0,0,1,5,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0],
   [0,0,0,1,3,1,1,0,0,0,1,0,0,0,0,0],
-  [0,0,0,0,5,0,0,0,0,0,1,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0],
   [0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0],
   [0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0],
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
@@ -41,16 +41,16 @@ Levels.prototype.levelsArray = [
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],
-  [0,0,0,5,0,0,0,1,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,1,0,5,0,3,1,1,0,0],
+  [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,1,0,0,0,3,1,1,0,0],
   [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],
   [0,0,1,1,4,0,0,1,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,1,2,1,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
   [0,0,4,0,0,0,0,4,1,1,0,0,0,0,0,0],
   [0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0],
-  [0,0,1,0,0,5,0,0,0,0,0,1,1,1,0,0],
+  [0,0,1,0,0,0,0,0,0,0,0,1,1,1,0,0],
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
@@ -60,16 +60,16 @@ Levels.prototype.levelsArray = [
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],
-  [0,0,0,5,0,0,0,1,0,0,0,1,1,3,0,0],
+  [0,0,0,0,0,0,0,1,0,0,0,1,1,3,0,0],
   [0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0],
   [0,0,4,1,1,0,0,1,0,4,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,1,0,0,0,0,5,0,0,0],
+  [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,1,2,1,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,4,0,0,0,0,0,0,5,0,0],
+  [0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,0,0,1,1,3,0,0,0,0],
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
@@ -81,7 +81,7 @@ Levels.prototype.currentLevel = 0;
 Levels.prototype.currentLevelArray = function(){
   return this.levelsArray[this.currentLevel];
 }
-/*
+
 //this is called when a level is completed, all pookas and fygars are killed
 Levels.prototype.nextLevel = function(){
   var maxLevel =  this.levelsArray.length;
@@ -106,7 +106,7 @@ Levels.prototype.getEntityNumber = function(){
      for(var j = 0; j < line.length; j++) {
         if (line[j] === 3) noFygars += 1;
         if (line[j] === 4) noPookas += 1;
-        if (line[j] === 5) noRocks += 1;
+        if (line[j] === 0) noRocks += 1;
      }
    }
    return [noFygars,noPookas,noRocks];
@@ -122,7 +122,7 @@ Levels.prototype.getFygarLocation = function(){
      for(var j = 0; j < line.length; j++) {
           if (line[j] === 3){
             //convert i and j to x and y coordinates
-            coordinates = [i*32+16,j*32+16];
+            coordinates = [j*32,i*32];
             // add them to array
             fygarLocations.push(coordinates);
           }
@@ -140,7 +140,7 @@ Levels.prototype.getPookaLocation = function(){
      var line = level[i];
      for(var j = 0; j < line.length; j++) {
           if (line[j] === 4){
-            coordinates = [i*32+16,j*32+16];
+            coordinates = [j*32,i*32];
             pookaLocations.push(coordinates);
           }
       }
@@ -148,6 +148,7 @@ Levels.prototype.getPookaLocation = function(){
     return pookaLocations;
 };
 //returns x and y coordinates of all rocks in level as a list of tuples
+/*
 Levels.prototype.getRockLocation = function(){
   var rockLocations = [];
 
@@ -155,7 +156,7 @@ Levels.prototype.getRockLocation = function(){
   for(var i = 0; i < level.length; i++) {
      var line = level[i];
      for(var j = 0; j < line.length; j++) {
-          if (line[j] === 5){
+          if (line[j] === 0){
             coordinates = [i*32+16,j*32+16];
             rockLocations.push(coordinates);
           }
