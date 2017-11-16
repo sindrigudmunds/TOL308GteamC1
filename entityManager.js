@@ -85,11 +85,13 @@ var entityManager = {
       var enemies = this._fygars.concat(this._pookas);
       if(player.shooting){
           // Player is shooting,  lets check if enemies collide with the gun
-          var enemy = collisionManager.checkGunCollision(player.gunCoords, enemies);
-          if(enemy){
+          var enemy = collisionManager.checkGunCollisions(player.gunCoords, enemies);
+          if(enemy !== false){
+            enemy.kill();
+            console.log("enemy killed");
               // We hit an enemy, kill it.
-              enemy.kill();
-              console.log("enemy killed!");
+              //enemy.kill(); //kill ekki skilgreint?
+
           }
       }
 

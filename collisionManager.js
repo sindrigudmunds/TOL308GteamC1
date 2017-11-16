@@ -10,6 +10,9 @@ var collisionManager = {
     },
 
     checkGunCollision: function(gun, enemy){
+      if (enemy._isDeadNow) {
+        return false;
+      }
         if (gun.x < enemy.cx + 32 &&
             gun.x + gun.width > enemy.cx &&
             gun.y < enemy.cy + 32 &&
@@ -28,6 +31,9 @@ var collisionManager = {
         // Getum síðan gert sambærilegt check til að athuga hvort byssan
         // sé að collida við enemies
         for(var i = 0; i < objects.length; i++){
+            if (objects[i]._isDeadNow) {
+              continue;
+            }
             var isCollision = this.checkCollision(playerX, playerY, objects[i].cx, objects[i].cy, 32)
             if(isCollision) return objects[i];
         }
