@@ -77,10 +77,15 @@ var entityManager = {
     },
 
     clearCorpses : function(){
-      this._fygars = [];
-      this._pookas = [];
-      this._players = [];
 
+      while (this._fygars.length > 0) {
+        this._fygars.pop();
+      }
+
+      while (this._pookas.length > 0) {
+        this._pookas.pop();
+      }
+      this._players.pop();
     },
 
     update: function(du) {
