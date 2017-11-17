@@ -237,26 +237,26 @@ function Grid(xSize, ySize, cellSize, level){
             var newCell = new Cell(x, y, this.cellSize);
             if(level[y][x] !== 0){  // þægilegara að hugsa sem y x miðað við level grid
               if(x !== 15){ // viljum ekki skoða x+1 :: sem er stærra en borðið
-                if(level[y][x+1] !== 0){
+                if(level[y][x+1] !== 0 && level[y][x+1] !==5){
                     newCell.AmmountDug['right'] = 8;
                     newCell.pointsGivem = true;
                 }
               }
               if(y !== 0){ // viljum ekki skoða x-1: minna en borðið
-                if(level[y][x-1] !== 0){
+                if(level[y][x-1] !== 0 && level[y][x-1] !==5){
                      newCell.AmmountDug['left'] = 8;
                      newCell.pointsGiven = true;
                 }
               }
               if(y !== 15){ // -- || --
-                if(level[y+1][x] !== 0) {
+                if(level[y+1][x] !== 0 && level[y+1][x] !==5) {
                     newCell.AmmountDug['up'] = 8;
                     newCell.pintsGiven = true;
                 }
 
               }
               if(y !== 0){ // -- || --
-                if(level[y-1][x] !== 0) {
+                if(level[y-1][x] !== 0 && level[y-1][x] !==5) {
                     newCell.AmmountDug['down'] = 8;
                     this.pointsGiven = true;
                 }

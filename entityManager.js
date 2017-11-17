@@ -68,6 +68,10 @@ var entityManager = {
       this._fygars.push(new Fygar(descr));
     },
 
+    generateRock : function (descr) {
+      this._rocks.push(new Rock(descr));
+    },
+
     allDead : function(enemies){
         var allDead = true;
         for (var i = 0; i < enemies.length; i++) {
@@ -77,7 +81,6 @@ var entityManager = {
     },
 
     clearCorpses : function(){
-
       while (this._fygars.length > 0) {
         this._fygars.pop();
       }
@@ -85,6 +88,7 @@ var entityManager = {
       while (this._pookas.length > 0) {
         this._pookas.pop();
       }
+
       this._players.pop();
     },
 

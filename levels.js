@@ -22,16 +22,16 @@ Levels.prototype.levelsArray = [
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],
-  [0,0,4,0,0,0,0,1,0,0,1,1,4,1,0,0],
+  [0,0,4,0,0,5,0,1,0,0,1,1,4,1,0,0],
   [0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0],
   [0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0],
   [0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0],
   [0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,1,2,1,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,1,5,0,0,0,0],
   [0,0,0,1,3,1,1,0,0,0,1,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0],
+  [0,0,0,0,5,0,0,0,0,0,1,0,0,0,0,0],
   [0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0],
   [0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0],
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
@@ -111,7 +111,7 @@ Levels.prototype.getEntityNumber = function(){
      for(var j = 0; j < line.length; j++) {
         if (line[j] === 3) noFygars += 1;
         if (line[j] === 4) noPookas += 1;
-        if (line[j] === 0) noRocks += 1;
+        if (line[j] === 5) noRocks += 1;
      }
    }
    return [noFygars,noPookas,noRocks];
@@ -153,7 +153,7 @@ Levels.prototype.getPookaLocation = function(){
     return pookaLocations;
 };
 //returns x and y coordinates of all rocks in level as a list of tuples
-/*
+
 Levels.prototype.getRockLocation = function(){
   var rockLocations = [];
 
@@ -161,11 +161,11 @@ Levels.prototype.getRockLocation = function(){
   for(var i = 0; i < level.length; i++) {
      var line = level[i];
      for(var j = 0; j < line.length; j++) {
-          if (line[j] === 0){
-            coordinates = [i*32+16,j*32+16];
+          if (line[j] === 5){
+            coordinates = [j*32+16,i*32+16];
             rockLocations.push(coordinates);
           }
       }
     }
     return rockLocations;
-};*/
+};

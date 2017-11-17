@@ -26,7 +26,7 @@ function createPlayer() {
     });
 
 }
-
+/*
 function createPooka() {
   entityManager.generatePooka({
   });
@@ -40,10 +40,15 @@ function createFygar(descr) {
   entityManager.generateFygar(descr);
 }
 
+function createRock(descr) {
+  entityManager.generateRock(descr);
+}
+*/
 function initLevel(){
 
   var fygars = levels.getFygarLocation();
   var pookas = levels.getPookaLocation();
+  var rocks = levels.getRockLocation();
 
 	for(var i=0; i<fygars.length; i++){
 		entityManager.generateFygar({cx:fygars[i][0], cy: fygars[i][1]});
@@ -51,6 +56,10 @@ function initLevel(){
 
 	for(var i=0; i<pookas.length; i++){
 		entityManager.generatePooka2({cx:pookas[i][0], cy: pookas[i][1]});
+	}
+
+  for(var i=0; i<rocks.length; i++){
+		entityManager.generateRock({cx:rocks[i][0], cy: rocks[i][1]});
 	}
 
   createPlayer();
@@ -165,6 +174,10 @@ function preloadDone() {
     // Fygar left
     g_sprites.fygarLeft1 = new Sprite(616,162,28,28,g_images.spriteSheet4);
     g_sprites.fygarLeft2 = new Sprite(648,162,28,28,g_images.spriteSheet4);
+
+    // Rock
+    g_sprites.rock = new Sprite(420, 100, 32, 32, g_images.spriteSheet3);
+    g_sprites.rock2= new Sprite(460, 100, 32, 32, g_images.spriteSheet3);
 
 
     // player arrow right
