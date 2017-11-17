@@ -115,6 +115,7 @@ var entityManager = {
           var enemy = collisionManager.checkGunCollisions(player.gunCoords, enemies);
           if(enemy !== false){
             enemy.kill();
+            scoreManager.addToScore(200);
             console.log("enemy killed");
               // We hit an enemy, kill it.
           }
@@ -122,7 +123,7 @@ var entityManager = {
 
       if(this.allDead(enemies)){
         //console.log("allirdauðir");
-
+        scoreManager.addToScore(500);
         this.clearLevel();
         //console.log(levels.currentLevel);
         levels.nextLevel();

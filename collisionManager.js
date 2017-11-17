@@ -8,7 +8,7 @@ var collisionManager = {
 
          */
         var c = size*0.375;
-        if (util.distSq(x1,y1,x2,y2)<c*c) return true;
+        if (util.distSq(x1+16,y1+19,x2,y2)<c*c) return true;
         return false;
     },
 
