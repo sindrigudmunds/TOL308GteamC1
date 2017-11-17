@@ -57,12 +57,15 @@ Fygar.prototype.randomisePosition = function () {
 };
 
 Fygar.prototype.update = function (du) {
-  var oldGridX = this.gridX;
-  var oldGridY = this.gridY;
-
+  // if dead, quit the update immediately
   if (this._isDeadNow) {
     return;
   }
+
+  var oldGridX = this.gridX;
+  var oldGridY = this.gridY;
+
+
 
 
   //console.log(this.pathToPlayer);

@@ -50,6 +50,12 @@ function initLevel(){
   var pookas = levels.getPookaLocation();
   var rocks = levels.getRockLocation();
 
+  for(var i=0; i<rocks.length; i++){
+		entityManager.generateRock({cx:rocks[i][0], cy: rocks[i][1]});
+	}
+
+  //grid.RenderGrid(ctx);
+
 	for(var i=0; i<fygars.length; i++){
 		entityManager.generateFygar({cx:fygars[i][0], cy: fygars[i][1]});
 	}
@@ -58,9 +64,7 @@ function initLevel(){
 		entityManager.generatePooka2({cx:pookas[i][0], cy: pookas[i][1]});
 	}
 
-  for(var i=0; i<rocks.length; i++){
-		entityManager.generateRock({cx:rocks[i][0], cy: rocks[i][1]});
-	}
+
 
   createPlayer();
 }

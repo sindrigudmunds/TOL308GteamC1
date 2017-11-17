@@ -80,13 +80,16 @@ var entityManager = {
         return allDead;
     },
 
-    clearCorpses : function(){
+    clearLevel : function(){
       while (this._fygars.length > 0) {
         this._fygars.pop();
       }
 
       while (this._pookas.length > 0) {
         this._pookas.pop();
+      }
+      while (this._rocks.length > 0) {
+        this._rocks.pop();
       }
 
       this._players.pop();
@@ -122,7 +125,7 @@ var entityManager = {
       if(this.allDead(enemies)){
         console.log("allirdauðir");
 
-        this.clearCorpses();
+        this.clearLevel();
         console.log(levels.currentLevel);
         levels.nextLevel();
         console.log(levels.currentLevel);
