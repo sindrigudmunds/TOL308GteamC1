@@ -133,32 +133,32 @@ Pooka2.prototype.render = function (ctx) {
 
 Pooka2.prototype.rightAnim = function (ctx){
   if(this.animCounter < 8){
-    g_sprites.pookaRight1.drawAt(ctx,this.cx,this.cy);
+    g_sprites.pookaRight1.drawCentredAt(ctx,this.cx,this.cy);
   } else { // if playerAnimCounter > 8
-    g_sprites.pookaRight2.drawAt(ctx,this.cx,this.cy);
+    g_sprites.pookaRight2.drawCentredAt(ctx,this.cx,this.cy);
   }
 }
 
 Pooka2.prototype.leftAnim = function (ctx){
   if(this.animCounter < 8){
-    g_sprites.pookaLeft1.drawAt(ctx,this.cx,this.cy);
+    g_sprites.pookaLeft1.drawCentredAt(ctx,this.cx,this.cy);
   } else { // if playerAnimCounter > 8
-    g_sprites.pookaLeft2.drawAt(ctx,this.cx,this.cy);
+    g_sprites.pookaLeft2.drawCentredAt(ctx,this.cx,this.cy);
   }
 }
 
 Pooka2.prototype.upAnim = function (ctx){
   if(this.animCounter < 8){
-    g_sprites.pookaLeft1.drawAt(ctx,this.cx,this.cy);
+    g_sprites.pookaLeft1.drawCentredAt(ctx,this.cx,this.cy);
   } else { // if playerAnimCounter > 8
-    g_sprites.pookaLeft2.drawAt(ctx,this.cx,this.cy);
+    g_sprites.pookaLeft2.drawCentredAt(ctx,this.cx,this.cy);
   }
 }
 
 Pooka2.prototype.downAnim = function (ctx){
   if(this.animCounter < 8){
-    g_sprites.pookaLeft1.drawAt(ctx,this.cx,this.cy);
+    g_sprites.pookaLeft1.drawCentredAt(ctx,this.cx,this.cy);
   } else { // if playerAnimCounter > 8
-    g_sprites.pookaLeft2.drawAt(ctx,this.cx,this.cy);
+    g_sprites.pookaLeft2.drawCentredAt(ctx,this.cx,this.cy);
   }
 }
