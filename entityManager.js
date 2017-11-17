@@ -117,18 +117,16 @@ var entityManager = {
             enemy.kill();
             console.log("enemy killed");
               // We hit an enemy, kill it.
-              //enemy.kill(); //kill ekki skilgreint?
-
           }
       }
 
       if(this.allDead(enemies)){
-        console.log("allirdauðir");
+        //console.log("allirdauðir");
 
         this.clearLevel();
-        console.log(levels.currentLevel);
+        //console.log(levels.currentLevel);
         levels.nextLevel();
-        console.log(levels.currentLevel);
+        //console.log(levels.currentLevel);
 
         grid = new Grid(16, 16, 32, levels.currentLevelArray());
         player.reset();
@@ -152,6 +150,10 @@ var entityManager = {
             if(scoreManager.livesRemaining === 0){
                 // Game over
                 scoreManager.reset();
+                this.clearLevel();
+                levels.resetLevel();
+                player.reset();
+                initLevel();
 
                 //Todo - Game over screen, "menu" fyrir restart
                 grid = new Grid(16, 16, 32, currentLevel);

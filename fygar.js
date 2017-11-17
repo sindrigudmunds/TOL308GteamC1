@@ -65,9 +65,6 @@ Fygar.prototype.update = function (du) {
   var oldGridX = this.gridX;
   var oldGridY = this.gridY;
 
-
-
-
   //console.log(this.pathToPlayer);
 
   if (this.cx >= g_canvas.width-5 || this.cx <= 5) {

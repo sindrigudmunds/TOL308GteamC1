@@ -94,7 +94,6 @@ Levels.prototype.nextLevel = function(){
 }
 
 Levels.prototype.resetLevel = function(){
-
   this.currentLevel = 0;
 }
 
