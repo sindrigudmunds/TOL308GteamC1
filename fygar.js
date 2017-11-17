@@ -128,37 +128,37 @@ Fygar.prototype.render = function (ctx) {
   this.lastCx = newCx;
   this.lastCy = newCy;
 
-  //g_sprites.fygar.drawCentredAt(ctx,this.cx,this.cy);
+  //g_sprites.fygar.drawAt(ctx,this.cx,this.cy);
 };
 
 Fygar.prototype.rightAnim = function (ctx){
   if(this.animCounter < 8){
-    g_sprites.fygarRight1.drawCentredAt(ctx,this.cx,this.cy);
+    g_sprites.fygarRight1.drawAt(ctx,this.cx,this.cy);
   } else { // if playerAnimCounter > 8
-    g_sprites.fygarRight2.drawCentredAt(ctx,this.cx,this.cy);
+    g_sprites.fygarRight2.drawAt(ctx,this.cx,this.cy);
   }
 }
 
 Fygar.prototype.leftAnim = function (ctx){
   if(this.animCounter < 8){
-    g_sprites.fygarLeft1.drawCentredAt(ctx,this.cx,this.cy);
+    g_sprites.fygarLeft1.drawAt(ctx,this.cx,this.cy);
   } else { // if playerAnimCounter > 8
-    g_sprites.fygarLeft2.drawCentredAt(ctx,this.cx,this.cy);
+    g_sprites.fygarLeft2.drawAt(ctx,this.cx,this.cy);
   }
 }
 
 Fygar.prototype.upAnim = function (ctx){
   if(this.animCounter < 8){
-    g_sprites.fygarLeft1.drawCentredAt(ctx,this.cx,this.cy);
+    g_sprites.fygarLeft1.drawAt(ctx,this.cx,this.cy);
   } else { // if playerAnimCounter > 8
-    g_sprites.fygarLeft2.drawCentredAt(ctx,this.cx,this.cy);
+    g_sprites.fygarLeft2.drawAt(ctx,this.cx,this.cy);
   }
 }
 
 Fygar.prototype.downAnim = function (ctx){
   if(this.animCounter < 8){
-    g_sprites.fygarLeft1.drawCentredAt(ctx,this.cx,this.cy);
+    g_sprites.fygarLeft1.drawAt(ctx,this.cx,this.cy);
   } else { // if playerAnimCounter > 8
-    g_sprites.fygarLeft2.drawCentredAt(ctx,this.cx,this.cy);
+    g_sprites.fygarLeft2.drawAt(ctx,this.cx,this.cy);
   }
 }

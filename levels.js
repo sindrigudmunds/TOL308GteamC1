@@ -126,7 +126,7 @@ Levels.prototype.getFygarLocation = function(){
      for(var j = 0; j < line.length; j++) {
           if (line[j] === 3){
             //convert i and j to x and y coordinates
-            coordinates = [j*32+16,i*32+16];
+            coordinates = [j*32,i*32];
             // add them to array
             fygarLocations.push(coordinates);
           }
@@ -144,7 +144,7 @@ Levels.prototype.getPookaLocation = function(){
      var line = level[i];
      for(var j = 0; j < line.length; j++) {
           if (line[j] === 4){
-            coordinates = [j*32+16,i*32+16];
+            coordinates = [j*32,i*32];
             pookaLocations.push(coordinates);
           }
       }
@@ -161,7 +161,7 @@ Levels.prototype.getRockLocation = function(){
      var line = level[i];
      for(var j = 0; j < line.length; j++) {
           if (line[j] === 5){
-            coordinates = [j*32+16,i*32+16];
+            coordinates = [j*32,i*32];
             rockLocations.push(coordinates);
           }
       }
