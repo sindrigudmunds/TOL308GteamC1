@@ -31,6 +31,9 @@ var entityManager = {
     _fygars   : [],
     _rocks : [],
 
+    showRoundScreen : true,
+    roundScreenLifespan : 72,
+
     // "PRIVATE" METHODS
 
     _forEachOf: function(aCategory, fn) {
@@ -95,19 +98,41 @@ var entityManager = {
       this._players.pop();
     },
 
+    roundScreen : function(ctx){
+      ctx.save();
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, 512, 512);
+      ctx.textAlign="center";
+      ctx.fillStyle = "white";
+      ctx.fillText("Round " + (levels.currentLevel+1),
+                    256,256);
+
+      ctx.restore();
+
+    },
+
     update: function(du) {
+      if(!this.showRoundScreen){
+        for (var c = 0; c < this._categories.length; ++c) {
+            var aCategory = this._categories[c];
+            var i = 0;
 
-      for (var c = 0; c < this._categories.length; ++c) {
-          var aCategory = this._categories[c];
-          var i = 0;
-
-          while (i < aCategory.length) {
-              if(!aCategory[i].isDeadNow){
-                var status = aCategory[i].update(du);
-                ++i;
+            while (i < aCategory.length) {
+                if(!aCategory[i].isDeadNow){
+                  var status = aCategory[i].update(du);
+                  ++i;
+                }
               }
-          }
+            }
       }
+      if (this.roundScreenLifespan > 0) {
+        this.showRoundScreen = true;
+        this.roundScreenLifespan -= du;
+      }
+      else {
+        this.showRoundScreen = false;
+      }
+
       var player = this._players[0];
       var enemies = this._fygars.concat(this._pookas);
       if(player.shooting){
@@ -127,6 +152,7 @@ var entityManager = {
         this.clearLevel();
         //console.log(levels.currentLevel);
         levels.nextLevel();
+        this.roundScreenLifespan = 72;
         //console.log(levels.currentLevel);
 
         grid = new Grid(16, 16, 32, levels.currentLevelArray());
@@ -176,6 +202,7 @@ var entityManager = {
               }
           }
       }
+      if(this.showRoundScreen) this.roundScreen(ctx);
     }
 }
 
