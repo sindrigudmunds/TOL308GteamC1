@@ -1,12 +1,6 @@
 var collisionManager = {
 
     checkCollision: function(x1, y1, x2, y2, size){
-        /*if (x1 < x2 + size && x1 + size > x2 &&
-            y1 < y2 + size && y1 + size > y2) {
-                return true;
-         }
-
-         */
         var c = size*0.375;
         if (util.distSq(x1,y1,x2+15,y2+15)<c*c) return true;
         return false;

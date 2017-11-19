@@ -1,6 +1,6 @@
-// LEVELS
-//HUGMYND UM HVERNIG MEGI GEYMA UPPLÝSINGAR UM LEVEL, AUÐVELT AÐ BÆTA VIÐ
-// yrði aðeins kallað á í upphafi hvers level til að sækja byrjunarstöður
+//========//
+// LEVELS //
+//========//
 function Levels(descr){
   for (var property in descr) {
     this[property] = descr[property];
@@ -9,12 +9,12 @@ function Levels(descr){
 
 /* ==================
 1 - grid already dug
-2 - player location
+2 - player location (not used)
 3 - fygar location
 4 - pooka location
-0 - rock location
+5 - rock location
 ====================*/
-//ath engin aðferð notar player location því hún er alltaf sú sama.
+
 
 Levels.prototype.levelsArray = [
 //level1
@@ -260,42 +260,21 @@ Levels.prototype.currentLevelArray = function(){
 Levels.prototype.nextLevel = function(){
   var maxLevel =  this.levelsArray.length;
   if (this.currentLevel + 1 === maxLevel){
+    //resets game as there is no game over feature
     this.resetLevel();
   }
   else {
     this.currentLevel += 1;
-
   }
 }
-
 
 Levels.prototype.resetLevel = function(){
   this.currentLevel = 0;
 }
 
-//returns list [x,y,z] where x = number of fygars in current level,
-// y = number of pookas and z = number of rocks
-Levels.prototype.getEntityNumber = function(){
-  var noFygars = 0;
-  var noPookas = 0;
-  var noRocks = 0;
-
-  var level = this.levelsArray[this.currentLevel];
-  for(var i = 0; i < level.length; i++) {
-     var line = level[i];
-     for(var j = 0; j < line.length; j++) {
-        if (line[j] === 3) noFygars += 1;
-        if (line[j] === 4) noPookas += 1;
-        if (line[j] === 5) noRocks += 1;
-     }
-   }
-   return [noFygars,noPookas,noRocks];
-
-};
 //returns x and y coordinates of all fygars in level as a list of tuples
 Levels.prototype.getFygarLocation = function(){
   var fygarLocations = [];
-
   var level = this.levelsArray[this.currentLevel];
   for(var i = 0; i < level.length; i++) {
      var line = level[i];
@@ -311,10 +290,10 @@ Levels.prototype.getFygarLocation = function(){
     return fygarLocations;
 
 };
+
 //returns x and y coordinates of all pooaks in level as a list of tuples
 Levels.prototype.getPookaLocation = function(){
   var pookaLocations = [];
-
   var level = this.levelsArray[this.currentLevel];
   for(var i = 0; i < level.length; i++) {
      var line = level[i];
@@ -327,11 +306,10 @@ Levels.prototype.getPookaLocation = function(){
     }
     return pookaLocations;
 };
-//returns x and y coordinates of all rocks in level as a list of tuples
 
+//returns x and y coordinates of all rocks in level as a list of tuples
 Levels.prototype.getRockLocation = function(){
   var rockLocations = [];
-
   var level = this.levelsArray[this.currentLevel];
   for(var i = 0; i < level.length; i++) {
      var line = level[i];

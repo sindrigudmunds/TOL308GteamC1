@@ -1,25 +1,5 @@
-/*
-
-entityManager.js
-
-A module which handles arbitrary entity-management for "Asteroids"
-
-
-We create this module as a single global object, and initialise it
-with suitable 'data' and 'methods'.
-
-"Private" properties are denoted by an underscore prefix convention.
-
-*/
-
-
 "use strict";
 
-
-// Tell jslint not to complain about my use of underscore prefixes (nomen),
-// my flattening of some indentation (white), or my use of incr/decr ops
-// (plusplus).
-//
 /*jslint nomen: true, white: true, plusplus: true*/
 
 
@@ -45,8 +25,6 @@ var entityManager = {
     },
     // PUBLIC METHODS
 
-    // Some things must be deferred until after initial construction
-    // i.e. thing which need `this` to be defined.
     deferredSetup : function () {
          this._categories = [this._players, this._pookas,
                             this._fygars,this._rocks];
@@ -65,8 +43,8 @@ var entityManager = {
       this._pookas.push(new Pooka(descr));
     },
 
-    generatePooka2 : function(descr){
-      this._pookas.push(new Pooka2(descr));
+    generatePooka : function(descr){
+      this._pookas.push(new Pooka(descr));
     },
 
     generateFygar : function(descr){
@@ -141,15 +119,11 @@ var entityManager = {
         this.deathAnimDuration -= du;
       }
       if(this.deathAnimDuration < 0){
-
         this.playerDying = false;
         this.roundScreenLifespan = 72;
         this._players[0].reset();
         this.deathAnimDuration = 0;
-
       }
-
-
 
       var player = this._players[0];
       var enemies = this._fygars.concat(this._pookas);
@@ -176,9 +150,7 @@ var entityManager = {
         grid = new Grid(16, 16, 32, levels.currentLevelArray());
         player.reset();
         initLevel();
-
       }
-
 
       var collisionObject = collisionManager.checkCollisions(player, enemies);
       if(collisionObject){
@@ -187,13 +159,10 @@ var entityManager = {
             for(var i = 0; i < enemies.length; i++){
                 enemies[i].reset();
             }
-
             // Kill player
             this.deathAnimDuration = 72;
             scoreManager.livesRemaining--;
-
             console.log(scoreManager.livesRemaining);
-
             if(scoreManager.livesRemaining < 0){
                 // Game over
                 scoreManager.reset();
@@ -201,11 +170,13 @@ var entityManager = {
                 levels.resetLevel();
                 player.reset();
                 initLevel();
-
                 //Todo - Game over screen, "menu" fyrir restart
                 grid = new Grid(16, 16, 32, currentLevel);
             }
         }
+        /*if(collisionObject.type === 'rock'){
+        collison for rocks
+        }*/
       }
     },
 
@@ -223,10 +194,8 @@ var entityManager = {
           }
       }
     }
-      if(this.playerDying) this._players[0].deathAnim(ctx,this.deathAnimDuration);
-      if(this.showRoundScreen) this.roundScreen(ctx);
+    if(this.playerDying) this._players[0].deathAnim(ctx,this.deathAnimDuration);
+    if(this.showRoundScreen) this.roundScreen(ctx);
     }
 }
-
-// Some deferred setup which needs the object to have been created first
 entityManager.deferredSetup();

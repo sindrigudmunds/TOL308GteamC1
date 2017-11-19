@@ -9,28 +9,19 @@ function Player(descr){
 };
 
 Player.prototype = new Entity();
-
-//Player.prototype.sprite = new Sprite(16,6,16,16,g_images.spriteSheet3);
-
-//Player.prototype.cx = 480;
-//Player.prototype.cy = 480;
-
 Player.prototype.MIN_Y = 42;
 Player.prototype.MAX_Y = 492;
-Player.prototype.MIN_X = 14; // ekki 0 til að sprite fari ekki út fyrir rammann
-Player.prototype.MAX_X = 502;// 448 - 10 (kall er 32 px á breidd)
-
-
+Player.prototype.MIN_X = 14;
+Player.prototype.MAX_X = 502;
 Player.prototype.UP = keyCode('W');
 Player.prototype.LEFT = keyCode('A');
 Player.prototype.RIGHT = keyCode('D');
 Player.prototype.DOWN = keyCode('S');
 Player.prototype.SHOOT = keyCode('M');
-
-Player.prototype.lastDirLeftRight = 'Left';  // player byrjar að stefna til vinstri
-Player.prototype.lastDirUpDown = 'Down';  // player byrjar að stefna niður
+Player.prototype.lastDirLeftRight = 'Left';
+Player.prototype.lastDirUpDown = 'Down';
 Player.prototype.speed = 2;
-Player.prototype.lastAnimation = 1; // 1-4 eins og er - væri hægt að hafa 1-8
+Player.prototype.lastAnimation = 1;
 Player.prototype.animCounter = 0;
 Player.prototype.shooting = false;
 Player.prototype.shootCounter = 0;
@@ -40,7 +31,6 @@ Player.prototype.gunCoords = {};
 Player.prototype.update = function (du) {
 		var nextcy = this.cy;
     var nextcx = this.cx;
-  //  var this.currentDirection = null;
 
     if (keys[this.SHOOT]) {
       this.shooting = true;
@@ -113,7 +103,6 @@ Player.prototype.update = function (du) {
           } else if (this.lastDirUpDown === 'up') {
             nextcy -= this.speed*du;
           }
-          // var lastDirLeftRight -- grunar að það sé rangt - breyti í lastDirUpDown
           this.currentDirection = this.lastDirUpDown;
         }
     }
@@ -169,7 +158,6 @@ Player.prototype.render = function (ctx) {
 };
 
 // g_sprites.plArrowRightPl.drawCentredAt(ctx,this.cx,this.cy);
-
 Player.prototype.shootingAnim2 = function (ctx){
   var delta = 0;
   var frame;
@@ -205,8 +193,6 @@ Player.prototype.shootingAnim2 = function (ctx){
   }
 }
 
-
-
 Player.prototype.shootingAnim = function (ctx, direction){
   console.log(playerShootingArr[0]);
   if(this.shootCounter < 19){
@@ -240,7 +226,6 @@ Player.prototype.shootingAnim = function (ctx, direction){
     this.shootCounter += 1;
   }
 }
-
 
 Player.prototype.rightAnim = function (ctx){
   this.lastAnimation = 1;

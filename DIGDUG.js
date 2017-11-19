@@ -26,24 +26,7 @@ function createPlayer() {
     });
 
 }
-/*
-function createPooka() {
-  entityManager.generatePooka({
-  });
-}
 
-function createPooka2(descr) {
-  entityManager.generatePooka2(descr);
-}
-
-function createFygar(descr) {
-  entityManager.generateFygar(descr);
-}
-
-function createRock(descr) {
-  entityManager.generateRock(descr);
-}
-*/
 function initLevel(){
 
   var fygars = levels.getFygarLocation();
@@ -54,18 +37,13 @@ function initLevel(){
 		entityManager.generateRock({cx:rocks[i][0], cy: rocks[i][1]});
 	}
 
-  //grid.RenderGrid(ctx);
-
 	for(var i=0; i<fygars.length; i++){
 		entityManager.generateFygar({cx:fygars[i][0], cy: fygars[i][1]});
 	}
 
 	for(var i=0; i<pookas.length; i++){
-		entityManager.generatePooka2({cx:pookas[i][0], cy: pookas[i][1]});
+		entityManager.generatePooka({cx:pookas[i][0], cy: pookas[i][1]});
 	}
-
-
-
   createPlayer();
 }
 
@@ -95,33 +73,17 @@ function gatherInputs(){
 // GAME-SPECIFIC UPDATE LOGIC
 
 function updateSimulation(du) {
-
-    //processDiagnostics();
-
     entityManager.update(du);
-
-    // Prevent perpetual firing!
-    //eatKey(Ship.prototype.KEY_FIRE);
 }
-
-
-
-
 
 // GAME-SPECIFIC RENDERING
-
 function renderSimulation(ctx) {
-
     entityManager.render(ctx);
-
-    //if (g_renderSpatialDebug) spatialManager.render(ctx);
 }
-
 
 // =============
 // PRELOAD STUFF
 // =============
-
 var g_images = {};
 
 function requestPreloads() {
@@ -134,9 +96,7 @@ function requestPreloads() {
         spriteSheet5 : "NES_Dig_Dug_ClearX700Y220VertFlipped.png",
         backgroundTexture : "DigDugBackgroundTextureresized448.png",
         blom : "Blom.png",
-
     };
-
     imagesPreload(requiredImages, g_images, preloadDone);
 }
 
@@ -146,12 +106,7 @@ var playerDeathAnim = [];
 var g_sprites = {};
 function preloadDone() {
 
-    //g_sprites.spriteSheet1  = new Sprite(g_images.spriteSheet1);
-    //g_sprites.spriteSheet2 = new Sprite(g_images.spriteSheet2);
-
-    //g_sprites.player = new Sprite(32,6,32,38,g_images.spriteSheet3);
-
-    // blóm
+    // flower
     g_sprites.blom = new Sprite(0,0,32,32, g_images.blom);
     // player right
     g_sprites.playerWalkRight1 = new Sprite(32,6,32,38,g_images.spriteSheet3);
@@ -222,24 +177,8 @@ function preloadDone() {
     for (var i = 0; i < 4; i++) {
         playerDeathAnim.push(new Sprite((i*40)+280,14,32,32,g_images.spriteSheet3))
     }
-
-
-
-    //g_sprites.pookalabb2 = new Sprite(58,102,28,28,g_images.spriteSheet3);
     entityManager.init();
-    //createInitialShips();
-    //createPlayer();
 
-    //Örugglega betri leið til að búa til marga pookas, mjög primitive
-    //createPooka();
-    //createPooka();
-    /*
-    createFygar({cx: 64, cy: 64});
-    createFygar({cx: 486, cy: 356});
-    createFygar({cx: 128, cy: 486});
-    createPooka2({cx: 228, cy: 364});
-    createPooka2({cx: 328, cy: 364});
-    */
     initLevel();
     grid.print();
     main.init();
@@ -247,76 +186,3 @@ function preloadDone() {
 
 // Kick it off
 requestPreloads();
-
-
-
-
-// Eiður: Comment-a út: veit ekki hvort við notum sambærileg diagnostics
-// GAME-SPECIFIC DIAGNOSTICS
-/*
-var g_allowMixedActions = true;
-var g_useGravity = false;
-var g_useAveVel = true;
-var g_renderSpatialDebug = false;
-
-var KEY_MIXED   = keyCode('M');;
-var KEY_GRAVITY = keyCode('G');
-var KEY_AVE_VEL = keyCode('V');
-var KEY_SPATIAL = keyCode('X');
-
-var KEY_HALT  = keyCode('H');
-var KEY_RESET = keyCode('R');
-
-var KEY_0 = keyCode('0');
-
-var KEY_1 = keyCode('1');
-var KEY_2 = keyCode('2');
-
-var KEY_K = keyCode('K');
-
-function processDiagnostics() {
-
-    if (eatKey(KEY_MIXED))
-        g_allowMixedActions = !g_allowMixedActions;
-
-    if (eatKey(KEY_GRAVITY)) g_useGravity = !g_useGravity;
-
-    if (eatKey(KEY_AVE_VEL)) g_useAveVel = !g_useAveVel;
-
-    if (eatKey(KEY_SPATIAL)) g_renderSpatialDebug = !g_renderSpatialDebug;
-
-    if (eatKey(KEY_HALT)) entityManager.haltShips();
-
-    if (eatKey(KEY_RESET)) entityManager.resetShips();
-
-    if (eatKey(KEY_0)) entityManager.toggleRocks();
-
-    if (eatKey(KEY_1)) entityManager.generateShip({
-        cx : g_mouseX,
-        cy : g_mouseY,
-
-        sprite : g_sprites.ship});
-
-    if (eatKey(KEY_2)) entityManager.generateShip({
-        cx : g_mouseX,
-        cy : g_mouseY,
-
-        sprite : g_sprites.ship2
-        });
-
-    if (eatKey(KEY_K)) entityManager.killNearestShip(
-        g_mouseX, g_mouseY);
-}
-*/
-
-
-// =================
-// RENDER SIMULATION
-// =================
-
-// We take a very layered approach here...
-//
-// The primary `render` routine handles generic stuff such as
-// the diagnostic toggles (including screen-clearing).
-//
-// It then delegates the game-specific logic to `gameRender`

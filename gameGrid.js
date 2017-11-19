@@ -74,9 +74,6 @@ Cell.prototype.Dig = function(direction){
          this.dugDownFully = true;
          this.pointsGiven = true;
     }
-
-
-
     // Búið að grafa í gegnum alla celluna
     //  this.IsFullyDug = true;
     // ----------------------------------------
@@ -136,7 +133,6 @@ Cell.prototype.Render = function(ctx)
     }
     */
 }
-
 
 Cell.prototype.makeFullyDugInDir = function(x, y, direction){
    var cellObj = grid.FindCell(x,y);
@@ -206,7 +202,6 @@ Grid.prototype.PlayerMoved = function(x, y, direction){
     if(direction === 'down') yIndex = Math.floor(y / 32);
     // console.log("xIndex: " + xIndex + " -- yIndex: " + yIndex + " -- Dir: " + direction
 
-
     //Viljum ekki grafa fyrir ofan yfirborðið
     if(yIndex <= 1) return;
 
@@ -220,12 +215,9 @@ Grid.prototype.PlayerMoved = function(x, y, direction){
     //if(direction === 'down') if(cell.dugDownFully) return;
     // --------------------------------------------------------
     cell.Dig(direction);
-
 }
 
 Grid.prototype.FindCell = function(x, y, direction){
-
-
 
     //if(direction === 'down') yIndex++;
     //if(direction === 'right') xIndex++;
