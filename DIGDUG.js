@@ -141,6 +141,7 @@ function requestPreloads() {
 }
 
 var playerShootingArr = [];
+var playerDeathAnim = [];
 
 var g_sprites = {};
 function preloadDone() {
@@ -217,6 +218,13 @@ function preloadDone() {
     playerShootingArr.push(g_sprites.plArrowDown4 = new Sprite(678, 142, 14, 47,  g_images.spriteSheet5));
     playerShootingArr.push(g_sprites.plArrowDown5 = new Sprite(678, 142, 14, 59,  g_images.spriteSheet5));
     playerShootingArr.push(g_sprites.plArrowDown6 = new Sprite(678, 142, 14, 80,  g_images.spriteSheet5));
+
+    for (var i = 0; i < 4; i++) {
+        playerDeathAnim.push(new Sprite((i*40)+280,14,32,32,g_images.spriteSheet3))
+    }
+
+
+
     //g_sprites.pookalabb2 = new Sprite(58,102,28,28,g_images.spriteSheet3);
     entityManager.init();
     //createInitialShips();

@@ -33,6 +33,8 @@ var entityManager = {
 
     showRoundScreen : true,
     roundScreenLifespan : 72,
+    playerDying : false,
+    deathAnimDuration : 0,
 
     // "PRIVATE" METHODS
 
@@ -112,7 +114,7 @@ var entityManager = {
     },
 
     update: function(du) {
-      if(!this.showRoundScreen){
+      if(!this.showRoundScreen && !this.playerDying){
         for (var c = 0; c < this._categories.length; ++c) {
             var aCategory = this._categories[c];
             var i = 0;
@@ -125,6 +127,7 @@ var entityManager = {
               }
             }
       }
+
       if (this.roundScreenLifespan > 0) {
         this.showRoundScreen = true;
         this.roundScreenLifespan -= du;
@@ -132,6 +135,21 @@ var entityManager = {
       else {
         this.showRoundScreen = false;
       }
+
+      if (this.deathAnimDuration > 0) {
+        this.playerDying = true;
+        this.deathAnimDuration -= du;
+      }
+      if(this.deathAnimDuration < 0){
+
+        this.playerDying = false;
+        this.roundScreenLifespan = 72;
+        this._players[0].reset();
+        this.deathAnimDuration = 0;
+
+      }
+
+
 
       var player = this._players[0];
       var enemies = this._fygars.concat(this._pookas);
@@ -169,12 +187,14 @@ var entityManager = {
             for(var i = 0; i < enemies.length; i++){
                 enemies[i].reset();
             }
-            player.reset();
+
             // Kill player
+            this.deathAnimDuration = 72;
             scoreManager.livesRemaining--;
+
             console.log(scoreManager.livesRemaining);
 
-            if(scoreManager.livesRemaining === 0){
+            if(scoreManager.livesRemaining < 0){
                 // Game over
                 scoreManager.reset();
                 this.clearLevel();
@@ -192,7 +212,7 @@ var entityManager = {
     render: function(ctx) {
       grid.RenderGrid(ctx);
       scoreManager.renderScores(ctx);
-
+      if(!this.playerDying){
       for (var c = 0; c < this._categories.length; ++c) {
 
           var aCategory = this._categories[c];
@@ -202,6 +222,8 @@ var entityManager = {
               }
           }
       }
+    }
+      if(this.playerDying) this._players[0].deathAnim(ctx,this.deathAnimDuration);
       if(this.showRoundScreen) this.roundScreen(ctx);
     }
 }

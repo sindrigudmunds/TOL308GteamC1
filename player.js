@@ -211,12 +211,12 @@ Player.prototype.shootingAnim = function (ctx, direction){
   console.log(playerShootingArr[0]);
   if(this.shootCounter < 19){
     if(this.animCounter < 3){
-      
+
       playerShootingArr[0].drawCentredAt(ctx,this.cx+50,this.cy + 20 );
       g_sprites.plArrowRightPl.drawCentredAt(ctx,this.cx,this.cy);
     }
     if(this.animCounter < 6){
-      
+
       g_sprites.plArrowRight2.drawCentredAt(ctx,this.cx+50,this.cy + 20);
       g_sprites.plArrowRightPl.drawCentredAt(ctx,this.cx,this.cy);
     }
@@ -284,4 +284,19 @@ Player.prototype.lastAnim = function(ctx){
   if(this.lastAnimation === 2) g_sprites.playerWalkLeft1.drawCentredAt(ctx,this.cx,this.cy);
   if(this.lastAnimation === 3) g_sprites.playerWalkUp1.drawCentredAt(ctx,this.cx,this.cy);
   if(this.lastAnimation === 4) g_sprites.playerWalkDown1.drawCentredAt(ctx,this.cx,this.cy);
+}
+
+Player.prototype.deathAnim = function(ctx,n){
+    if( n >= 60 ){
+      playerDeathAnim[0].drawCentredAt(ctx,this.cx,this.cy);
+    }
+    if( n >= 40 && n < 60){
+      playerDeathAnim[1].drawCentredAt(ctx,this.cx,this.cy);
+    }
+    if( n >= 20 && n < 40){
+      playerDeathAnim[2].drawCentredAt(ctx,this.cx,this.cy);
+    }
+    if( n > 0 && n <20){
+      playerDeathAnim[3].drawCentredAt(ctx,this.cx,this.cy);
+    }
 }
