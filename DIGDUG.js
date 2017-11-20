@@ -89,13 +89,13 @@ var g_images = {};
 function requestPreloads() {
 
     var requiredImages = {
-        spriteSheet1   : "NES_Dig_Dug_General_Sprites.png",
-        spriteSheet2  : "NES_Dig_Dug_Vegetables.png",
-        spriteSheet3 : "NES_Dig_Dug_ClearX700Y220.png",
-        spriteSheet4 : "NES_Dig_Dug_ClearX700Y220Flipped.png",
-        spriteSheet5 : "NES_Dig_Dug_ClearX700Y220VertFlipped.png",
-        backgroundTexture : "DigDugBackgroundTextureresized448.png",
-        blom : "Blom.png",
+        spriteSheet1   : "https://notendur.hi.is/~ots4/DigDugImages/NES_Dig_Dug_General_Sprites.png",
+        spriteSheet2  : "https://notendur.hi.is/~ots4/DigDugImages/NES_Dig_Dug_Vegetables.png",
+        spriteSheet3 : "https://notendur.hi.is/~ots4/DigDugImages/NES_Dig_Dug_ClearX700Y220.png",
+        spriteSheet4 : "https://notendur.hi.is/~ots4/DigDugImages/NES_Dig_Dug_ClearX700Y220Flipped.png",
+        spriteSheet5 : "https://notendur.hi.is/~ots4/DigDugImages/NES_Dig_Dug_ClearX700Y220VertFlipped.png",
+        backgroundTexture : "https://notendur.hi.is/~ots4/DigDugImages/DigDugBackgroundTextureresized448.png",
+        blom : "https://notendur.hi.is/~ots4/DigDugImages/Blom.png",
     };
     imagesPreload(requiredImages, g_images, preloadDone);
 }
